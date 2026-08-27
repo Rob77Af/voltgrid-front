@@ -5,6 +5,7 @@ import DriverMatchupPredictions from './driver-matchup-predictions';
 import Top10Finish from './top-10-finish';
 
 import Poletime from './poletime';
+import Evo from './evo';
 
 const PredictionTabs = () => {
     const [activeId, setActiveId] = useState('head-to-head');
@@ -29,8 +30,12 @@ const PredictionTabs = () => {
                     <Poletime />
                 )}
 
+                {activeId === 'evo' && (
+                    <Evo />
+                )}
+
                 {/* Placeholder for other categories */}
-                {activeId !== 'head-to-head' && activeId !== 'master' && activeId !== 'poletime' && (
+                {activeId !== 'head-to-head' && activeId !== 'master' && activeId !== 'poletime' && activeId !== 'evo' && (
                     <div className="w-full h-40 flex items-center justify-center text-gray-500 border border-[#ffffff3d] bg-[#1a1a1a] mt-8">
                         <p className="uppercase tracking-widest text-sm">Mode coming soon...</p>
                     </div>
