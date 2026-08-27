@@ -6,6 +6,7 @@ import Top10Finish from './top-10-finish';
 
 import Poletime from './poletime';
 import Evo from './evo';
+import EvoV2 from './evo-v2';
 import Misc from './misc';
 
 import { usePredictionStore } from '@/store/usePredictionStore';
@@ -51,6 +52,10 @@ const PredictionTabs = () => {
 
                 {(activeId === 'evo' || isAllMode) && (
                     <Evo hideSubmit={isAllMode} />
+                )}
+
+                {(activeId === 'evo-v2') && (
+                    <EvoV2 hideSubmit={false} />
                 )}
 
                 {(activeId === 'head-to-head' || isAllMode) && (

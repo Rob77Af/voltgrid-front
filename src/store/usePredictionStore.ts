@@ -7,6 +7,7 @@ interface PredictionState {
     poletime: number[];
     top10: string[];
     evo: string[];
+    evoV2: string[];
     h2h: Record<string, string>;
     misc: Record<string, string>;
     
@@ -14,6 +15,7 @@ interface PredictionState {
     setPoletime: (digits: number[] | ((prev: number[]) => number[])) => void;
     setTop10: (picks: string[] | ((prev: string[]) => string[])) => void;
     setEvo: (drivers: string[] | ((prev: string[]) => string[])) => void;
+    setEvoV2: (picks: string[] | ((prev: string[]) => string[])) => void;
     setH2H: (picks: Record<string, string> | ((prev: Record<string, string>) => Record<string, string>)) => void;
     setMisc: (answers: Record<string, string> | ((prev: Record<string, string>) => Record<string, string>)) => void;
 }
@@ -30,6 +32,7 @@ export const usePredictionStore = create<PredictionState>()(
             poletime: [1, 2, 5, 0, 0, 0],
             top10: Array(10).fill(''),
             evo: [],
+            evoV2: Array(5).fill(''),
             h2h: initialH2H,
             misc: {},
             
@@ -41,6 +44,9 @@ export const usePredictionStore = create<PredictionState>()(
             })),
             setEvo: (updater) => set((state) => ({ 
                 evo: typeof updater === 'function' ? updater(state.evo) : updater 
+            })),
+            setEvoV2: (updater) => set((state) => ({ 
+                evoV2: typeof updater === 'function' ? updater(state.evoV2) : updater 
             })),
             setH2H: (updater) => set((state) => ({ 
                 h2h: typeof updater === 'function' ? updater(state.h2h) : updater 
