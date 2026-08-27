@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { F1_DRIVERS } from '@/api/f1-data';
 import { usePredictionStore } from '@/store/usePredictionStore';
 
-const Top10Finish = () => {
+const Top10Finish = ({ hideSubmit }: { hideSubmit?: boolean }) => {
     const picks = usePredictionStore(state => state.top10);
     const setPicks = usePredictionStore(state => state.setTop10);
     const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
@@ -119,14 +119,16 @@ const Top10Finish = () => {
                 })}
             </div>
             
-            <div className="mt-4 flex justify-end">
-                <button 
-                    disabled={picks.some(p => p === '')}
-                    className="bg-[#fbaa19] text-black font-bold uppercase tracking-widest px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-yellow-500 transition-colors"
-                >
-                    Submit Prediction
-                </button>
-            </div>
+            {!hideSubmit && (
+                <div className="mt-4 flex justify-end">
+                    <button 
+                        disabled={picks.some(p => p === '')}
+                        className="bg-[#fbaa19] text-black font-bold uppercase tracking-widest px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-yellow-500 transition-colors"
+                    >
+                        SUBMIT PREDICTION
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

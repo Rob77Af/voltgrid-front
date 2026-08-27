@@ -2,7 +2,7 @@
 import React from 'react';
 import { usePredictionStore } from '@/store/usePredictionStore';
 
-const Poletime = () => {
+const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
     const digits = usePredictionStore(state => state.poletime);
     const setDigits = usePredictionStore(state => state.setPoletime);
 
@@ -67,14 +67,16 @@ const Poletime = () => {
                 </div>
             </div>
 
-            <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-[#1a1a1a] border border-[#ffffff3d]">
-                <p className="f1-summary-copy text-sm md:text-base text-gray-400 font-medium tracking-wide">
-                    Your pick: <span className="text-white font-bold">{digits[0]}:{digits[1]}{digits[2]}.{digits[3]}{digits[4]}{digits[5]}</span>
-                </p>
-                <button type="button" className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-black hover:text-[#fbaa19]">
-                    SUBMIT PREDICTION
-                </button>
-            </footer>
+            {!hideSubmit && (
+                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-[#1a1a1a] border border-[#ffffff3d]">
+                    <p className="f1-summary-copy text-sm md:text-base text-gray-400 font-medium tracking-wide">
+                        Your pick: <span className="text-white font-bold">{digits[0]}:{digits[1]}{digits[2]}.{digits[3]}{digits[4]}{digits[5]}</span>
+                    </p>
+                    <button type="button" className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-black hover:text-[#fbaa19]">
+                        SUBMIT PREDICTION
+                    </button>
+                </footer>
+            )}
         </div>
     );
 };

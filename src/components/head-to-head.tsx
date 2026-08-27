@@ -61,12 +61,16 @@ const HeadToHead = (props: any) => {
                         );
                     })}
                 </div>
+                {!props.hideSubmit && (
                 <footer className="f1-predictions-summary">
-                    <p className="f1-summary-copy">{countPicks} of 11 picks locked in</p>
+                    <p className="f1-summary-copy">
+                        <span className="font-bold">{Object.keys(picks).length}</span> / {F1_MATCHUPS.length} MATCHUPS PREDICTED
+                    </p>
                     <button type="button" className="f1-submit-picks">
                         SUBMIT PICKS
                     </button>
                 </footer>
+            )}
             </section>
         </div>
     )

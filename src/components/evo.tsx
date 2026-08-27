@@ -3,7 +3,7 @@ import React from 'react';
 import { F1_DRIVERS } from '@/api/f1-data';
 import { usePredictionStore } from '@/store/usePredictionStore';
 
-const Evo = () => {
+const Evo = ({ hideSubmit }: { hideSubmit?: boolean }) => {
     const selectedDrivers = usePredictionStore(state => state.evo);
     const setSelectedDrivers = usePredictionStore(state => state.setEvo);
 
@@ -84,21 +84,23 @@ const Evo = () => {
                 </div>
             </div>
 
-            <footer className="f1-predictions-summary flex items-center justify-between p-4 mt-4 bg-[#1a1a1a] border border-[#ffffff3d]">
-                <p className="f1-summary-copy text-sm md:text-base text-gray-400 font-medium tracking-wide">
-                    {selectedDrivers.length === 5 
-                        ? <span className="text-[#fbaa19]">All 5 drivers selected!</span> 
-                        : `Pick ${5 - selectedDrivers.length} more driver${5 - selectedDrivers.length > 1 ? 's' : ''}`
-                    }
-                </p>
-                <button 
-                    type="button" 
-                    disabled={selectedDrivers.length !== 5}
-                    className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#fbaa19] disabled:hover:text-black"
-                >
-                    SUBMIT PREDICTION
-                </button>
-            </footer>
+            {!hideSubmit && (
+                <footer className="f1-predictions-summary flex items-center justify-between p-4 mt-4 bg-[#1a1a1a] border border-[#ffffff3d]">
+                    <p className="f1-summary-copy text-sm md:text-base text-gray-400 font-medium tracking-wide">
+                        {selectedDrivers.length === 5 
+                            ? <span className="text-[#fbaa19]">All 5 drivers selected!</span> 
+                            : `Pick ${5 - selectedDrivers.length} more driver${5 - selectedDrivers.length > 1 ? 's' : ''}`
+                        }
+                    </p>
+                    <button 
+                        type="button" 
+                        disabled={selectedDrivers.length !== 5}
+                        className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#fbaa19] disabled:hover:text-black"
+                    >
+                        SUBMIT PREDICTION
+                    </button>
+                </footer>
+            )}
         </div>
     );
 };
