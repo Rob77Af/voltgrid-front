@@ -2,10 +2,9 @@
 import React, { useState } from 'react';
 import { F1_DRIVERS } from '@/api/f1-data';
 
-
-
 const Top10Finish = () => {
     const [picks, setPicks] = useState<string[]>(Array(10).fill(''));
+    const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
 
     const handleSelect = (index: number, driver: string) => {
         const newPicks = [...picks];
@@ -27,42 +26,88 @@ const Top10Finish = () => {
                 <p className="text-gray-400 text-sm">Predict the top 10 finishers in exact order.</p>
             </div>
 
-            <div className="flex flex-col gap-3">
+            {/* Invisible overlay to close dropdown when clicking outside */}
+            {openDropdownIndex !== null && (
+                <div 
+                    className="fixed inset-0 z-40" 
+                    onClick={() => setOpenDropdownIndex(null)}
+                />
+            )}
+
+            <div className="flex flex-col gap-3 relative">
                 {picks.map((pick, index) => {
                     const position = index + 1;
+                    const isOpen = openDropdownIndex === index;
+                    
                     return (
                         <div 
                             key={index} 
-                            className={`flex items-stretch bg-black border ${pick ? 'border-[#fbaa19]' : 'border-[#ffffff3d]'} transition-colors duration-200 hover:border-[#fbaa19]`}
+                            className={`flex items-stretch bg-black border ${
+                                pick || isOpen ? 'border-[#fbaa19]' : 'border-[#ffffff3d]'
+                            } transition-colors duration-200 relative ${isOpen ? 'z-50' : 'z-10 hover:border-[#fbaa19]'}`}
                             style={{ minHeight: '3.5rem' }}
                         >
                             <div className="w-16 flex items-center justify-center bg-[#fbaa19] text-black font-bold uppercase border-r border-[#fbaa19]">
                                 {getOrdinal(position)}
                             </div>
-                            <div className="flex-1 flex items-center px-4 relative">
-                                <select 
-                                    className="w-full bg-transparent text-white uppercase font-bold outline-none cursor-pointer appearance-none"
-                                    value={pick}
-                                    onChange={(e) => handleSelect(index, e.target.value)}
+                            
+                            {/* Custom Select Box */}
+                            <div className="flex-1 relative flex items-center h-full">
+                                <div 
+                                    className="w-full h-full flex items-center justify-between px-4 cursor-pointer"
+                                    onClick={() => setOpenDropdownIndex(isOpen ? null : index)}
                                 >
-                                    <option value="" disabled className="text-gray-500 bg-black">Select Driver</option>
-                                    {F1_DRIVERS.map(driver => (
-                                        <option 
-                                            key={driver} 
-                                            value={driver} 
-                                            className="bg-black text-white"
-                                            disabled={picks.includes(driver) && picks[index] !== driver}
-                                        >
-                                            {driver}
-                                        </option>
-                                    ))}
-                                </select>
-                                {/* Custom arrow for select */}
-                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#fbaa19]">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
+                                    <span className={`uppercase font-bold tracking-wider ${pick ? 'text-white' : 'text-gray-500'}`}>
+                                        {pick || 'Select Driver'}
+                                    </span>
+                                    
+                                    <div className={`text-[#fbaa19] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
                                 </div>
+
+                                {/* Custom Dropdown Menu */}
+                                {isOpen && (
+                                    <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-[#0a0a0a] border border-[#fbaa19] max-h-60 overflow-y-auto shadow-2xl shadow-black/50 z-[100]">
+                                        <div className="flex flex-col py-2">
+                                            {F1_DRIVERS.map(driver => {
+                                                const isPickedHere = pick === driver;
+                                                const isPickedElsewhere = picks.includes(driver) && !isPickedHere;
+                                                
+                                                return (
+                                                    <div 
+                                                        key={driver}
+                                                        onClick={() => {
+                                                            if (!isPickedElsewhere) {
+                                                                handleSelect(index, driver);
+                                                                setOpenDropdownIndex(null);
+                                                            }
+                                                        }}
+                                                        className={`px-4 py-3 uppercase font-bold text-sm tracking-wider flex items-center justify-between transition-colors ${
+                                                            isPickedHere 
+                                                                ? 'bg-[#fbaa19] text-black' 
+                                                                : isPickedElsewhere 
+                                                                    ? 'text-[#333] cursor-not-allowed line-through decoration-[#fbaa19]/30' 
+                                                                    : 'text-white hover:bg-[#1a1a1a] hover:text-[#fbaa19] cursor-pointer'
+                                                        }`}
+                                                    >
+                                                        <span>{driver}</span>
+                                                        {isPickedElsewhere && (
+                                                            <span className="text-[10px] tracking-widest text-[#555] font-black">SELECTED</span>
+                                                        )}
+                                                        {isPickedHere && (
+                                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     );
