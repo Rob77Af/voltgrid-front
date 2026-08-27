@@ -1,0 +1,360 @@
+.terms-conditions-container1 {
+    width: 100%;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+}
+
+.terms-conditions-thq-terms-content-elm {
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    padding: 64px 32px;
+    max-width: 860px;
+    font-family: inherit;
+    flex-direction: column;
+}
+
+.terms-conditions-thq-terms-conditions-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.terms-conditions-thq-last-updated-august232026-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq-please-read-these-terms-conditions-carefully-before-usi-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq1-acceptance-of-terms-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-by-accessing-and-using-this-website-you-confirm-that-you-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq2-definitions-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-website-refers-to-all-pages-features-and-content-acce-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq3-use-of-the-website-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-you-agree-to-use-this-website-only-for-lawful-purposes-an-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq4-intellectual-property-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-all-content-on-this-website-including-but-not-limited-to-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq5-user-submitted-content-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-if-you-submit-post-or-upload-any-content-to-this-websit-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq6-privacy-policy-and-data-protection-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-your-use-of-this-website-is-also-governed-by-our-privacy-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq7-cookie-policy-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-this-website-uses-cookies-and-similar-tracking-technologi-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq8-website-analytics-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-this-website-uses-a-privacy-focused-first-party-analytic-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq9-third-party-links-and-services-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-this-website-may-contain-links-to-third-party-websites-s-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq10-third-party-service-providers-artificial-intelligenc-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-to-operate-this-website-and-provide-its-features-we-rely-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq11-disclaimer-of-warranties-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-thiswebsiteandallcontentservicesandmaterialsava-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq12-limitation-of-liability-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-tothefullestextentpermittedbyapplicablelawinno-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq13-indemnification-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-you-agree-to-defend-indemnify-and-hold-harmless-the-web-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq14-force-majeure-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-we-shall-not-be-held-liable-for-any-failure-or-delay-in-p-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq15-accuracy-and-errors-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-we-make-reasonable-efforts-to-ensure-that-the-content-on-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq16-age-restrictions-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-this-website-is-not-directed-to-or-intended-for-use-by-in-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq17-no-professional-advice-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-nothing-on-this-website-constitutes-legal-financial-med-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq18-modifications-to-terms-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-we-reserve-the-right-to-revise-and-update-these-terms-c-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq19-termination-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-we-may-terminate-or-suspend-your-access-to-the-website-im-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq20-governing-law-and-jurisdiction-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-these-terms-conditions-shall-be-governed-by-and-constru-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq21-dispute-resolution-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-before-initiating-any-formal-legal-proceedings-you-agree-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq22-severability-and-waiver-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-if-any-provision-of-these-terms-is-found-to-be-unenforcea-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq23-entire-agreement-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-these-terms-conditions-together-with-our-privacy-polic-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-thq24-contact-information-elm {
+    color: var(--color-on-surface, #111827);
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.terms-conditions-thq-if-you-have-any-questions-concerns-or-requests-regardin-elm {
+    color: var(--color-on-surface-secondary, #6b7280);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.terms-conditions-link {
+    display: contents;
+}
+
+.terms-conditions-container2 {
+    right: 50px;
+    border: 1px solid #ffffff5c;
+    bottom: 30px;
+    display: flex;
+    z-index: 22;
+    position: fixed;
+    box-shadow: 5px 5px 10px 0px rgba(31, 31, 31, 0.4);
+    min-height: auto;
+    align-items: center;
+    padding-top: 8px;
+    padding-left: 12px;
+    border-radius: 8px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    backdrop-filter: blur(6px);
+    background-color: rgba(41, 41, 41, 0.41);
+}
+
+.terms-conditions-icon1 {
+    width: 24px;
+    margin-right: 4px;
+}
+
+.terms-conditions-text {
+    color: white;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+}
