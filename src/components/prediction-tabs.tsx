@@ -4,6 +4,8 @@ import F1BetRemoteControl from './f1-bet-remote-control';
 import DriverMatchupPredictions from './driver-matchup-predictions';
 import Top10Finish from './top-10-finish';
 
+import Poletime from './poletime';
+
 const PredictionTabs = () => {
     const [activeId, setActiveId] = useState('head-to-head');
 
@@ -23,8 +25,12 @@ const PredictionTabs = () => {
                     <Top10Finish />
                 )}
 
+                {activeId === 'poletime' && (
+                    <Poletime />
+                )}
+
                 {/* Placeholder for other categories */}
-                {activeId !== 'head-to-head' && activeId !== 'master' && (
+                {activeId !== 'head-to-head' && activeId !== 'master' && activeId !== 'poletime' && (
                     <div className="w-full h-40 flex items-center justify-center text-gray-500 border border-[#ffffff3d] bg-[#1a1a1a] mt-8">
                         <p className="uppercase tracking-widest text-sm">Mode coming soon...</p>
                     </div>
