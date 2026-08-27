@@ -29,7 +29,7 @@ const initialH2H = F1_MATCHUPS.reduce((acc, m) => {
 export const usePredictionStore = create<PredictionState>()(
     persist(
         (set) => ({
-            poletime: [1, 2, 5, 0, 0, 0],
+            poletime: [0, 0, 0, 0, 0, 0],
             top10: Array(10).fill(''),
             evo: [],
             evoV2: Array(5).fill(''),
@@ -57,6 +57,7 @@ export const usePredictionStore = create<PredictionState>()(
         }),
         {
             name: 'voltgrid-predictions-storage', // key in localStorage
+            version: 1, // bump version to clear old cached data (like the 1:25.000 poletime)
         }
     )
 );
