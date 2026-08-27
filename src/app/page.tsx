@@ -2,23 +2,21 @@ import type { Metadata } from 'next';
 import './page.css';
 
 export const metadata: Metadata = {
-  title: 'VoltGrid – Racing Betting & Fantasy Game Platform',
-  description: 'Experience Formula 1-inspired betting, fantasy gaming, and live dashboards.',
+  title: 'VoltGrid – F1 Predictions',
+  description: 'Make your driver matchup predictions for the next Grand Prix.',
 };
 
 import React from 'react'
 
-
-
 import F1BetRemoteControl from '@/components/f1-bet-remote-control'
 import DriverMatchupPredictions from '@/components/driver-matchup-predictions'
-// css imported globally
 
-const BetNow = (props) => {
+const BetPage = () => {
     return (
         <div className="bet-now-container1">
             
-            <main className="f1-bet-page">
+            
+            <main className="f1-bet-page" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
                 <section className="f1-bet-shell">
                     <header className="f1-bet-header">
                         <p className="f1-bet-eyebrow">F1 // PREDICTIONS</p>
@@ -36,22 +34,22 @@ const BetNow = (props) => {
                             </p>
                         </section>
                     </header>
-                    <F1BetRemoteControl></F1BetRemoteControl>
+                    <F1BetRemoteControl />
                     <section
                         aria-label="Driver matchup predictions"
                         className="f1-predictions-stage"
                     >
-                        <DriverMatchupPredictions rootClassName="driver-matchup-predictionsroot-class-name"></DriverMatchupPredictions>
+                        <DriverMatchupPredictions rootClassName="driver-matchup-predictionsroot-class-name" />
                     </section>
                     <p className="f1-responsible-notice">
-                        Play responsibly. Predictions are for entertainment only — know your
-                        limits.
+                        Play responsibly. Predictions are for entertainment only — know your limits.
                     </p>
                 </section>
             </main>
+
             
         </div>
     )
 }
 
-export default BetNow
+export default BetPage;
