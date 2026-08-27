@@ -53,6 +53,11 @@ const F1BetRemoteControl = (props: any) => {
                         onClick={() => setActiveId(cat.id)}
                         aria-pressed={activeId === cat.id}
                         className={activeId === cat.id ? "f1-remote-control-button f1-remote-control-button-active" : "f1-remote-control-button"}
+                        style={
+                            activeId === cat.id
+                                ? { backgroundColor: 'var(--volt-yellow)', color: 'var(--volt-black)', borderColor: 'var(--volt-yellow)' }
+                                : {}
+                        }
                     >
                         <div aria-hidden="true" className="f1-remote-control-icon">
                             {cat.icon}
