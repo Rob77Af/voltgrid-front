@@ -1,14 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import { F1_DRIVERS } from '@/api/f1-data';
 
-const drivers = [
-    'Lando Norris', 'Oscar Piastri', 'Charles Leclerc', 'Lewis Hamilton',
-    'George Russell', 'Kimi Antonelli', 'Max Verstappen', 'Isack Hadjar',
-    'Fernando Alonso', 'Lance Stroll', 'Franco Colapinto', 'Pierre Gasly',
-    'Esteban Ocon', 'Oliver Bearman', 'Liam Lawson', 'Arvid Lindblad',
-    'Sergio Pérez', 'Valtteri Bottas', 'Alex Albon', 'Carlos Sainz',
-    'Nico Hülkenberg', 'Gabriel Bortoleto'
-].sort();
+
 
 const Top10Finish = () => {
     const [picks, setPicks] = useState<string[]>(Array(10).fill(''));
@@ -52,7 +46,7 @@ const Top10Finish = () => {
                                     onChange={(e) => handleSelect(index, e.target.value)}
                                 >
                                     <option value="" disabled className="text-gray-500 bg-black">Select Driver</option>
-                                    {drivers.map(driver => (
+                                    {F1_DRIVERS.map(driver => (
                                         <option 
                                             key={driver} 
                                             value={driver} 
