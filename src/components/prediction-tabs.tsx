@@ -17,33 +17,26 @@ const PredictionTabs = () => {
             
             <section
                 aria-label="Driver matchup predictions"
-                className="f1-predictions-stage"
+                className="f1-predictions-stage flex flex-col gap-16 mt-8"
             >
-                {activeId === 'head-to-head' && (
-                    <DriverMatchupPredictions rootClassName="driver-matchup-predictionsroot-class-name" />
-                )}
-                
-                {activeId === 'master' && (
-                    <Top10Finish />
-                )}
-
-                {activeId === 'poletime' && (
+                {(activeId === 'poletime' || activeId === 'all-forms') && (
                     <Poletime />
                 )}
 
-                {activeId === 'evo' && (
+                {(activeId === 'master' || activeId === 'all-forms') && (
+                    <Top10Finish />
+                )}
+
+                {(activeId === 'evo' || activeId === 'all-forms') && (
                     <Evo />
                 )}
 
-                {activeId === 'misc' && (
-                    <Misc />
+                {(activeId === 'head-to-head' || activeId === 'all-forms') && (
+                    <DriverMatchupPredictions rootClassName="driver-matchup-predictionsroot-class-name" />
                 )}
 
-                {/* Placeholder for other categories */}
-                {activeId !== 'head-to-head' && activeId !== 'master' && activeId !== 'poletime' && activeId !== 'evo' && activeId !== 'misc' && (
-                    <div className="w-full h-40 flex items-center justify-center text-gray-500 border border-[#ffffff3d] bg-[#1a1a1a] mt-8">
-                        <p className="uppercase tracking-widest text-sm">Mode coming soon...</p>
-                    </div>
+                {(activeId === 'misc' || activeId === 'all-forms') && (
+                    <Misc />
                 )}
             </section>
         </>
