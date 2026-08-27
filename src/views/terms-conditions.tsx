@@ -11,7 +11,7 @@ const TermsConditions = (props) => {
     return (
         <div className="terms-conditions-container1">
             
-            <Navigation></Navigation>
+            
             <div className="terms-conditions-thq-terms-content-elm">
                 <h1 className="terms-conditions-thq-terms-conditions-elm">
                     Terms &amp; Conditions
@@ -389,7 +389,7 @@ const TermsConditions = (props) => {
                     the matter in your communication.
                 </p>
             </div>
-            <Footer></Footer>
+            
         </div>
     )
 }

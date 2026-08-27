@@ -13,7 +13,7 @@ const Homepage = (props) => {
     return (
         <div className="homepage-container1">
             
-            <Navigation></Navigation>
+            
             <section
                 id="home-hero"
                 data-hero-capped="true"
@@ -615,7 +615,7 @@ const Homepage = (props) => {
 </style>` }} />
                 </div>
             </div>
-            <Footer></Footer>
+            
             
         </div>
     )

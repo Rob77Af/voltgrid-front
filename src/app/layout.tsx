@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GlobalProvider } from "../../global-context";
+import Navigation from "../components/navigation";
+import Footer from "../components/footer";
 
 
 export const metadata: Metadata = {
@@ -18,7 +20,9 @@ export default function RootLayout({
       <body>
         {/* Wrap the children with your provider */}
         <GlobalProvider initialLocales={undefined}>
+          <Navigation />
           {children}
+          <Footer />
         </GlobalProvider>
       </body>
     </html>

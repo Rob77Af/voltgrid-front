@@ -1,15 +1,37 @@
 "use client";
-import React from 'react'
+import React, { useState } from 'react';
 
+const matchups = [
+  { id: 'm1', team: 'McLaren', d1: { num: '04', name: 'Lando Norris' }, d2: { num: '81', name: 'Oscar Piastri' }, defaultPick: '04' },
+  { id: 'm2', team: 'Ferrari', d1: { num: '16', name: 'Charles Leclerc' }, d2: { num: '44', name: 'Lewis Hamilton' }, defaultPick: '44' },
+  { id: 'm3', team: 'Mercedes', d1: { num: '63', name: 'George Russell' }, d2: { num: '12', name: 'Kimi Antonelli' }, defaultPick: '63' },
+  { id: 'm4', team: 'Red Bull', d1: { num: '01', name: 'Max Verstappen' }, d2: { num: '06', name: 'Isack Hadjar' }, defaultPick: '06' },
+  { id: 'm5', team: 'Aston Martin', d1: { num: '14', name: 'Fernando Alonso' }, d2: { num: '18', name: 'Lance Stroll' }, defaultPick: '14' },
+  { id: 'm6', team: 'Alpine', d1: { num: '43', name: 'Franco Colapinto' }, d2: { num: '10', name: 'Pierre Gasly' }, defaultPick: '10' },
+  { id: 'm7', team: 'Haas', d1: { num: '31', name: 'Esteban Ocon' }, d2: { num: '87', name: 'Oliver Bearman' }, defaultPick: '31' },
+  { id: 'm8', team: 'Racing Bulls', d1: { num: '30', name: 'Liam Lawson' }, d2: { num: '41', name: 'Arvid Lindblad' }, defaultPick: '41' },
+  { id: 'm9', team: 'Cadillac', d1: { num: '11', name: 'Sergio Pérez' }, d2: { num: '77', name: 'Valtteri Bottas' }, defaultPick: '11' },
+  { id: 'm10', team: 'Williams', d1: { num: '23', name: 'Alex Albon' }, d2: { num: '55', name: 'Carlos Sainz' }, defaultPick: '55' },
+  { id: 'm11', team: 'Audi/Sauber', d1: { num: '27', name: 'Nico Hülkenberg' }, d2: { num: '05', name: 'Gabriel Bortoleto' }, defaultPick: '27' },
+];
 
+const DriverMatchupPredictions = (props: any) => {
+    // Initialize state with default picks
+    const initialPicks = matchups.reduce((acc, m) => {
+        acc[m.id] = m.defaultPick;
+        return acc;
+    }, {} as Record<string, string>);
+    
+    const [picks, setPicks] = useState(initialPicks);
 
-// css imported globally
+    const handlePick = (matchupId: string, driverNum: string) => {
+        setPicks(prev => ({ ...prev, [matchupId]: driverNum }));
+    };
 
-const DriverMatchupPredictions = (props) => {
+    const countPicks = Object.keys(picks).length;
+
     return (
-        <div
-            className={`driver-matchup-predictions-container ${props.rootClassName} `}
-        >
+        <div className={`driver-matchup-predictions-container ${props.rootClassName || ''}`}>
             <section className="f1-predictions-panel">
                 <header className="f1-predictions-header">
                     <p className="f1-predictions-kicker">F1 PREDICTION MARKET</p>
@@ -20,262 +42,43 @@ const DriverMatchupPredictions = (props) => {
                     <p className="f1-race-label">NEXT RACE · MIAMI GRAND PRIX</p>
                 </header>
                 <div className="f1-matchup-grid">
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">McLaren</p>
-                        <div className="f1-driver-options">
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">04</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Lando Norris</span>
-                                    <span className="f1-driver-team">McLaren</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">81</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Oscar Piastri</span>
-                                    <span className="f1-driver-team">McLaren</span>
-                                </span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Ferrari</p>
-                        <div className="f1-driver-options">
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">16</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Charles Leclerc</span>
-                                    <span className="f1-driver-team">Ferrari</span>
-                                </span>
-                            </button>
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">44</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Lewis Hamilton</span>
-                                    <span className="f1-driver-team">Ferrari</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Mercedes</p>
-                        <div className="f1-driver-options">
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">63</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">George Russell</span>
-                                    <span className="f1-driver-team">Mercedes</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">12</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Kimi Antonelli</span>
-                                    <span className="f1-driver-team">Mercedes</span>
-                                </span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Red Bull</p>
-                        <div className="f1-driver-options">
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">01</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Max Verstappen</span>
-                                    <span className="f1-driver-team">Red Bull</span>
-                                </span>
-                            </button>
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">06</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Isack Hadjar</span>
-                                    <span className="f1-driver-team">Red Bull</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Aston Martin</p>
-                        <div className="f1-driver-options">
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">14</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Fernando Alonso</span>
-                                    <span className="f1-driver-team">Aston Martin</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">18</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Lance Stroll</span>
-                                    <span className="f1-driver-team">Aston Martin</span>
-                                </span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Alpine</p>
-                        <div className="f1-driver-options">
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">43</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Franco Colapinto</span>
-                                    <span className="f1-driver-team">Alpine</span>
-                                </span>
-                            </button>
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">10</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Pierre Gasly</span>
-                                    <span className="f1-driver-team">Alpine</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Haas</p>
-                        <div className="f1-driver-options">
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">31</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Esteban Ocon</span>
-                                    <span className="f1-driver-team">Haas</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">87</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Oliver Bearman</span>
-                                    <span className="f1-driver-team">Haas</span>
-                                </span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Racing Bulls</p>
-                        <div className="f1-driver-options">
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">30</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Liam Lawson</span>
-                                    <span className="f1-driver-team">Racing Bulls</span>
-                                </span>
-                            </button>
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">41</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Arvid Lindblad</span>
-                                    <span className="f1-driver-team">Racing Bulls</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Cadillac</p>
-                        <div className="f1-driver-options">
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">11</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Sergio Pérez</span>
-                                    <span className="f1-driver-team">Cadillac</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">77</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Valtteri Bottas</span>
-                                    <span className="f1-driver-team">Cadillac</span>
-                                </span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Williams</p>
-                        <div className="f1-driver-options">
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">23</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Alex Albon</span>
-                                    <span className="f1-driver-team">Williams</span>
-                                </span>
-                            </button>
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">55</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Carlos Sainz</span>
-                                    <span className="f1-driver-team">Williams</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                        </div>
-                    </article>
-                    <article className="f1-matchup-card">
-                        <p className="f1-matchup-label">Audi/Sauber</p>
-                        <div className="f1-driver-options">
-                            <button
-                                type="button"
-                                className="f1-driver-option-selected f1-driver-option"
-                            >
-                                <span className="f1-driver-number">27</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Nico Hülkenberg</span>
-                                    <span className="f1-driver-team">Audi/Sauber</span>
-                                </span>
-                                <span className="f1-choice-status">YOUR PICK</span>
-                            </button>
-                            <button type="button" className="f1-driver-option">
-                                <span className="f1-driver-number">05</span>
-                                <span className="f1-driver-details">
-                                    <span className="f1-driver-name">Gabriel Bortoleto</span>
-                                    <span className="f1-driver-team">Audi/Sauber</span>
-                                </span>
-                            </button>
-                        </div>
-                    </article>
+                    {matchups.map(m => {
+                        const picked = picks[m.id];
+                        return (
+                            <article key={m.id} className="f1-matchup-card">
+                                <p className="f1-matchup-label">{m.team}</p>
+                                <div className="f1-driver-options">
+                                    <button
+                                        type="button"
+                                        onClick={() => handlePick(m.id, m.d1.num)}
+                                        className={picked === m.d1.num ? "f1-driver-option-selected f1-driver-option" : "f1-driver-option"}
+                                    >
+                                        <span className="f1-driver-number">{m.d1.num}</span>
+                                        <span className="f1-driver-details">
+                                            <span className="f1-driver-name">{m.d1.name}</span>
+                                            <span className="f1-driver-team">{m.team}</span>
+                                        </span>
+                                        {picked === m.d1.num && <span className="f1-choice-status">YOUR PICK</span>}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => handlePick(m.id, m.d2.num)}
+                                        className={picked === m.d2.num ? "f1-driver-option-selected f1-driver-option" : "f1-driver-option"}
+                                    >
+                                        <span className="f1-driver-number">{m.d2.num}</span>
+                                        <span className="f1-driver-details">
+                                            <span className="f1-driver-name">{m.d2.name}</span>
+                                            <span className="f1-driver-team">{m.team}</span>
+                                        </span>
+                                        {picked === m.d2.num && <span className="f1-choice-status">YOUR PICK</span>}
+                                    </button>
+                                </div>
+                            </article>
+                        );
+                    })}
                 </div>
                 <footer className="f1-predictions-summary">
-                    <p className="f1-summary-copy">11 of 11 picks locked in</p>
+                    <p className="f1-summary-copy">{countPicks} of 11 picks locked in</p>
                     <button type="button" className="f1-submit-picks">
                         SUBMIT PICKS
                     </button>
@@ -285,8 +88,4 @@ const DriverMatchupPredictions = (props) => {
     )
 }
 
-
-
-
-
-export default DriverMatchupPredictions
+export default DriverMatchupPredictions;

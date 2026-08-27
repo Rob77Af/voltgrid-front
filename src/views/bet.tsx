@@ -1,15 +1,13 @@
 "use client";
 import React from 'react'
 
-import Navigation from '../components/navigation'
-import Footer from '../components/footer'
 import F1BetRemoteControl from '../components/f1-bet-remote-control'
 import DriverMatchupPredictions from '../components/driver-matchup-predictions'
 
 const BetPage = () => {
     return (
-        <div className="homepage-container1">
-            <Navigation />
+        <div className="bet-now-container1">
+            
             
             <main className="f1-bet-page" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
                 <section className="f1-bet-shell">
@@ -42,7 +40,7 @@ const BetPage = () => {
                 </section>
             </main>
 
-            <Footer />
+            
         </div>
     )
 }
