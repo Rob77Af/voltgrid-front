@@ -40,8 +40,12 @@ const categories = [
     )}
 ];
 
-const F1BetRemoteControl = (props: any) => {
-    const [activeId, setActiveId] = useState('head-to-head');
+interface Props {
+    activeId: string;
+    setActiveId: (id: string) => void;
+}
+
+const F1BetRemoteControl = ({ activeId, setActiveId }: Props) => {
 
     return (
         <div className="f1-bet-remote-control-container">

@@ -7,15 +7,11 @@ export const metadata: Metadata = {
 };
 
 import React from 'react'
-
-import F1BetRemoteControl from '@/components/f1-bet-remote-control'
-import DriverMatchupPredictions from '@/components/driver-matchup-predictions'
+import PredictionTabs from '@/components/prediction-tabs'
 
 const BetPage = () => {
     return (
         <div className="bet-now-container1">
-            
-            
             <main className="f1-bet-page" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
                 <section className="f1-bet-shell">
                     <header className="f1-bet-header">
@@ -34,20 +30,12 @@ const BetPage = () => {
                             </p>
                         </section>
                     </header>
-                    <F1BetRemoteControl />
-                    <section
-                        aria-label="Driver matchup predictions"
-                        className="f1-predictions-stage"
-                    >
-                        <DriverMatchupPredictions rootClassName="driver-matchup-predictionsroot-class-name" />
-                    </section>
+                    <PredictionTabs />
                     <p className="f1-responsible-notice">
                         Play responsibly. Predictions are for entertainment only — know your limits.
                     </p>
                 </section>
             </main>
-
-            
         </div>
     )
 }
