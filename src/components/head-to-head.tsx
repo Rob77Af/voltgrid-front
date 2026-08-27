@@ -1,15 +1,12 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import { F1_MATCHUPS } from '@/api/f1-data';
+import { usePredictionStore } from '@/store/usePredictionStore';
+import './driver-matchup-predictions.css';
 
-const DriverMatchupPredictions = (props: any) => {
-    // Initialize state with default picks
-    const initialPicks = F1_MATCHUPS.reduce((acc, m) => {
-        acc[m.id] = m.defaultPick;
-        return acc;
-    }, {} as Record<string, string>);
-    
-    const [picks, setPicks] = useState(initialPicks);
+const HeadToHead = (props: any) => {
+    const picks = usePredictionStore(state => state.h2h);
+    const setPicks = usePredictionStore(state => state.setH2H);
 
     const handlePick = (matchupId: string, driverNum: string) => {
         setPicks(prev => ({ ...prev, [matchupId]: driverNum }));
@@ -75,4 +72,4 @@ const DriverMatchupPredictions = (props: any) => {
     )
 }
 
-export default DriverMatchupPredictions;
+export default HeadToHead;

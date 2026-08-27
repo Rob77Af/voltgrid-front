@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
+import { usePredictionStore } from '@/store/usePredictionStore';
 
 const QUESTIONS = [
     { id: 'q1', text: 'Safety Car deployed during the race?', options: ['Yes', 'No'] },
@@ -10,7 +11,8 @@ const QUESTIONS = [
 ];
 
 const Misc = () => {
-    const [answers, setAnswers] = useState<Record<string, string>>({});
+    const answers = usePredictionStore(state => state.misc);
+    const setAnswers = usePredictionStore(state => state.setMisc);
 
     const handleSelect = (questionId: string, option: string) => {
         setAnswers(prev => ({

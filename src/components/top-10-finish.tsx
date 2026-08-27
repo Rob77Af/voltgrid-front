@@ -1,9 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 import { F1_DRIVERS } from '@/api/f1-data';
+import { usePredictionStore } from '@/store/usePredictionStore';
 
 const Top10Finish = () => {
-    const [picks, setPicks] = useState<string[]>(Array(10).fill(''));
+    const picks = usePredictionStore(state => state.top10);
+    const setPicks = usePredictionStore(state => state.setTop10);
     const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
 
     const handleSelect = (index: number, driver: string) => {

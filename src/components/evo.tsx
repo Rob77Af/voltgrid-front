@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import { F1_DRIVERS } from '@/api/f1-data';
+import { usePredictionStore } from '@/store/usePredictionStore';
 
 const Evo = () => {
-    const [selectedDrivers, setSelectedDrivers] = useState<string[]>([]);
+    const selectedDrivers = usePredictionStore(state => state.evo);
+    const setSelectedDrivers = usePredictionStore(state => state.setEvo);
 
     const toggleDriver = (driver: string) => {
         if (selectedDrivers.includes(driver)) {

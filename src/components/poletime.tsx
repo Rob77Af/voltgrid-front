@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
+import { usePredictionStore } from '@/store/usePredictionStore';
 
 const Poletime = () => {
-    // Default time: 1:25.000
-    const [digits, setDigits] = useState<number[]>([1, 2, 5, 0, 0, 0]);
+    const digits = usePredictionStore(state => state.poletime);
+    const setDigits = usePredictionStore(state => state.setPoletime);
 
     // Max values for each position:
     // [0] Minutes: 0 to 3

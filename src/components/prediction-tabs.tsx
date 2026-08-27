@@ -10,6 +10,15 @@ import Misc from './misc';
 
 const PredictionTabs = () => {
     const [activeId, setActiveId] = useState('head-to-head');
+    const [isMounted, setIsMounted] = useState(false);
+
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) {
+        return <div className="w-full h-96 flex items-center justify-center text-[#fbaa19] font-bold">LOADING PREDICTIONS...</div>;
+    }
 
     return (
         <>
