@@ -44,7 +44,7 @@
     --color-on-primary: var(--color-on-primary-light);
     --color-on-surface: var(--color-on-surface-light);
     --color-scrim-dark: color-mix(in oklab, #000000 65%, transparent);
-    --font-family-body: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /*--font-family-body: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;*/
     --font-weight-body: 400;
     --line-height-body: 1.6;
     --color-accent-dark: #ffe37a;

@@ -44,7 +44,7 @@
     --color-on-primary: var(--color-on-primary-light);
     --color-on-surface: var(--color-on-surface-light);
     --color-scrim-dark: color-mix(in oklab, #000000 65%, transparent);
-    --font-family-body: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* --font-family-body: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;*/
     --font-weight-body: 400;
     --line-height-body: 1.6;
     --color-accent-dark: #ffe37a;
@@ -70,7 +70,22 @@
     --color-overlay-light: color-mix(in oklab, #000000 40%, transparent);
     --color-primary-light: #665200;
     --color-surface-light: #fefbf8;
-    --font-family-heading: "Saira", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-family-heading: var(--current-display-font), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-s: 14px;
+    --font-size-m: 16px;
+    --font-size-l: 18px;
+    --font-size-xl: 24px;
+    --font-size-xxl: 32px;
+    --font-size-xxxl: 48px;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+    --spacing-xs: 4px;
+    --spacing-s: 8px;
+    --spacing-m: 16px;
+    --spacing-l: 24px;
+    --spacing-xl: 32px;
     --font-weight-heading: 700;
     --letter-spacing-body: 0.01em;
     --line-height-heading: 1.25;
@@ -1868,7 +1883,7 @@
     font-size: 10px;
     min-width: 5.5rem;
     background: var(--volt-yellow);
-    
+
     box-sizing: border-box;
     min-height: 3.5rem;
     align-items: center;
@@ -1931,7 +1946,7 @@
 
 .Headings {
     font-size: 2em;
-    font-family: Saira;
+    font-family: var(--current-display-font);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: 0.02em;

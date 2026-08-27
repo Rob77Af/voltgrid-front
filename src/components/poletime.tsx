@@ -27,7 +27,7 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
         <button
             type="button"
             onClick={onClick}
-            className="w-14 h-20 md:w-20 md:h-28 bg-[#1a1a1a] border border-[#ffffff3d] flex items-center justify-center text-4xl md:text-6xl font-['Saira'] font-bold text-white hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors select-none focus:outline-none focus:border-[#fbaa19]"
+            className="w-14 h-20 md:w-20 md:h-28 bg-[#1a1a1a] border border-[#ffffff3d] flex items-center justify-center text-4xl md:text-6xl font-display font-bold text-white hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors select-none focus:outline-none focus:border-[#fbaa19]"
         >
             {value}
         </button>
@@ -37,7 +37,7 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
         <div className="w-full flex flex-col gap-8 mt-8">
             <header className="f1-predictions-header border border-[#ffffff3d] p-6 bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
                 <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                <h2 className="text-white text-2xl md:text-3xl font-['Saira'] font-bold uppercase tracking-wider mb-2">POLETIME</h2>
+                <h2 className="text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">POLETIME</h2>
                 <p className="text-gray-400 text-sm md:text-base">
                     Predict the exact pole position lap time. Click each digit to increment its value.
                 </p>
@@ -48,7 +48,7 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                     {/* Minutes */}
                     <DigitButton value={digits[0]} onClick={() => incrementDigit(0)} />
                     
-                    <span className="text-white text-4xl md:text-6xl font-['Saira'] font-bold pb-2 mx-1 md:mx-2">:</span>
+                    <span className="text-white text-4xl md:text-6xl font-display font-bold pb-2 mx-1 md:mx-2">:</span>
                     
                     {/* Seconds */}
                     <div className="flex items-center gap-1 md:gap-2">
@@ -56,7 +56,7 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                         <DigitButton value={digits[2]} onClick={() => incrementDigit(2)} />
                     </div>
 
-                    <span className="text-[#fbaa19] text-4xl md:text-6xl font-['Saira'] font-bold pb-2 mx-1 md:mx-2">.</span>
+                    <span className="text-[#fbaa19] text-4xl md:text-6xl font-display font-bold pb-2 mx-1 md:mx-2">.</span>
                     
                     {/* Milliseconds */}
                     <div className="flex items-center gap-1 md:gap-2">

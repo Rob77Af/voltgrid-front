@@ -63,7 +63,7 @@ const PredictionTabs = () => {
 
                 {isAllMode && (
                     <footer className="w-full p-8 bg-[#fbaa19] border-t-4 border-black text-center shadow-2xl flex flex-col items-center justify-center gap-4 sticky bottom-0 z-50">
-                        <h3 className="text-black font-black uppercase text-xl md:text-2xl tracking-widest font-['Saira']">
+                        <h3 className="text-black font-black uppercase text-xl md:text-2xl tracking-widest font-display">
                             {isAllValid ? 'ALL SELECTIONS COMPLETE' : 'INCOMPLETE SELECTIONS'}
                         </h3>
                         <button 
