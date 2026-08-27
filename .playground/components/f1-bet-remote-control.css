@@ -1,0 +1,31 @@
+.f1-bet-remote-control-container {
+    gap: 2px;
+    width: 100%;
+    border: 1px solid var(--volt-grey);
+    height: auto;
+    display: flex;
+    padding: var(--spacing-xs);
+    position: relative;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    min-height: 3.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: stretch;
+    border-radius: var(--border-radius-control);
+    flex-direction: row;
+    background-color: var(--volt-black);
+}
+
+@media(max-width: 767px) {
+    .f1-bet-remote-control-container {
+        padding: var(--spacing-xs);
+        min-height: 3.25rem;
+    }
+}
+
+@media(max-width: 479px) {
+    .f1-bet-remote-control-container {
+        min-height: 3rem;
+    }
+}
