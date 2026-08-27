@@ -418,7 +418,7 @@
     gap: var(--spacing-xs);
     color: var(--color-on-surface-secondary);
     display: flex;
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     align-items: center;
     font-family: var(--font-family-body);
     letter-spacing: 0.05em;
@@ -457,7 +457,7 @@
     cursor: default;
     opacity: 0.4;
     padding: 4px 0;
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     font-family: var(--font-family-heading);
     font-weight: var(--font-weight-medium);
     letter-spacing: 0.02em;
@@ -468,7 +468,7 @@
     color: var(--color-on-surface);
     padding: 4px 0;
     position: relative;
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     transition: color 0.2s ease;
     font-family: var(--font-family-heading);
     font-weight: var(--font-weight-medium);
@@ -811,7 +811,7 @@
 
 .volt-hero-eyebrow {
     color: var(--color-primary);
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     font-family: var(--font-family-heading);
     font-weight: var(--font-weight-medium);
     margin-bottom: var(--spacing-md);
@@ -940,7 +940,7 @@
 
 .volt-hero-metric-label {
     color: var(--color-on-surface-secondary);
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     text-transform: uppercase;
 }
 
@@ -952,7 +952,7 @@
 
 .volt-hero-metric-delta {
     color: var(--color-primary);
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     font-weight: bold;
 }
 
@@ -978,7 +978,7 @@
     flex: 1;
     color: var(--color-on-surface-secondary);
     padding: 2px var(--spacing-lg);
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     background: var(--color-surface);
     text-align: left;
     margin-left: var(--spacing-md);
@@ -1079,7 +1079,7 @@
     top: 16px;
     left: var(--spacing-lg);
     position: absolute;
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     font-weight: bold;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -1305,7 +1305,7 @@
 
 .volt-how-chat-bubble {
     padding: var(--spacing-sm) var(--spacing-md);
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     align-self: flex-start;
     background: var(--color-surface-tint);
     border-radius: var(--border-radius-md);
@@ -1504,7 +1504,7 @@
 .f1-predictions-kicker {
     color: var(--volt-yellow);
     margin: 0;
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     font-weight: var(--font-weight-medium);
     line-height: 1.2;
     letter-spacing: 0.12em;
@@ -1647,7 +1647,7 @@
 .f1-driver-team {
     color: var(--color-neutral-dark);
     overflow: hidden;
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     line-height: 1.25;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -1656,7 +1656,7 @@
 .f1-choice-status {
     flex: 0 0 auto;
     color: var(--volt-yellow);
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     font-weight: var(--font-weight-medium);
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -1727,7 +1727,7 @@
 .f1-bet-eyebrow {
     color: var(--volt-yellow);
     margin: 0 0 var(--spacing-sm);
-    font-size: var(--font-size-xs);
+    font-size: 10px;
     font-weight: var(--font-weight-medium);
     line-height: 1.2;
     letter-spacing: 0.14em;
@@ -1819,15 +1819,16 @@
 }
 
 .f1-remote-control-button {
-    gap: var(--spacing-sm);
+    gap: 4px;
     flex: 1 1 0;
     color: color-mix(in oklab, var(--volt-white) 72%, transparent);
     border: 1px solid color-mix(in oklab, var(--volt-white) 24%, transparent);
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     padding: var(--spacing-sm) var(--spacing-md);
-    font-size: var(--font-size-xs);
-    min-width: 8.5rem;
+    font-size: 10px;
+    min-width: 5.5rem;
     background: var(--volt-grey);
     box-sizing: border-box;
     min-height: 3.5rem;
@@ -1856,17 +1857,18 @@
 }
 
 .f1-remote-control-button-active {
-    gap: var(--spacing-sm);
+    gap: 4px;
     flex: 1 1 0;
     color: var(--volt-black);
-    border: 2px solid var(--volt-yellow);
+    border: 1px solid var(--volt-yellow);
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     padding: var(--spacing-sm) var(--spacing-md);
-    font-size: var(--font-size-xs);
-    min-width: 8.5rem;
+    font-size: 10px;
+    min-width: 5.5rem;
     background: var(--volt-yellow);
-    box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--volt-black) 18%, transparent), 0 0 14px color-mix(in oklab, var(--volt-yellow) 30%, transparent);
+    
     box-sizing: border-box;
     min-height: 3.5rem;
     align-items: center;
@@ -1881,8 +1883,8 @@
 }
 
 .f1-remote-control-button-active:hover {
-    background: var(--color-accent-dark);
-    border-color: var(--color-accent-dark);
+    background: var(--color-accent-light);
+    border-color: var(--color-accent-light);
 }
 
 .f1-remote-control-button-active:focus-visible {
@@ -2076,13 +2078,13 @@
     }
 
     .f1-remote-control-button {
-        min-width: 7.5rem;
+        min-width: 4.5rem;
         min-height: 3.25rem;
         padding-inline: var(--spacing-sm);
     }
 
     .f1-remote-control-button-active {
-        min-width: 7.5rem;
+        min-width: 4.5rem;
         min-height: 3.25rem;
         padding-inline: var(--spacing-sm);
     }
@@ -2161,12 +2163,12 @@
     }
 
     .f1-remote-control-button {
-        font-size: var(--font-size-xs);
-        min-width: 7rem;
+        font-size: 10px;
+        min-width: 4.5rem;
     }
 
     .f1-remote-control-button-active {
-        font-size: var(--font-size-xs);
-        min-width: 7rem;
+        font-size: 10px;
+        min-width: 4.5rem;
     }
 }
