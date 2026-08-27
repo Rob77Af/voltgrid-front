@@ -6,7 +6,6 @@ import Top10Finish from './top-10-finish';
 
 import Poletime from './poletime';
 import Evo from './evo';
-import EvoV2 from './evo-v2';
 import Misc from './misc';
 
 import { usePredictionStore } from '@/store/usePredictionStore';
@@ -18,7 +17,7 @@ const PredictionTabs = () => {
     // Global validation for ALL forms
     const { top10, evo, h2h, misc } = usePredictionStore();
     const isTop10Valid = top10.every(p => p !== '');
-    const isEvoValid = evo.length === 5;
+    const isEvoValid = evo.every(p => p !== '');
     const isH2HValid = Object.keys(h2h).length === 11; // F1_MATCHUPS.length
     const isMiscValid = Object.keys(misc).length === 5; // QUESTIONS.length
     
@@ -52,10 +51,6 @@ const PredictionTabs = () => {
 
                 {(activeId === 'evo' || isAllMode) && (
                     <Evo hideSubmit={isAllMode} />
-                )}
-
-                {(activeId === 'evo-v2') && (
-                    <EvoV2 hideSubmit={false} />
                 )}
 
                 {(activeId === 'head-to-head' || isAllMode) && (

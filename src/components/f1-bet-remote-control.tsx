@@ -19,11 +19,6 @@ const categories = [
             <path d="M13.5 2 5 13h5l-1 9 8.5-12h-5L13.5 2Z"></path>
         </svg>
     )},
-    { id: 'evo-v2', label: 'Evo V2', icon: (
-        <svg fill="currentColor" viewBox="0 0 24 24">
-            <path d="M13.5 2 5 13h5l-1 9 8.5-12h-5L13.5 2Z"></path>
-        </svg>
-    )},
     { id: 'head-to-head', label: 'H2H', icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round">
             <circle r="3" cx="8" cy="9"></circle>
