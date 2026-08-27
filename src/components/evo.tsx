@@ -16,10 +16,10 @@ const Evo = ({ hideSubmit }: { hideSubmit?: boolean }) => {
 
     return (
         <div className="w-full flex flex-col gap-4 mt-8">
-            <header className="f1-predictions-header border border-[#ffffff3d] p-6 bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md mb-2">
+            <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md mb-2">
                 <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                <h2 className="text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">EVO (BIGGEST MOVERS)</h2>
-                <p className="text-gray-400 text-sm md:text-base">
+                <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">EVO (BIGGEST MOVERS)</h2>
+                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
                     Select the 5 drivers you predict will gain the most positions.
                 </p>
             </header>
@@ -40,8 +40,8 @@ const Evo = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                     return (
                         <div 
                             key={index} 
-                            className={`flex items-stretch bg-black border ${
-                                pick || isOpen ? 'border-[#fbaa19]' : 'border-[#ffffff3d]'
+                            className={`flex items-stretch bg-white dark:bg-black border ${
+                                pick || isOpen ? 'border-[#fbaa19]' : 'border-black/20 dark:border-[#ffffff3d]'
                             } transition-colors duration-200 relative ${isOpen ? 'z-50' : 'z-10 hover:border-[#fbaa19]'}`}
                             style={{ minHeight: '3.5rem' }}
                         >
@@ -57,10 +57,10 @@ const Evo = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                                 >
                                     {pickDetails ? (
                                         <div className="flex flex-col leading-tight">
-                                            <span className="uppercase font-bold tracking-wider text-white">
+                                            <span className="uppercase font-bold tracking-wider text-black dark:text-white">
                                                 {pickDetails.name} <span className="text-[#fbaa19]"># {pickDetails.num}</span>
                                             </span>
-                                            <span className="text-xs text-gray-400 font-medium uppercase tracking-wider mt-0.5">{pickDetails.team}</span>
+                                            <span className="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wider mt-0.5">{pickDetails.team}</span>
                                         </div>
                                     ) : (
                                         <span className="uppercase font-bold tracking-wider text-gray-500">
@@ -77,7 +77,7 @@ const Evo = ({ hideSubmit }: { hideSubmit?: boolean }) => {
 
                                 {/* Custom Dropdown Menu */}
                                 {isOpen && (
-                                    <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-[#0a0a0a] border border-[#fbaa19] max-h-60 overflow-y-auto shadow-2xl shadow-black/50 z-[100]">
+                                    <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-gray-50 dark:bg-[#0a0a0a] border border-[#fbaa19] max-h-60 overflow-y-auto shadow-2xl shadow-black/50 z-[100]">
                                         <div className="flex flex-col py-2">
                                             {F1_DRIVERS.map(driver => {
                                                 const isPickedHere = pick === driver;
@@ -98,7 +98,7 @@ const Evo = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                                                                 ? 'bg-[#fbaa19] text-black' 
                                                                 : isPickedElsewhere 
                                                                     ? 'text-[#333] cursor-not-allowed line-through decoration-[#fbaa19]/30' 
-                                                                    : 'text-white hover:bg-[#1a1a1a] hover:text-[#fbaa19] cursor-pointer'
+                                                                    : 'text-black dark:text-white hover:bg-white dark:bg-[#1a1a1a] hover:text-[#fbaa19] cursor-pointer'
                                                         }`}
                                                     >
                                                         <div className="flex flex-col leading-tight">

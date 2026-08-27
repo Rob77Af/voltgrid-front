@@ -27,7 +27,7 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
         <button
             type="button"
             onClick={onClick}
-            className="w-14 h-20 md:w-20 md:h-28 bg-[#1a1a1a] border border-[#ffffff3d] flex items-center justify-center text-4xl md:text-6xl font-display font-bold text-white hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors select-none focus:outline-none focus:border-[#fbaa19]"
+            className="w-14 h-20 md:w-20 md:h-28 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] flex items-center justify-center text-4xl md:text-6xl font-display font-bold text-black dark:text-white hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors select-none focus:outline-none focus:border-[#fbaa19]"
         >
             {value}
         </button>
@@ -35,20 +35,20 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
 
     return (
         <div className="w-full flex flex-col gap-8 mt-8">
-            <header className="f1-predictions-header border border-[#ffffff3d] p-6 bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
+            <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
                 <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                <h2 className="text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">POLETIME</h2>
-                <p className="text-gray-400 text-sm md:text-base">
+                <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">POLETIME</h2>
+                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
                     Predict the exact pole position lap time. Click each digit to increment its value.
                 </p>
             </header>
 
-            <div className="flex flex-col items-center justify-center py-12 bg-black border border-[#ffffff3d]">
+            <div className="flex flex-col items-center justify-center py-12 bg-white dark:bg-black border border-black/20 dark:border-[#ffffff3d]">
                 <div className="flex items-center justify-center gap-1 md:gap-3">
                     {/* Minutes */}
                     <DigitButton value={digits[0]} onClick={() => incrementDigit(0)} />
                     
-                    <span className="text-white text-4xl md:text-6xl font-display font-bold pb-2 mx-1 md:mx-2">:</span>
+                    <span className="text-black dark:text-white text-4xl md:text-6xl font-display font-bold pb-2 mx-1 md:mx-2">:</span>
                     
                     {/* Seconds */}
                     <div className="flex items-center gap-1 md:gap-2">
@@ -68,11 +68,11 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
             </div>
 
             {!hideSubmit && (
-                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-[#1a1a1a] border border-[#ffffff3d]">
-                    <p className="f1-summary-copy text-sm md:text-base text-gray-400 font-medium tracking-wide">
-                        Your pick: <span className="text-white font-bold">{digits[0]}:{digits[1]}{digits[2]}.{digits[3]}{digits[4]}{digits[5]}</span>
+                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
+                    <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
+                        Your pick: <span className="text-black dark:text-white font-bold">{digits[0]}:{digits[1]}{digits[2]}.{digits[3]}{digits[4]}{digits[5]}</span>
                     </p>
-                    <button type="button" className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-black hover:text-[#fbaa19]">
+                    <button type="button" className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-white dark:bg-black hover:text-[#fbaa19]">
                         SUBMIT PREDICTION
                     </button>
                 </footer>

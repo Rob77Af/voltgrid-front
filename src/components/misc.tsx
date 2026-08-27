@@ -26,10 +26,10 @@ const Misc = ({ hideSubmit }: { hideSubmit?: boolean }) => {
 
     return (
         <div className="w-full flex flex-col gap-8 mt-8">
-            <header className="f1-predictions-header border border-[#ffffff3d] p-6 bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
+            <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
                 <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                <h2 className="text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">MISC</h2>
-                <p className="text-gray-400 text-sm md:text-base">
+                <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">MISC</h2>
+                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
                     Answer the following event props. Choose one outcome per question.
                 </p>
             </header>
@@ -38,8 +38,8 @@ const Misc = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                 {QUESTIONS.map(q => {
                     const selectedOption = answers[q.id];
                     return (
-                        <div key={q.id} className="bg-black border border-[#ffffff3d] p-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between hover:border-[#fbaa19] transition-colors">
-                            <h3 className="text-white uppercase font-bold tracking-wider text-sm md:text-base md:w-1/2">
+                        <div key={q.id} className="bg-white dark:bg-black border border-black/20 dark:border-[#ffffff3d] p-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between hover:border-[#fbaa19] transition-colors">
+                            <h3 className="text-black dark:text-white uppercase font-bold tracking-wider text-sm md:text-base md:w-1/2">
                                 {q.text}
                             </h3>
                             <div className="flex items-center gap-2 md:w-1/2">
@@ -52,7 +52,7 @@ const Misc = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                                             className={`flex-1 py-3 px-4 font-bold uppercase tracking-widest text-sm transition-all border ${
                                                 isSelected 
                                                 ? 'bg-[#fbaa19] text-black border-[#fbaa19]' 
-                                                : 'bg-[#1a1a1a] text-white border-[#ffffff3d] hover:border-[#fbaa19] hover:text-[#fbaa19]'
+                                                : 'bg-white dark:bg-[#1a1a1a] text-black dark:text-white border-black/20 dark:border-[#ffffff3d] hover:border-[#fbaa19] hover:text-[#fbaa19]'
                                             }`}
                                         >
                                             {opt}
@@ -71,8 +71,8 @@ const Misc = ({ hideSubmit }: { hideSubmit?: boolean }) => {
             </div>
 
             {!hideSubmit && (
-                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-[#1a1a1a] border border-[#ffffff3d]">
-                    <p className="f1-summary-copy text-sm md:text-base text-gray-400 font-medium tracking-wide">
+                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
+                    <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
                         {answeredCount === totalQuestions 
                             ? <span className="text-[#fbaa19]">All {totalQuestions} answered!</span>
                             : `${answeredCount} of ${totalQuestions} answered`
@@ -81,7 +81,7 @@ const Misc = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                     <button 
                         type="button" 
                         disabled={answeredCount !== totalQuestions}
-                        className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#fbaa19] disabled:hover:text-black"
+                        className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-white dark:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#fbaa19] disabled:hover:text-black"
                     >
                         SUBMIT PREDICTION
                     </button>

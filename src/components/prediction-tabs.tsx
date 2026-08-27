@@ -68,7 +68,7 @@ const PredictionTabs = () => {
                         </h3>
                         <button 
                             disabled={!isAllValid}
-                            className="bg-black text-[#fbaa19] border-2 border-black font-black uppercase tracking-widest px-12 py-4 text-lg md:text-xl transition-all hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="bg-white dark:bg-black text-[#fbaa19] border-2 border-black font-black uppercase tracking-widest px-12 py-4 text-lg md:text-xl transition-all hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:cursor-not-allowed"
                         >
                             SUBMIT ALL PREDICTIONS
                         </button>

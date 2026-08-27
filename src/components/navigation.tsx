@@ -38,7 +38,7 @@ const Navigation = () => {
                             <Link 
                                 key={index} 
                                 href={link.href}
-                                className="text-white text-sm font-semibold uppercase tracking-widest hover:text-[#fbff00] transition-colors"
+                                className="text-black dark:text-white text-sm font-semibold uppercase tracking-widest hover:text-[#fbff00] transition-colors"
                             >
                                 {link.name}
                             </Link>
@@ -67,7 +67,7 @@ const Navigation = () => {
                         <div className="md:hidden flex items-center">
                             <button
                                 aria-label="Open menu"
-                                className="text-white p-2"
+                                className="text-black dark:text-white p-2"
                                 onClick={() => setIsMobileMenuOpen(true)}
                             >
                                 <svg fill="none" width="28" height="28" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round">
@@ -82,14 +82,14 @@ const Navigation = () => {
 
                 {/* MOBILE OVERLAY MENU */}
                 {isMobileMenuOpen && (
-                    <div className="fixed inset-0 bg-black z-[1100] p-6 flex flex-col overflow-y-auto">
+                    <div className="fixed inset-0 bg-white dark:bg-black z-[1100] p-6 flex flex-col overflow-y-auto">
                         <div className="flex items-center justify-between mb-12">
                             <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
                                 <Logo isOnDarkBackground />
                             </Link>
                             <button
                                 aria-label="Close menu"
-                                className="text-white p-2"
+                                className="text-black dark:text-white p-2"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 <svg fill="none" width="28" height="28" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round">
@@ -105,7 +105,7 @@ const Navigation = () => {
                                     key={index} 
                                     href={link.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="text-white text-2xl font-bold uppercase tracking-widest hover:text-[#fbff00] transition-colors border-b border-white/10 pb-4"
+                                    className="text-black dark:text-white text-2xl font-bold uppercase tracking-widest hover:text-[#fbff00] transition-colors border-b border-white/10 pb-4"
                                 >
                                     {link.name}
                                 </Link>

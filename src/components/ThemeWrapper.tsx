@@ -4,6 +4,7 @@ import { useThemeStore, THEME_FONTS } from '@/store/useThemeStore';
 
 export default function ThemeWrapper({ children }: { children: React.ReactNode }) {
     const theme = useThemeStore(state => state.theme);
+    const mode = useThemeStore(state => state.mode);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -27,7 +28,7 @@ export default function ThemeWrapper({ children }: { children: React.ReactNode }
 
     return (
         <div 
-            className="min-h-screen transition-all duration-300"
+            className={`min-h-screen transition-all duration-300 ${mounted && mode === 'dark' ? 'dark bg-gray-50 dark:bg-[#0a0a0a] text-black dark:text-white' : 'bg-gray-100 text-black'}`}
             style={{ 
                 fontFamily: bodyVar,
                 // We can set a local custom property for headers to use
