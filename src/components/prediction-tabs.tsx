@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import F1BetRemoteControl from './f1-bet-remote-control';
-import DriverMatchupPredictions from './driver-matchup-predictions';
+import HeadToHead from './head-to-head';
 import Top10Finish from './top-10-finish';
 
 import Poletime from './poletime';
@@ -32,7 +32,7 @@ const PredictionTabs = () => {
                 )}
 
                 {(activeId === 'head-to-head' || activeId === 'all-forms') && (
-                    <DriverMatchupPredictions rootClassName="driver-matchup-predictionsroot-class-name" />
+                    <HeadToHead rootClassName="head-to-head-root-class-name" />
                 )}
 
                 {(activeId === 'misc' || activeId === 'all-forms') && (

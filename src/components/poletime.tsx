@@ -36,7 +36,7 @@ const Poletime = () => {
         <div className="w-full flex flex-col gap-8 mt-8">
             <header className="f1-predictions-header border border-[#ffffff3d] p-6 bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
                 <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                <h2 className="text-white text-2xl md:text-3xl font-['Saira'] font-bold uppercase tracking-wider mb-2">POLETIME PREDICTION</h2>
+                <h2 className="text-white text-2xl md:text-3xl font-['Saira'] font-bold uppercase tracking-wider mb-2">POLETIME</h2>
                 <p className="text-gray-400 text-sm md:text-base">
                     Predict the exact pole position lap time. Click each digit to increment its value.
                 </p>
