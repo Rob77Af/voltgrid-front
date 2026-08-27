@@ -6,6 +6,7 @@ import Top10Finish from './top-10-finish';
 
 import Poletime from './poletime';
 import Evo from './evo';
+import Misc from './misc';
 
 const PredictionTabs = () => {
     const [activeId, setActiveId] = useState('head-to-head');
@@ -34,8 +35,12 @@ const PredictionTabs = () => {
                     <Evo />
                 )}
 
+                {activeId === 'misc' && (
+                    <Misc />
+                )}
+
                 {/* Placeholder for other categories */}
-                {activeId !== 'head-to-head' && activeId !== 'master' && activeId !== 'poletime' && activeId !== 'evo' && (
+                {activeId !== 'head-to-head' && activeId !== 'master' && activeId !== 'poletime' && activeId !== 'evo' && activeId !== 'misc' && (
                     <div className="w-full h-40 flex items-center justify-center text-gray-500 border border-[#ffffff3d] bg-[#1a1a1a] mt-8">
                         <p className="uppercase tracking-widest text-sm">Mode coming soon...</p>
                     </div>
