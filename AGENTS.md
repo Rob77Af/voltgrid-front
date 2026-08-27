@@ -7,3 +7,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+<!-- BEGIN:user-workflow-rules -->
+# User Workflow Requirements
+- ALWAYS run `npm run build` (or via `cmd.exe /c "npm run build"`) and check for errors BEFORE committing and pushing to GitHub.
+- ALWAYS push changes to the repository immediately after successfully completing a task and verifying the build.
+<!-- END:user-workflow-rules -->
