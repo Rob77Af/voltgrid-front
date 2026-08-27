@@ -9,7 +9,7 @@ const THEME_OPTIONS: { id: FontTheme; name: string; desc: string }[] = [
     { id: 'wallstreet', name: 'Wall Street', desc: 'Montserrat & IBM Plex. Institutional, serious trading desk.' }
 ];
 
-export default function DashboardPage() {
+export default function SuperlicensePage() {
     const activeTheme = useThemeStore(state => state.theme);
     const setTheme = useThemeStore(state => state.setTheme);
 
