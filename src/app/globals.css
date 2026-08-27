@@ -27,7 +27,7 @@ body {
 
 
 /* Playground Imports */
-@import "./playground-style.css";
+@import "./style.css";
 @import "../components/driver-matchup-predictions.css";
 @import "../components/f1-bet-remote-control.css";
 @import "../components/footer.css";
