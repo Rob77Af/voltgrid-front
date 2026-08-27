@@ -38,3 +38,11 @@ export const F1_DRIVERS = [
   'N.HÜLKENBERG',
   'G.BORTOLETO'
 ];
+
+export function getDriverDetails(driverName: string) {
+  for (const match of F1_MATCHUPS) {
+    if (match.d1.name === driverName) return { ...match.d1, team: match.team };
+    if (match.d2.name === driverName) return { ...match.d2, team: match.team };
+  }
+  return { name: driverName, num: '??', team: 'Unknown' };
+}

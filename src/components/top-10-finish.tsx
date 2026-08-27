@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { F1_DRIVERS } from '@/api/f1-data';
+import { F1_DRIVERS, getDriverDetails } from '@/api/f1-data';
 import { usePredictionStore } from '@/store/usePredictionStore';
 
 const Top10Finish = ({ hideSubmit }: { hideSubmit?: boolean }) => {
@@ -27,7 +27,7 @@ const Top10Finish = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                 <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
                 <h2 className="text-white text-2xl md:text-3xl font-['Saira'] font-bold uppercase tracking-wider mb-2">MASTER (TOP 10)</h2>
                 <p className="text-gray-400 text-sm md:text-base">
-                    Predict the top 10 finishers in exact order. Click on the slots below to choose your drivers.
+                    Predict the exact finishing order of the top 10 drivers.
                 </p>
             </header>
 
@@ -41,8 +41,8 @@ const Top10Finish = ({ hideSubmit }: { hideSubmit?: boolean }) => {
 
             <div className="flex flex-col gap-3 relative">
                 {picks.map((pick, index) => {
-                    const position = index + 1;
                     const isOpen = openDropdownIndex === index;
+                    const pickDetails = pick ? getDriverDetails(pick) : null;
                     
                     return (
                         <div 
@@ -52,19 +52,28 @@ const Top10Finish = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                             } transition-colors duration-200 relative ${isOpen ? 'z-50' : 'z-10 hover:border-[#fbaa19]'}`}
                             style={{ minHeight: '3.5rem' }}
                         >
-                            <div className="w-16 flex items-center justify-center bg-[#fbaa19] text-black font-bold uppercase border-r border-[#fbaa19]">
-                                {getOrdinal(position)}
+                            <div className="w-16 flex items-center justify-center bg-[#fbaa19] text-black font-black uppercase text-lg border-r border-[#fbaa19]">
+                                {getOrdinal(index + 1)}
                             </div>
                             
                             {/* Custom Select Box */}
                             <div className="flex-1 relative flex items-center h-full">
                                 <div 
-                                    className="w-full h-full flex items-center justify-between px-4 cursor-pointer"
+                                    className="w-full h-full flex items-center justify-between px-4 py-2 cursor-pointer"
                                     onClick={() => setOpenDropdownIndex(isOpen ? null : index)}
                                 >
-                                    <span className={`uppercase font-bold tracking-wider ${pick ? 'text-white' : 'text-gray-500'}`}>
-                                        {pick || 'Select Driver'}
-                                    </span>
+                                    {pickDetails ? (
+                                        <div className="flex flex-col leading-tight">
+                                            <span className="uppercase font-bold tracking-wider text-white">
+                                                {pickDetails.name} <span className="text-[#fbaa19]"># {pickDetails.num}</span>
+                                            </span>
+                                            <span className="text-xs text-gray-400 font-medium uppercase tracking-wider mt-0.5">{pickDetails.team}</span>
+                                        </div>
+                                    ) : (
+                                        <span className="uppercase font-bold tracking-wider text-gray-500">
+                                            Select Driver
+                                        </span>
+                                    )}
                                     
                                     <div className={`text-[#fbaa19] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
                                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
@@ -80,6 +89,7 @@ const Top10Finish = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                                             {F1_DRIVERS.map(driver => {
                                                 const isPickedHere = pick === driver;
                                                 const isPickedElsewhere = picks.includes(driver) && !isPickedHere;
+                                                const driverDetails = getDriverDetails(driver);
                                                 
                                                 return (
                                                     <div 
@@ -90,7 +100,7 @@ const Top10Finish = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                                                                 setOpenDropdownIndex(null);
                                                             }
                                                         }}
-                                                        className={`px-4 py-3 uppercase font-bold text-sm tracking-wider flex items-center justify-between transition-colors ${
+                                                        className={`px-4 py-3 uppercase font-bold tracking-wider flex items-center justify-between transition-colors ${
                                                             isPickedHere 
                                                                 ? 'bg-[#fbaa19] text-black' 
                                                                 : isPickedElsewhere 
@@ -98,7 +108,10 @@ const Top10Finish = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                                                                     : 'text-white hover:bg-[#1a1a1a] hover:text-[#fbaa19] cursor-pointer'
                                                         }`}
                                                     >
-                                                        <span>{driver}</span>
+                                                        <div className="flex flex-col leading-tight">
+                                                            <span>{driverDetails.name} <span className={isPickedHere ? "text-black/70" : "text-[#fbaa19]"}># {driverDetails.num}</span></span>
+                                                            <span className={`text-[10px] sm:text-xs mt-0.5 ${isPickedHere ? "text-black/70" : "text-gray-500"}`}>{driverDetails.team}</span>
+                                                        </div>
                                                         {isPickedElsewhere && (
                                                             <span className="text-[10px] tracking-widest text-[#555] font-black">SELECTED</span>
                                                         )}
