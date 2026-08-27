@@ -1,0 +1,29 @@
+.logo-container1 {
+    display: contents;
+}
+
+.logo-thq-voltgrid-logo-light-elm {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.logo-thq-voltgrid-logo-dark-elm {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.logo-container2 {
+    display: none;
+}
+
+.logo-container3 {
+    display: contents;
+}
+
+.logo-container4 {
+    display: none;
+}
+
+.logo-container5 {
+    display: contents;
+}

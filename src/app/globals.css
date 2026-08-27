@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* Playground Imports */
+@import "./playground-style.css";
+@import "../components/driver-matchup-predictions.css";
+@import "../components/f1-bet-remote-control.css";
+@import "../components/footer.css";
+@import "../components/logo.css";
+@import "../components/navigation.css";
+@import "../views/bet-now.css";
+@import "../views/homepage.css";
+@import "../views/terms-conditions.css";

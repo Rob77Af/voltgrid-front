@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./globals.css";
 import { GlobalProvider } from "../../global-context";
 
 
@@ -16,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* Wrap the children with your provider */}
-        <GlobalProvider>
+        <GlobalProvider initialLocales={undefined}>
           {children}
         </GlobalProvider>
       </body>
