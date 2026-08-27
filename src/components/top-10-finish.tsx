@@ -21,10 +21,13 @@ const Top10Finish = () => {
 
     return (
         <div className="w-full flex flex-col gap-4 mt-8">
-            <div className="flex flex-col gap-2 mb-4">
-                <h2 className="text-[#fbaa19] text-xl font-bold uppercase tracking-widest font-['Saira']">Top 10 Finish</h2>
-                <p className="text-gray-400 text-sm">Predict the top 10 finishers in exact order.</p>
-            </div>
+            <header className="f1-predictions-header border border-[#ffffff3d] p-6 bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md mb-2">
+                <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
+                <h2 className="text-white text-2xl md:text-3xl font-['Saira'] font-bold uppercase tracking-wider mb-2">MASTER PREDICTION (TOP 10)</h2>
+                <p className="text-gray-400 text-sm md:text-base">
+                    Predict the top 10 finishers in exact order. Click on the slots below to choose your drivers.
+                </p>
+            </header>
 
             {/* Invisible overlay to close dropdown when clicking outside */}
             {openDropdownIndex !== null && (
