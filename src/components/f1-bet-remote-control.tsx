@@ -48,7 +48,7 @@ interface Props {
 const F1BetRemoteControl = ({ activeId, setActiveId }: Props) => {
 
     return (
-        <div className="w-full flex p-1 relative box-border min-h-[3.5rem] overflow-x-auto overflow-y-hidden items-stretch flex-row bg-white dark:bg-[#0a0a0a] border border-black/20 dark:border-[#ffffff3d]">
+        <div className="w-full flex p-1 relative box-border min-h-[4.5rem] overflow-x-auto overflow-y-hidden items-stretch flex-row bg-white dark:bg-[#0a0a0a] border border-black/20 dark:border-[#ffffff3d] rounded-sm">
             <nav aria-label="Prediction categories" className="flex flex-row w-full gap-1 items-stretch flex-nowrap min-w-max">
                 {categories.map(cat => (
                     <button
@@ -56,16 +56,16 @@ const F1BetRemoteControl = ({ activeId, setActiveId }: Props) => {
                         type="button"
                         onClick={() => setActiveId(cat.id)}
                         aria-pressed={activeId === cat.id}
-                        className={`flex-1 flex flex-row justify-center items-center gap-2 p-2 px-4 cursor-pointer uppercase font-bold tracking-widest text-xs md:text-sm transition-colors border-b-2 ${
+                        className={`flex-1 flex flex-col justify-center items-center gap-1.5 p-2 px-4 cursor-pointer uppercase font-bold tracking-widest text-[10px] sm:text-xs md:text-sm transition-colors border-b-2 ${
                             activeId === cat.id 
                                 ? "bg-[#fbaa19] text-black border-[#fbaa19]" 
                                 : "bg-transparent text-gray-600 dark:text-gray-400 border-transparent hover:text-black dark:hover:text-[#fbaa19] hover:bg-gray-100 dark:hover:bg-[#1a1a1a]"
                         }`}
                     >
-                        <div aria-hidden="true" className="w-5 h-5 flex justify-center items-center">
+                        <div aria-hidden="true" className="w-5 h-5 md:w-6 md:h-6 flex justify-center items-center shrink-0">
                             {cat.icon}
                         </div>
-                        <span>{cat.label}</span>
+                        <span className="whitespace-nowrap">{cat.label}</span>
                     </button>
                 ))}
             </nav>

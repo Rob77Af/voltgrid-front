@@ -9,7 +9,12 @@ export default function ThemeWrapper({ children }: { children: React.ReactNode }
 
     useEffect(() => {
         setMounted(true);
-    }, []);
+        if (mode === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [mode]);
 
     // Get the CSS variable names based on the theme
     const displayVar = {
@@ -28,7 +33,7 @@ export default function ThemeWrapper({ children }: { children: React.ReactNode }
 
     return (
         <div 
-            className={`min-h-screen transition-all duration-300 ${mounted && mode === 'dark' ? 'dark bg-gray-50 dark:bg-[#0a0a0a] text-black dark:text-white' : 'bg-gray-100 text-black'}`}
+            className="min-h-screen transition-all duration-300"
             style={{ 
                 fontFamily: bodyVar,
                 // We can set a local custom property for headers to use
