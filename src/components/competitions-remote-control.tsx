@@ -52,7 +52,7 @@ const CompetitionsRemoteControl = ({ activeId, setActiveId }: Props) => {
                         type="button"
                         onClick={() => setActiveId(cat.id)}
                         aria-pressed={activeId === cat.id}
-                        className={`flex-1 flex flex-col justify-center items-center gap-1.5 p-2 px-4 cursor-pointer uppercase font-bold tracking-widest text-[10px] sm:text-xs md:text-sm transition-colors border-b-2 ${
+                        className={`w-24 sm:w-28 md:w-32 shrink-0 flex flex-col justify-center items-center gap-1 p-2 px-2 cursor-pointer uppercase font-bold tracking-widest text-[9px] sm:text-[10px] md:text-xs transition-colors border-b-2 ${
                             activeId === cat.id 
                                 ? "bg-[#fbaa19] text-black border-[#fbaa19]" 
                                 : "bg-transparent text-gray-600 dark:text-gray-400 border-transparent hover:text-black dark:hover:text-[#fbaa19] hover:bg-gray-100 dark:hover:bg-[#1a1a1a]"
@@ -61,7 +61,7 @@ const CompetitionsRemoteControl = ({ activeId, setActiveId }: Props) => {
                         <div aria-hidden="true" className="w-5 h-5 md:w-6 md:h-6 flex justify-center items-center shrink-0">
                             {cat.icon}
                         </div>
-                        <span className="whitespace-nowrap">{cat.label}</span>
+                        <span className="whitespace-normal break-words text-center leading-tight">{cat.label}</span>
                     </button>
                 ))}
             </nav>
