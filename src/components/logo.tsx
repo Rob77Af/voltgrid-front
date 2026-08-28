@@ -1,115 +1,32 @@
-"use client";
-import React from 'react'
+﻿"use client";
+import React from 'react';
 
+interface Props {
+    isOnDarkBackground?: boolean;
+}
 
-
-
-// css imported globally
-
-const Logo = (props) => {
+const Logo = (props: Props) => {
     return (
-        <div className="logo-container1">
-            {props.isOnDarkBackground === false && (
-                <div className="logo-thq-voltgrid-logo-light-elm voltgrid-logo-light">
-                    <div className="logo-lockup">
-                        <div className="logo-mark">
-                            <svg
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 32 32"
-                                aria-hidden="true"
-                                className="logo-glyph"
-                            >
-                                <path
-                                    d="M18 4L8 18H16L14 28L24 14H16L18 4Z"
-                                    fill="currentColor"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeLinejoin="round"
-                                ></path>
-                                <rect
-                                    x="2"
-                                    y="2"
-                                    width="28"
-                                    height="28"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeDasharray="2 4"
-                                ></rect>
-                            </svg>
-                        </div>
-                        <div className="logo-text-group">
-                            <span className="logo-brand">VOLTGRID</span>
-                            <span className="logo-tagline">RACING SYSTEMS</span>
-                        </div>
+        <div className="flex shrink-0 items-center justify-center">
+            {/* Outer border (Yellow) with a small gap (padding) */}
+            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border-[2px] md:border-[3px] border-[#fbaa19] p-[1.5px] bg-transparent">
+                {/* Inner border (Black) and 50% Solid Gradient Background */}
+                <div 
+                    className="w-full h-full rounded-full border-[2px] md:border-[3px] border-black flex flex-col overflow-hidden"
+                    style={{ background: 'linear-gradient(to bottom, #fbaa19 50%, #000000 50%)' }}
+                >
+                    {/* Top half - F1 */}
+                    <div className="h-1/2 w-full flex items-end justify-center pb-0.5">
+                        <span className="text-black font-black text-sm md:text-base leading-none font-display uppercase tracking-tighter">F1</span>
                     </div>
-                </div>
-            )}
-            {props.isOnDarkBackground === true && (
-                <div className="logo-thq-voltgrid-logo-dark-elm voltgrid-logo-dark">
-                    <div className="logo-lockup">
-                        <div className="logo-mark">
-                            <svg
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 32 32"
-                                aria-hidden="true"
-                                className="logo-glyph"
-                            >
-                                <path
-                                    d="M18 4L8 18H16L14 28L24 14H16L18 4Z"
-                                    fill="currentColor"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeLinejoin="round"
-                                ></path>
-                                <rect
-                                    x="2"
-                                    y="2"
-                                    width="28"
-                                    height="28"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeDasharray="2 4"
-                                ></rect>
-                            </svg>
-                        </div>
-                        <div className="logo-text-group">
-                            <span className="logo-brand">VOLTGRID</span>
-                            <span className="logo-tagline">RACING SYSTEMS</span>
-                        </div>
+                    {/* Bottom half - Master */}
+                    <div className="h-1/2 w-full flex items-start justify-center pt-1">
+                        <span className="text-white font-bold text-[5px] md:text-[6px] uppercase tracking-[0.2em] leading-none font-display">MASTER</span>
                     </div>
-                </div>
-            )}
-            <div className="logo-container2">
-                <div className="logo-container3">
-                    <script dangerouslySetInnerHTML={{ __html: `<script defer data-name="voltgrid-logo-logic">
-(function(){
-document.addEventListener('DOMContentLoaded', () => {
-  /* Logo interaction logic if needed in future */
-});
-})()
-</script>` }} />
-                </div>
-            </div>
-            <div className="logo-container4">
-                <div className="logo-container5">
-                    <script dangerouslySetInnerHTML={{ __html: `<style>
-[data-tq-logo-variant] {
-  flex-shrink: 0;
-}
-[data-tq-logo-variant], [data-tq-logo-variant] * {
-  white-space: nowrap;
-}
-</style>` }} />
                 </div>
             </div>
         </div>
     )
 }
 
-
-
-
-
-export default Logo
+export default Logo;
