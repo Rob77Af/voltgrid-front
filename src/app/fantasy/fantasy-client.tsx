@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState } from 'react';
 import CompetitionsRemoteControl from '@/components/competitions-remote-control';
 
@@ -15,6 +15,8 @@ export default function FantasyClient() {
                 return <div className="p-8 text-center text-gray-500 font-bold uppercase tracking-widest border border-black/20 dark:border-[#ffffff3d] bg-white dark:bg-[#1a1a1a]">Milesimus Content</div>;
             case 'teamwork':
                 return <div className="p-8 text-center text-gray-500 font-bold uppercase tracking-widest border border-black/20 dark:border-[#ffffff3d] bg-white dark:bg-[#1a1a1a]">Teamwork Content</div>;
+            case 'stats':
+                return <div className="p-8 text-center text-gray-500 font-bold uppercase tracking-widest border border-black/20 dark:border-[#ffffff3d] bg-white dark:bg-[#1a1a1a]">Stats Content</div>;
             default:
                 return null;
         }
