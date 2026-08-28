@@ -33,32 +33,62 @@ const PredictionTabs = () => {
 
     const isAllMode = activeId === 'all-forms';
 
+    const headerData: Record<string, { title: string, desc: string }> = {
+        'poletime': { title: 'Poletime', desc: 'Predict the exact pole position lap time.' },
+        'master': { title: 'Top 10 Finish', desc: 'Select the drivers you predict will finish in the top 10 positions.' },
+        'evo': { title: 'Evo (Biggest Movers)', desc: 'Select the 5 drivers you predict will gain the most positions.' },
+        'head-to-head': { title: 'Head to Head', desc: 'Choose the driver you expect to finish ahead in each matchup.' },
+        'misc': { title: 'Misc', desc: 'Answer the following event props. Choose one outcome per question.' },
+        'all-forms': { title: 'All Predictions', desc: 'Review and complete all your predictions before the lights go out.' },
+    };
+
+    const currentHeader = headerData[activeId];
+
     return (
         <>
             <F1BetRemoteControl activeId={activeId} setActiveId={setActiveId} />
             
+            <header className="mt-8 mb-8 md:mb-12 border-b-4 border-[#fbaa19] pb-6 md:pb-8 flex flex-col gap-4">
+                <p className="text-[#fbaa19] text-sm md:text-base font-bold uppercase tracking-[0.2em] font-display">F1 // PREDICTIONS</p>
+                <h1 className="text-black dark:text-white text-5xl md:text-7xl font-black uppercase tracking-widest font-display mb-2">{currentHeader.title}</h1>
+                <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-2xl">
+                    {currentHeader.desc}
+                </p>
+                <section aria-label="Race status" className="mt-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] p-4 md:p-6 shadow-sm">
+                    <div className="flex flex-col">
+                        <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">UPCOMING RACE</p>
+                        <p className="text-black dark:text-white text-xl md:text-2xl font-black uppercase tracking-wider font-display">Miami Grand Prix</p>
+                    </div>
+                    <div aria-hidden="true" className="hidden sm:block w-px h-12 bg-black/20 dark:bg-white/20"></div>
+                    <p className="text-[#fbaa19] text-sm font-bold uppercase tracking-widest flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#fbaa19] animate-pulse"></span>
+                        PICKS CLOSE BEFORE LIGHTS OUT
+                    </p>
+                </section>
+            </header>
+            
             <section
-                aria-label="Driver matchup predictions"
-                className="f1-predictions-stage flex flex-col gap-16 mt-8"
+                aria-label="Head to head predictions"
+                className="f1-predictions-stage flex flex-col gap-16 mt-4"
             >
                 {(activeId === 'poletime' || isAllMode) && (
-                    <Poletime hideSubmit={isAllMode} />
+                    <Poletime hideSubmit={isAllMode} hideHeader={!isAllMode} />
                 )}
 
                 {(activeId === 'master' || isAllMode) && (
-                    <Top10Finish hideSubmit={isAllMode} />
+                    <Top10Finish hideSubmit={isAllMode} hideHeader={!isAllMode} />
                 )}
 
                 {(activeId === 'evo' || isAllMode) && (
-                    <Evo hideSubmit={isAllMode} />
+                    <Evo hideSubmit={isAllMode} hideHeader={!isAllMode} />
                 )}
 
                 {(activeId === 'head-to-head' || isAllMode) && (
-                    <HeadToHead hideSubmit={isAllMode} rootClassName="head-to-head-root-class-name" />
+                    <HeadToHead hideSubmit={isAllMode} hideHeader={!isAllMode} rootClassName="head-to-head-root-class-name" />
                 )}
 
                 {(activeId === 'misc' || isAllMode) && (
-                    <Misc hideSubmit={isAllMode} />
+                    <Misc hideSubmit={isAllMode} hideHeader={!isAllMode} />
                 )}
 
                 {isAllMode && (

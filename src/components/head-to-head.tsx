@@ -2,8 +2,6 @@
 import React from 'react';
 import { F1_MATCHUPS } from '@/api/f1-data';
 import { usePredictionStore } from '@/store/usePredictionStore';
-import './driver-matchup-predictions.css';
-
 const HeadToHead = (props: any) => {
     const picks = usePredictionStore(state => state.h2h);
     const setPicks = usePredictionStore(state => state.setH2H);
@@ -16,13 +14,15 @@ const HeadToHead = (props: any) => {
 
     return (
         <div className={`w-full flex flex-col gap-8 mt-8 ${props.rootClassName || ''}`}>
-            <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
-                <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">HEAD TO HEAD</h2>
-                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
-                    Choose the driver you expect to finish ahead in each matchup.
-                </p>
-            </header>
+            {!props.hideHeader && (
+                <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
+                    <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
+                    <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">HEAD TO HEAD</h2>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                        Choose the driver you expect to finish ahead in each matchup.
+                    </p>
+                </header>
+            )}
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {F1_MATCHUPS.map(m => {

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { F1_DRIVERS, getDriverDetails } from '@/api/f1-data';
 import { usePredictionStore } from '@/store/usePredictionStore';
 
-const Evo = ({ hideSubmit }: { hideSubmit?: boolean }) => {
+const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: boolean }) => {
     const picks = usePredictionStore(state => state.evo);
     const setPicks = usePredictionStore(state => state.setEvo);
     const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
@@ -16,13 +16,15 @@ const Evo = ({ hideSubmit }: { hideSubmit?: boolean }) => {
 
     return (
         <div className="w-full flex flex-col gap-4 mt-8">
-            <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md mb-2">
-                <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">EVO (BIGGEST MOVERS)</h2>
-                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
-                    Select the 5 drivers you predict will gain the most positions.
-                </p>
-            </header>
+            {!hideHeader && (
+                <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md mb-2">
+                    <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
+                    <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">EVO (BIGGEST MOVERS)</h2>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                        Select the 5 drivers you predict will gain the most positions.
+                    </p>
+                </header>
+            )}
 
             {/* Invisible overlay to close dropdown when clicking outside */}
             {openDropdownIndex !== null && (

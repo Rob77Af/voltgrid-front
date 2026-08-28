@@ -2,7 +2,7 @@
 import React from 'react';
 import { usePredictionStore } from '@/store/usePredictionStore';
 
-const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
+const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: boolean }) => {
     const digits = usePredictionStore(state => state.poletime);
     const setDigits = usePredictionStore(state => state.setPoletime);
 
@@ -35,13 +35,15 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
 
     return (
         <div className="w-full flex flex-col gap-8 mt-8">
-            <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
-                <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">POLETIME</h2>
-                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
-                    Predict the exact pole position lap time. Click each digit to increment its value.
-                </p>
-            </header>
+            {!hideHeader && (
+                <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
+                    <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
+                    <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">POLETIME</h2>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                        Predict the exact pole position lap time. Click each digit to increment its value.
+                    </p>
+                </header>
+            )}
 
             <div className="flex flex-col items-center justify-center py-12 bg-white dark:bg-black border border-black/20 dark:border-[#ffffff3d]">
                 <div className="flex items-center justify-center gap-1 md:gap-3">

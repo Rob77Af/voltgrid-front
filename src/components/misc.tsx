@@ -10,7 +10,7 @@ const QUESTIONS = [
     { id: 'q5', text: 'M.VERSTAPPEN fastest lap?', options: ['Yes', 'No'] },
 ];
 
-const Misc = ({ hideSubmit }: { hideSubmit?: boolean }) => {
+const Misc = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: boolean }) => {
     const answers = usePredictionStore(state => state.misc);
     const setAnswers = usePredictionStore(state => state.setMisc);
 
@@ -26,13 +26,15 @@ const Misc = ({ hideSubmit }: { hideSubmit?: boolean }) => {
 
     return (
         <div className="w-full flex flex-col gap-8 mt-8">
-            <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
-                <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">MISC</h2>
-                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
-                    Answer the following event props. Choose one outcome per question.
-                </p>
-            </header>
+            {!hideHeader && (
+                <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
+                    <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
+                    <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">MISC</h2>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                        Answer the following event props. Choose one outcome per question.
+                    </p>
+                </header>
+            )}
 
             <div className="flex flex-col gap-4">
                 {QUESTIONS.map(q => {
