@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { GlobalProvider } from "../../global-context";
 import Navigation from "../components/navigation";
+import NasdaqTicker from "../components/nasdaq-ticker";
 import Footer from "../components/footer";
 
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <GlobalProvider initialLocales={undefined}>
           <ThemeWrapper>
             <Navigation />
+            <NasdaqTicker />
             {children}
             <Footer />
           </ThemeWrapper>

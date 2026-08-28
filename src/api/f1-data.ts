@@ -46,3 +46,26 @@ export function getDriverDetails(driverName: string) {
   }
   return { name: driverName, num: '??', team: 'Unknown' };
 }
+export interface F1Event {
+    round: string;
+    name: string;
+    circuit: string;
+    date: string;
+    time: string;
+    status: 'OPEN' | 'CLOSED' | 'LIVE';
+}
+
+export const fetchNextEvent = async (): Promise<F1Event> => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                round: '06',
+                name: 'MIAMI GRAND PRIX',
+                circuit: 'MIAMI INT. AUTODROME',
+                date: 'MAY 05, 2024',
+                time: '16:00 EST',
+                status: 'OPEN'
+            });
+        }, 800);
+    });
+};

@@ -54,17 +54,6 @@ const PredictionTabs = () => {
                 <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-2xl">
                     {currentHeader.desc}
                 </p>
-                <section aria-label="Race status" className="mt-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] p-4 md:p-6 shadow-sm">
-                    <div className="flex flex-col">
-                        <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">UPCOMING RACE</p>
-                        <p className="text-black dark:text-white text-xl md:text-2xl font-black uppercase tracking-wider font-display">Miami Grand Prix</p>
-                    </div>
-                    <div aria-hidden="true" className="hidden sm:block w-px h-12 bg-black/20 dark:bg-white/20"></div>
-                    <p className="text-[#fbaa19] text-sm font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#fbaa19] animate-pulse"></span>
-                        PICKS CLOSE BEFORE LIGHTS OUT
-                    </p>
-                </section>
             </header>
             
             <section
