@@ -32,7 +32,7 @@ const HeadToHead = (props: any) => {
                             <p className="bg-gray-100 dark:bg-black text-black dark:text-white px-4 py-2 font-bold uppercase tracking-widest text-sm border-b border-black/20 dark:border-[#ffffff3d] text-center">
                                 {m.team}
                             </p>
-                            <div className="flex flex-col">
+                            <div className="flex flex-row w-full h-full">
                                 {[m.d1, m.d2].map(d => {
                                     const isPicked = picked === d.num;
                                     return (
@@ -40,22 +40,25 @@ const HeadToHead = (props: any) => {
                                             key={d.num}
                                             type="button"
                                             onClick={() => handlePick(m.id, d.num)}
-                                            className={`w-full flex items-center justify-between p-4 transition-all text-left border-b border-black/10 dark:border-white/10 last:border-0 ${
+                                            className={`flex-1 flex flex-col items-center justify-center p-4 md:p-6 transition-all text-center border-r border-black/10 dark:border-white/10 last:border-r-0 ${
                                                 isPicked 
                                                 ? 'bg-[#fbaa19] text-black' 
                                                 : 'bg-white dark:bg-[#1a1a1a] text-black dark:text-white hover:bg-gray-100 dark:hover:bg-black'
                                             }`}
                                         >
-                                            <div className="flex items-center gap-4">
-                                                <span className={`text-xl font-black ${isPicked ? 'text-black' : 'text-[#fbaa19]'}`}>
-                                                    {d.num}
+                                            <div className="flex flex-col leading-tight items-center">
+                                                <span className="uppercase font-bold tracking-wider text-xs sm:text-sm md:text-base">
+                                                    {d.name} <br className="block xl:hidden mb-1" /><span className={isPicked ? "text-black/70" : "text-[#fbaa19]"}># {d.num}</span>
                                                 </span>
-                                                <div className="flex flex-col">
-                                                    <span className="font-bold uppercase tracking-wider text-sm md:text-base">{d.name}</span>
-                                                    <span className={`text-xs uppercase tracking-widest ${isPicked ? 'text-black/70' : 'text-gray-500'}`}>{m.team}</span>
-                                                </div>
+                                                <span className={`text-[10px] sm:text-xs mt-1 ${isPicked ? "text-black/70" : "text-gray-500"}`}>
+                                                    {m.team}
+                                                </span>
                                             </div>
-                                            {isPicked && <span className="text-xs font-black tracking-widest uppercase ml-2 opacity-80 shrink-0">SELECTED</span>}
+                                            {isPicked && (
+                                                <div className="mt-3 text-[10px] font-black tracking-widest uppercase opacity-80 shrink-0 bg-black/10 px-2 py-1 rounded-sm">
+                                                    SELECTED
+                                                </div>
+                                            )}
                                         </button>
                                     );
                                 })}
