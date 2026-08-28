@@ -12,7 +12,7 @@ const Navigation = () => {
     }, []);
 
     const navLinks = [
-        { name: 'F1', href: '#' },
+        { name: 'F1', href: '/f1' },
         { name: 'News', href: '#' },
         { name: 'SocialMedia', href: '#' },
         { name: 'Fantasy', href: '/fantasy' }
