@@ -24,7 +24,7 @@ const HeadToHead = (props: any) => {
                 </header>
             )}
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 {F1_MATCHUPS.map(m => {
                     const picked = picks[m.id];
                     return (
@@ -32,7 +32,7 @@ const HeadToHead = (props: any) => {
                             <p className="bg-gray-100 dark:bg-black text-black dark:text-white px-4 py-2 font-bold uppercase tracking-widest text-sm border-b border-black/20 dark:border-[#ffffff3d] text-center">
                                 {m.team}
                             </p>
-                            <div className="flex flex-row w-full h-full">
+                            <div className="flex flex-col w-full h-full">
                                 {[m.d1, m.d2].map(d => {
                                     const isPicked = picked === d.num;
                                     return (
@@ -40,23 +40,25 @@ const HeadToHead = (props: any) => {
                                             key={d.num}
                                             type="button"
                                             onClick={() => handlePick(m.id, d.num)}
-                                            className={`flex-1 flex flex-col items-center justify-center p-4 md:p-6 transition-all text-center border-r border-black/10 dark:border-white/10 last:border-r-0 ${
+                                            className={`w-full flex-1 flex flex-row items-center justify-between p-2 md:p-3 transition-all text-left border-b border-black/10 dark:border-white/10 last:border-b-0 ${
                                                 isPicked 
                                                 ? 'bg-[#fbaa19] text-black' 
-                                                : 'bg-white dark:bg-[#1a1a1a] text-black dark:text-white hover:bg-gray-100 dark:hover:bg-black'
+                                                : 'bg-white dark:bg-[#1a1a1a] text-black dark:text-white hover:bg-gray-100 dark:hover:bg-black hover:text-[#fbaa19]'
                                             }`}
                                         >
-                                            <div className="flex flex-col leading-tight items-center">
-                                                <span className="uppercase font-bold tracking-wider text-xs sm:text-sm md:text-base">
-                                                    {d.name} <br className="block xl:hidden mb-1" /><span className={isPicked ? "text-black/70" : "text-[#fbaa19]"}># {d.num}</span>
+                                            <div className="flex flex-col leading-tight">
+                                                <span className="uppercase font-bold tracking-wider text-sm md:text-base">
+                                                    {d.name} <span className={isPicked ? "text-black/70" : "text-[#fbaa19]"}># {d.num}</span>
                                                 </span>
-                                                <span className={`text-[10px] sm:text-xs mt-1 ${isPicked ? "text-black/70" : "text-gray-500"}`}>
+                                                <span className={`text-[10px] md:text-xs mt-0.5 ${isPicked ? "text-black/70" : "text-gray-500"}`}>
                                                     {m.team}
                                                 </span>
                                             </div>
                                             {isPicked && (
-                                                <div className="mt-3 text-[10px] font-black tracking-widest uppercase opacity-80 shrink-0 bg-black/10 px-2 py-1 rounded-sm">
-                                                    SELECTED
+                                                <div className="ml-2">
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                                                    </svg>
                                                 </div>
                                             )}
                                         </button>

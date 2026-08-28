@@ -42,12 +42,12 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
                     return (
                         <div 
                             key={index} 
-                            className={`flex items-stretch bg-white dark:bg-black border ${
-                                pick || isOpen ? 'border-[#fbaa19]' : 'border-black/20 dark:border-[#ffffff3d]'
-                            } transition-colors duration-200 relative ${isOpen ? 'z-50' : 'z-10 hover:border-[#fbaa19]'}`}
+                            className={`flex items-stretch border transition-colors duration-200 relative ${
+                                pick ? 'bg-[#fbaa19] border-[#fbaa19]' : 'bg-white dark:bg-black ' + (isOpen ? 'border-[#fbaa19]' : 'border-black/20 dark:border-[#ffffff3d]')
+                            } ${isOpen ? 'z-50' : 'z-10 hover:border-[#fbaa19]'}`}
                             style={{ minHeight: '3.5rem' }}
                         >
-                            <div className="w-20 flex items-center justify-center bg-[#fbaa19] text-black font-bold uppercase border-r border-[#fbaa19] text-xs">
+                            <div className={`w-20 flex items-center justify-center font-bold uppercase text-xs border-r ${pick ? 'bg-[#e59914] text-black border-[#e59914]' : 'bg-[#fbaa19] text-black border-[#fbaa19]'}`}>
                                 EVO {index + 1}
                             </div>
                             
@@ -59,10 +59,10 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
                                 >
                                     {pickDetails ? (
                                         <div className="flex flex-col leading-tight">
-                                            <span className="uppercase font-bold tracking-wider text-black dark:text-white">
-                                                {pickDetails.name} <span className="text-[#fbaa19]"># {pickDetails.num}</span>
+                                            <span className={`uppercase font-bold tracking-wider ${pick ? 'text-black' : 'text-black dark:text-white'}`}>
+                                                {pickDetails.name} <span className={pick ? 'text-black/70' : 'text-[#fbaa19]'}># {pickDetails.num}</span>
                                             </span>
-                                            <span className="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wider mt-0.5">{pickDetails.team}</span>
+                                            <span className={`text-xs font-medium uppercase tracking-wider mt-0.5 ${pick ? 'text-black/70' : 'text-gray-600 dark:text-gray-400'}`}>{pickDetails.team}</span>
                                         </div>
                                     ) : (
                                         <span className="uppercase font-bold tracking-wider text-gray-500">
@@ -70,7 +70,7 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
                                         </span>
                                     )}
                                     
-                                    <div className={`text-[#fbaa19] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
+                                    <div className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} ${pick ? 'text-black' : 'text-[#fbaa19]'}`}>
                                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                                         </svg>

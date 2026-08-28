@@ -58,7 +58,7 @@ const PredictionTabs = () => {
             
             <section
                 aria-label="Head to head predictions"
-                className="f1-predictions-stage flex flex-col gap-16 mt-4"
+                className="f1-predictions-stage flex flex-col gap-16 mt-4 max-w-3xl w-full mx-auto"
             >
                 {(activeId === 'poletime' || isAllMode) && (
                     <Poletime hideSubmit={isAllMode} hideHeader={!isAllMode} />
