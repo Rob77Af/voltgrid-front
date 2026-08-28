@@ -15,63 +15,73 @@ const HeadToHead = (props: any) => {
     const countPicks = Object.keys(picks).length;
 
     return (
-        <div className={`driver-matchup-predictions-container ${props.rootClassName || ''}`}>
-            <section className="f1-predictions-panel">
-                <header className="f1-predictions-header">
-                    <p className="f1-predictions-kicker">F1 PREDICTION MARKET</p>
-                    <h2 className="f1-predictions-title">DRIVER MATCHUP PREDICTIONS</h2>
-                    <p className="f1-predictions-instruction">
-                        Choose the driver you expect to finish ahead in each matchup.
+        <div className={`w-full flex flex-col gap-8 mt-8 ${props.rootClassName || ''}`}>
+            <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md">
+                <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
+                <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">HEAD TO HEAD</h2>
+                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                    Choose the driver you expect to finish ahead in each matchup.
+                </p>
+            </header>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {F1_MATCHUPS.map(m => {
+                    const picked = picks[m.id];
+                    return (
+                        <article key={m.id} className="bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] flex flex-col hover:border-[#fbaa19] transition-colors overflow-hidden">
+                            <p className="bg-gray-100 dark:bg-black text-black dark:text-white px-4 py-2 font-bold uppercase tracking-widest text-sm border-b border-black/20 dark:border-[#ffffff3d] text-center">
+                                {m.team}
+                            </p>
+                            <div className="flex flex-col">
+                                {[m.d1, m.d2].map(d => {
+                                    const isPicked = picked === d.num;
+                                    return (
+                                        <button
+                                            key={d.num}
+                                            type="button"
+                                            onClick={() => handlePick(m.id, d.num)}
+                                            className={`w-full flex items-center justify-between p-4 transition-all text-left border-b border-black/10 dark:border-white/10 last:border-0 ${
+                                                isPicked 
+                                                ? 'bg-[#fbaa19] text-black' 
+                                                : 'bg-white dark:bg-[#1a1a1a] text-black dark:text-white hover:bg-gray-100 dark:hover:bg-black'
+                                            }`}
+                                        >
+                                            <div className="flex items-center gap-4">
+                                                <span className={`text-xl font-black ${isPicked ? 'text-black' : 'text-[#fbaa19]'}`}>
+                                                    {d.num}
+                                                </span>
+                                                <div className="flex flex-col">
+                                                    <span className="font-bold uppercase tracking-wider text-sm md:text-base">{d.name}</span>
+                                                    <span className={`text-xs uppercase tracking-widest ${isPicked ? 'text-black/70' : 'text-gray-500'}`}>{m.team}</span>
+                                                </div>
+                                            </div>
+                                            {isPicked && <span className="text-xs font-black tracking-widest uppercase ml-2 opacity-80 shrink-0">SELECTED</span>}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </article>
+                    );
+                })}
+            </div>
+            
+            {!props.hideSubmit && (
+                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
+                    <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
+                        {countPicks === F1_MATCHUPS.length 
+                            ? <span className="text-[#fbaa19]">All matchups predicted!</span>
+                            : `${countPicks} / ${F1_MATCHUPS.length} MATCHUPS PREDICTED`
+                        }
                     </p>
-                    <p className="f1-race-label">NEXT RACE · MIAMI GRAND PRIX</p>
-                </header>
-                <div className="f1-matchup-grid">
-                    {F1_MATCHUPS.map(m => {
-                        const picked = picks[m.id];
-                        return (
-                            <article key={m.id} className="f1-matchup-card">
-                                <p className="f1-matchup-label">{m.team}</p>
-                                <div className="f1-driver-options">
-                                    <button
-                                        type="button"
-                                        onClick={() => handlePick(m.id, m.d1.num)}
-                                        className={picked === m.d1.num ? "f1-driver-option-selected f1-driver-option" : "f1-driver-option"}
-                                    >
-                                        <span className="f1-driver-number">{m.d1.num}</span>
-                                        <span className="f1-driver-details">
-                                            <span className="f1-driver-name">{m.d1.name}</span>
-                                            <span className="f1-driver-team">{m.team}</span>
-                                        </span>
-                                        {picked === m.d1.num && <span className="f1-choice-status">YOUR PICK</span>}
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => handlePick(m.id, m.d2.num)}
-                                        className={picked === m.d2.num ? "f1-driver-option-selected f1-driver-option" : "f1-driver-option"}
-                                    >
-                                        <span className="f1-driver-number">{m.d2.num}</span>
-                                        <span className="f1-driver-details">
-                                            <span className="f1-driver-name">{m.d2.name}</span>
-                                            <span className="f1-driver-team">{m.team}</span>
-                                        </span>
-                                        {picked === m.d2.num && <span className="f1-choice-status">YOUR PICK</span>}
-                                    </button>
-                                </div>
-                            </article>
-                        );
-                    })}
-                </div>
-                {!props.hideSubmit && (
-                <footer className="f1-predictions-summary">
-                    <p className="f1-summary-copy">
-                        <span className="font-bold">{Object.keys(picks).length}</span> / {F1_MATCHUPS.length} MATCHUPS PREDICTED
-                    </p>
-                    <button type="button" className="f1-submit-picks">
-                        SUBMIT PICKS
+                    <button 
+                        type="button" 
+                        disabled={countPicks !== F1_MATCHUPS.length}
+                        className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        SUBMIT PREDICTION
                     </button>
                 </footer>
             )}
-            </section>
         </div>
     )
 }

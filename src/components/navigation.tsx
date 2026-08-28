@@ -27,7 +27,8 @@ const Navigation = () => {
                     <div className="navigation-left flex items-center">
                         <Link href="/" className="navigation-navlink1">
                             <div className="navigation-logo-link">
-                                <Logo isOnDarkBackground />
+                                <div className="block dark:hidden"><Logo isOnDarkBackground={false} /></div>
+                                <div className="hidden dark:block"><Logo isOnDarkBackground={true} /></div>
                             </div>
                         </Link>
                     </div>
@@ -85,7 +86,8 @@ const Navigation = () => {
                     <div className="fixed inset-0 bg-white dark:bg-black z-[1100] p-6 flex flex-col overflow-y-auto">
                         <div className="flex items-center justify-between mb-12">
                             <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                                <Logo isOnDarkBackground />
+                                <div className="block dark:hidden"><Logo isOnDarkBackground={false} /></div>
+                                <div className="hidden dark:block"><Logo isOnDarkBackground={true} /></div>
                             </Link>
                             <button
                                 aria-label="Close menu"
@@ -105,7 +107,7 @@ const Navigation = () => {
                                     key={index} 
                                     href={link.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="text-black dark:text-white text-2xl font-bold uppercase tracking-widest hover:text-[#fbff00] transition-colors border-b border-white/10 pb-4"
+                                    className="text-black dark:text-white text-2xl font-bold uppercase tracking-widest hover:text-[#fbff00] transition-colors border-b border-black/10 dark:border-white/10 pb-4"
                                 >
                                     {link.name}
                                 </Link>

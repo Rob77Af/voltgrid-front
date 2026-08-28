@@ -27,7 +27,7 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
         <button
             type="button"
             onClick={onClick}
-            className="w-14 h-20 md:w-20 md:h-28 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] flex items-center justify-center text-4xl md:text-6xl font-display font-bold text-black dark:text-white hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors select-none focus:outline-none focus:border-[#fbaa19]"
+            className="w-10 h-16 sm:w-14 sm:h-20 md:w-20 md:h-28 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] flex items-center justify-center text-3xl sm:text-4xl md:text-6xl font-display font-bold text-black dark:text-white hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors select-none focus:outline-none focus:border-[#fbaa19]"
         >
             {value}
         </button>
@@ -48,18 +48,18 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                     {/* Minutes */}
                     <DigitButton value={digits[0]} onClick={() => incrementDigit(0)} />
                     
-                    <span className="text-black dark:text-white text-4xl md:text-6xl font-display font-bold pb-2 mx-1 md:mx-2">:</span>
+                    <span className="text-black dark:text-white text-3xl sm:text-4xl md:text-6xl font-display font-bold pb-2 mx-0.5 sm:mx-1 md:mx-2">:</span>
                     
                     {/* Seconds */}
-                    <div className="flex items-center gap-1 md:gap-2">
+                    <div className="flex items-center gap-0.5 sm:gap-1 md:gap-2">
                         <DigitButton value={digits[1]} onClick={() => incrementDigit(1)} />
                         <DigitButton value={digits[2]} onClick={() => incrementDigit(2)} />
                     </div>
 
-                    <span className="text-[#fbaa19] text-4xl md:text-6xl font-display font-bold pb-2 mx-1 md:mx-2">.</span>
+                    <span className="text-[#fbaa19] text-3xl sm:text-4xl md:text-6xl font-display font-bold pb-2 mx-0.5 sm:mx-1 md:mx-2">.</span>
                     
                     {/* Milliseconds */}
-                    <div className="flex items-center gap-1 md:gap-2">
+                    <div className="flex items-center gap-0.5 sm:gap-1 md:gap-2">
                         <DigitButton value={digits[3]} onClick={() => incrementDigit(3)} />
                         <DigitButton value={digits[4]} onClick={() => incrementDigit(4)} />
                         <DigitButton value={digits[5]} onClick={() => incrementDigit(5)} />
@@ -72,7 +72,7 @@ const Poletime = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                     <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
                         Your pick: <span className="text-black dark:text-white font-bold">{digits[0]}:{digits[1]}{digits[2]}.{digits[3]}{digits[4]}{digits[5]}</span>
                     </p>
-                    <button type="button" className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-white dark:bg-black hover:text-[#fbaa19]">
+                    <button type="button" className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19]">
                         SUBMIT PREDICTION
                     </button>
                 </footer>

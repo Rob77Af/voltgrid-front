@@ -98,7 +98,7 @@ const Evo = ({ hideSubmit }: { hideSubmit?: boolean }) => {
                                                                 ? 'bg-[#fbaa19] text-black' 
                                                                 : isPickedElsewhere 
                                                                     ? 'text-[#333] cursor-not-allowed line-through decoration-[#fbaa19]/30' 
-                                                                    : 'text-black dark:text-white hover:bg-white dark:bg-[#1a1a1a] hover:text-[#fbaa19] cursor-pointer'
+                                                                    : 'text-black dark:text-white hover:bg-gray-200 dark:hover:bg-[#1a1a1a] hover:text-[#fbaa19] cursor-pointer'
                                                         }`}
                                                     >
                                                         <div className="flex flex-col leading-tight">
