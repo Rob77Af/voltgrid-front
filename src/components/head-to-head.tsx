@@ -40,24 +40,20 @@ const HeadToHead = (props: any) => {
                                             key={d.num}
                                             type="button"
                                             onClick={() => handlePick(m.id, d.num)}
-                                            className={`flex-1 flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 transition-all text-center border-r border-black/10 dark:border-white/10 last:border-r-0 ${
+                                            style={{ minHeight: '3.5rem' }}
+                                            className={`flex-1 flex flex-row items-center justify-between px-4 py-2 transition-all text-left border-r border-black/10 dark:border-white/10 last:border-r-0 ${
                                                 isPicked 
                                                 ? 'bg-[#fbaa19] text-black' 
                                                 : 'bg-white dark:bg-[#1a1a1a] text-black dark:text-white hover:bg-gray-100 dark:hover:bg-black hover:text-[#fbaa19]'
                                             }`}
                                         >
-                                            <div className="flex flex-col leading-tight items-center">
-                                                <span className="uppercase font-bold tracking-wider text-xs sm:text-sm md:text-base">
-                                                    {d.name} <span className={isPicked ? "text-black/70" : "text-[#fbaa19]"}># {d.num}</span>
-                                                </span>
-                                                <span className={`text-[10px] md:text-xs mt-1 ${isPicked ? "text-black/70" : "text-gray-500"}`}>
-                                                    {m.team}
-                                                </span>
-                                            </div>
+                                            <span className="uppercase font-bold tracking-wider text-sm md:text-base leading-tight">
+                                                {d.name} <span className={isPicked ? "text-black/70" : "text-[#fbaa19]"}># {d.num}</span>
+                                            </span>
                                             {isPicked && (
-                                                <div className="mt-2 text-[10px] font-black tracking-widest uppercase opacity-80 shrink-0 bg-black/10 px-2 py-0.5 rounded-sm">
-                                                    SELECTED
-                                                </div>
+                                                <svg className="w-5 h-5 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                                                </svg>
                                             )}
                                         </button>
                                     );

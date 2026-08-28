@@ -19,7 +19,7 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
             {!hideHeader && (
                 <header className="f1-predictions-header border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md mb-2">
                     <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">F1 PREDICTION MARKET</p>
-                    <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">EVO (BIGGEST MOVERS)</h2>
+                    <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider mb-2">EVO</h2>
                     <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
                         Select the 5 drivers you predict will gain the most positions.
                     </p>
