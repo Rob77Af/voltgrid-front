@@ -86,7 +86,7 @@ const Top10Finish = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHea
 
                                 {/* Custom Dropdown Menu */}
                                 {isOpen && (
-                                    <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-gray-50 dark:bg-[#0a0a0a] border border-[#fbaa19] max-h-60 overflow-y-auto shadow-2xl shadow-black/50 z-[100]">
+                                    <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-gray-50 dark:bg-[#0a0a0a] border border-[#fbaa19] max-h-[400px] md:max-h-[500px] overflow-y-auto shadow-2xl shadow-black/50 z-[100]">
                                         <div className="flex flex-col py-2">
                                             {F1_DRIVERS.map(driver => {
                                                 const isPickedHere = pick === driver;
