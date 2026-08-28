@@ -83,58 +83,59 @@ const Navigation = () => {
                     </div>
                 </div>
 
-                {/* MOBILE OVERLAY MENU */}
-                {isMobileMenuOpen && (
-                    <div className="fixed inset-0 bg-white dark:bg-[#0a0a0a] z-[1100] p-6 flex flex-col overflow-y-auto">
-                        <div className="flex items-center justify-between mb-12">
-                            <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                                <div className="block dark:hidden"><Logo isOnDarkBackground={false} /></div>
-                                <div className="hidden dark:block"><Logo isOnDarkBackground={true} /></div>
-                            </Link>
-                            <button
-                                aria-label="Close menu"
-                                className="text-black dark:text-white p-2 hover:text-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                <svg fill="none" width="28" height="28" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round">
-                                    <line x1="18" x2="6" y1="6" y2="18"></line>
-                                    <line x1="6" x2="18" y1="6" y2="18"></line>
-                                </svg>
-                            </button>
-                        </div>
-                        
-                        <div className="flex flex-col gap-6 flex-grow">
-                            {navLinks.map((link, index) => (
-                                <Link 
-                                    key={index} 
-                                    href={link.href}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="text-black dark:text-white text-2xl font-bold uppercase tracking-widest hover:text-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors border-b border-black/10 dark:border-white/10 pb-4"
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-                        </div>
-
-                        <div className="mt-12 flex flex-col gap-4 pb-8">
-                            <Link 
-                                href="/bet" 
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="bg-[#fbaa19] text-black w-full text-center px-6 py-4 text-lg font-bold uppercase tracking-wider rounded-sm hover:bg-yellow-500 transition-colors"
-                            >
-                                Bet
-                            </Link>
-                            <Link 
-                                href="/superlicense" 
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="bg-transparent text-black dark:text-white border-2 border-black/20 dark:border-white/20 w-full text-center px-6 py-4 text-lg font-bold uppercase tracking-wider rounded-sm hover:border-[#fbaa19] hover:text-[#fbaa19] dark:hover:border-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
-                            >
-                                Superlicense
-                            </Link>
-                        </div>
-                    </div>
-                )}
             </nav>
+
+            {/* MOBILE OVERLAY MENU */}
+            {isMobileMenuOpen && (
+                <div className="fixed inset-0 bg-white dark:bg-[#0a0a0a] z-[9999] p-6 flex flex-col overflow-y-auto">
+                    <div className="flex items-center justify-between mb-12">
+                        <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                            <div className="block dark:hidden"><Logo isOnDarkBackground={false} /></div>
+                            <div className="hidden dark:block"><Logo isOnDarkBackground={true} /></div>
+                        </Link>
+                        <button
+                            aria-label="Close menu"
+                            className="text-black dark:text-white p-2 hover:text-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            <svg fill="none" width="28" height="28" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round">
+                                <line x1="18" x2="6" y1="6" y2="18"></line>
+                                <line x1="6" x2="18" y1="6" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div className="flex flex-col gap-6 flex-grow">
+                        {navLinks.map((link, index) => (
+                            <Link 
+                                key={index} 
+                                href={link.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-black dark:text-white text-2xl font-bold uppercase tracking-widest hover:text-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors border-b border-black/10 dark:border-white/10 pb-4"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
+
+                    <div className="mt-12 flex flex-col gap-4 pb-8">
+                        <Link 
+                            href="/bet" 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="bg-[#fbaa19] text-black w-full text-center px-6 py-4 text-lg font-bold uppercase tracking-wider rounded-sm hover:bg-yellow-500 transition-colors"
+                        >
+                            Bet
+                        </Link>
+                        <Link 
+                            href="/superlicense" 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="bg-transparent text-black dark:text-white border-2 border-black/20 dark:border-white/20 w-full text-center px-6 py-4 text-lg font-bold uppercase tracking-wider rounded-sm hover:border-[#fbaa19] hover:text-[#fbaa19] dark:hover:border-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
+                        >
+                            Superlicense
+                        </Link>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
