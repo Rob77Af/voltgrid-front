@@ -75,6 +75,8 @@ export default function FantasyClient() {
             case 'master-competition': return 'MASTER COMPETITION';
             case 'milesimus': return 'MILESIMUS';
             case 'teamwork': return 'TEAMWORK';
+            case 'silly-season': return 'SILLY SEASON';
+            case 'paddock': return 'PADDOCK';
             case 'stats': return 'GLOBAL STATS';
             default: return 'COMPETITIONS';
         }

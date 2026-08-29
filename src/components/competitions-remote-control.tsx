@@ -28,6 +28,16 @@ const categories = [
             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
         </svg>
     )},
+    { id: 'silly-season', label: 'Silly Season', icon: (
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path>
+        </svg>
+    )},
+    { id: 'paddock', label: 'Paddock', icon: (
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4a2 2 0 012-2h2a2 2 0 012 2v4"></path>
+        </svg>
+    )},
     { id: 'stats', label: 'Stats', icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="20" x2="18" y2="10"></line>
