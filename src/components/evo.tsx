@@ -128,14 +128,21 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
             </div>
             
             {!hideSubmit && (
-                <div className="mt-4 flex justify-end">
+                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] mt-4">
+                    <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
+                        {picks.filter(p => p !== '').length === 5
+                            ? <span className="text-[#fbaa19]">All drivers predicted!</span>
+                            : `${picks.filter(p => p !== '').length} / 5 DRIVERS PREDICTED`
+                        }
+                    </p>
                     <button 
+                        type="button" 
                         disabled={picks.some(p => p === '')}
-                        className="bg-[#fbaa19] text-black font-bold uppercase tracking-widest px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-yellow-500 transition-colors"
+                        className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         SUBMIT PREDICTION
                     </button>
-                </div>
+                </footer>
             )}
         </div>
     );

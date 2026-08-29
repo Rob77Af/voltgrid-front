@@ -42,7 +42,7 @@ const PredictionTabs = () => {
 
     const headerData: Record<string, { title: string, desc: string }> = {
         'poletime': { title: 'Poletime', desc: 'Predict the exact pole position lap time.' },
-        'master': { title: 'Top 10 Finish', desc: 'Select the drivers you predict will finish in the top 10 positions.' },
+        'master': { title: 'Master (Top 10)', desc: 'Select the drivers you predict will finish in the top 10 positions.' },
         'evo': { title: 'Evo', desc: 'Select the 5 drivers you predict will gain the most positions.' },
         'head-to-head': { title: 'Head to Head', desc: 'Choose the driver you expect to finish ahead in each matchup.' },
         'misc': { title: 'Misc', desc: 'Answer the following event props. Choose one outcome per question.' },
