@@ -12,13 +12,13 @@ export interface RaceEvent {
 }
 
 const mockCalendar: RaceEvent[] = [
-    { id: 'r1', round: '01', name: 'BAHRAIN GRAND PRIX', circuit: 'Bahrain International Circuit', date: 'FEB 29 - MAR 02', qualiStart: '19:00', raceStart: '18:00' },
-    { id: 'r2', round: '02', name: 'SAUDI ARABIAN GRAND PRIX', circuit: 'Jeddah Corniche Circuit', date: 'MAR 07 - MAR 09', qualiStart: '20:00', raceStart: '20:00' },
-    { id: 'r3', round: '03', name: 'AUSTRALIAN GRAND PRIX', circuit: 'Albert Park Circuit', date: 'MAR 22 - MAR 24', qualiStart: '16:00', raceStart: '15:00' },
-    { id: 'r4', round: '04', name: 'JAPANESE GRAND PRIX', circuit: 'Suzuka International Racing Course', date: 'APR 05 - APR 07', qualiStart: '15:00', raceStart: '14:00' },
-    { id: 'r5', round: '05', name: 'MIAMI GRAND PRIX', circuit: 'Miami International Autodrome', date: 'MAY 03 - MAY 05', qualiStart: '16:00', raceStart: '16:00' },
-    { id: 'r6', round: '06', name: 'EMILIA ROMAGNA GRAND PRIX', circuit: 'Imola Circuit', date: 'MAY 17 - MAY 19', qualiStart: '16:00', raceStart: '15:00' },
-    { id: 'r7', round: '07', name: 'MONACO GRAND PRIX', circuit: 'Circuit de Monaco', date: 'MAY 24 - MAY 26', qualiStart: '16:00', raceStart: '15:00' }
+    { id: 'r1', round: '01', name: 'BAHRAIN GRAND PRIX', circuit: 'Bahrain International Circuit', date: 'FEB 29 - MAR 02', qualiStart: '01 MAR, 19:00', raceStart: '02 MAR, 18:00' },
+    { id: 'r2', round: '02', name: 'SAUDI ARABIAN GRAND PRIX', circuit: 'Jeddah Corniche Circuit', date: 'MAR 07 - MAR 09', qualiStart: '08 MAR, 20:00', raceStart: '09 MAR, 20:00' },
+    { id: 'r3', round: '03', name: 'AUSTRALIAN GRAND PRIX', circuit: 'Albert Park Circuit', date: 'MAR 22 - MAR 24', qualiStart: '23 MAR, 16:00', raceStart: '24 MAR, 15:00' },
+    { id: 'r4', round: '04', name: 'JAPANESE GRAND PRIX', circuit: 'Suzuka International Racing Course', date: 'APR 05 - APR 07', qualiStart: '06 APR, 15:00', raceStart: '07 APR, 14:00' },
+    { id: 'r5', round: '05', name: 'MIAMI GRAND PRIX', circuit: 'Miami International Autodrome', date: 'MAY 03 - MAY 05', qualiStart: '04 MAY, 16:00', raceStart: '05 MAY, 16:00' },
+    { id: 'r6', round: '06', name: 'EMILIA ROMAGNA GRAND PRIX', circuit: 'Imola Circuit', date: 'MAY 17 - MAY 19', qualiStart: '18 MAY, 16:00', raceStart: '19 MAY, 15:00' },
+    { id: 'r7', round: '07', name: 'MONACO GRAND PRIX', circuit: 'Circuit de Monaco', date: 'MAY 24 - MAY 26', qualiStart: '25 MAY, 16:00', raceStart: '26 MAY, 15:00' }
 ];
 
 const fetchCalendarData = async (): Promise<RaceEvent[]> => {
@@ -87,14 +87,14 @@ const Calendar = () => {
                             </div>
 
                             {/* Timings */}
-                            <div className="w-full sm:w-48 bg-gray-50 dark:bg-black/50 border-t sm:border-t-0 sm:border-l border-black/10 dark:border-white/10 flex flex-row sm:flex-col items-stretch">
-                                <div className="flex-1 p-3 flex flex-col items-center justify-center border-r sm:border-r-0 sm:border-b border-black/10 dark:border-white/10">
+                            <div className="w-full sm:w-auto shrink-0 bg-gray-50 dark:bg-black/50 border-t sm:border-t-0 sm:border-l border-black/10 dark:border-white/10 flex flex-row items-stretch">
+                                <div className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center border-r border-black/10 dark:border-white/10">
                                     <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">QUALIFYING</span>
-                                    <span className="text-black dark:text-white font-mono font-bold">{race.qualiStart}</span>
+                                    <span className="text-black dark:text-white font-mono font-bold text-xs sm:text-sm text-center">{race.qualiStart}</span>
                                 </div>
-                                <div className="flex-1 p-3 flex flex-col items-center justify-center">
+                                <div className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center">
                                     <span className="text-[10px] text-[#fbaa19] font-bold uppercase tracking-widest mb-1">RACE START</span>
-                                    <span className="text-black dark:text-white font-mono font-bold">{race.raceStart}</span>
+                                    <span className="text-black dark:text-white font-mono font-bold text-xs sm:text-sm text-center">{race.raceStart}</span>
                                 </div>
                             </div>
                         </article>
