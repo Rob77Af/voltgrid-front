@@ -31,6 +31,86 @@ const fetchCalendarData = async (): Promise<RaceEvent[]> => {
     });
 };
 
+const RaceCard = ({ race, isNext, isPast, isFuture }: { race: RaceEvent, isNext: boolean, isPast: boolean | null, isFuture: boolean | null }) => {
+    return (
+        <article 
+            className={`border flex flex-col sm:flex-row transition-all duration-300 group overflow-hidden ${
+                isNext 
+                    ? 'bg-[#fbaa19] border-[#fbaa19] text-black shadow-[0_0_15px_rgba(251,170,25,0.3)] scale-[1.02]' 
+                    : isFuture
+                        ? 'bg-white/50 dark:bg-[#0f0f0f] border-black/5 dark:border-white/5 opacity-70 hover:opacity-100 hover:border-[#fbaa19]/50'
+                        : 'bg-white dark:bg-[#1a1a1a] border-black/20 dark:border-[#ffffff3d] hover:border-[#fbaa19]'
+            } ${isPast ? 'opacity-50 grayscale hover:opacity-100 hover:grayscale-0' : ''}`}
+        >
+            {/* Round Number */}
+            <div className={`w-full sm:w-20 flex sm:flex-col items-center justify-center p-2 sm:p-0 font-black uppercase text-xl sm:text-2xl border-b sm:border-b-0 sm:border-r ${
+                isNext ? 'bg-[#e59914] text-black border-[#e59914]' : 'bg-[#fbaa19] text-black border-[#fbaa19]'
+            }`}>
+                <span className="text-xs tracking-widest mr-2 sm:mr-0 sm:mb-1">RND</span>
+                {race.round}
+            </div>
+            
+            {/* Race Info */}
+            <div className="flex-1 p-4 sm:p-6 flex flex-col justify-center">
+                <div className="flex items-center gap-3">
+                    <h3 className={`font-bold uppercase tracking-wider text-lg sm:text-xl transition-colors ${
+                        isNext ? 'text-black' : 'text-black dark:text-white group-hover:text-[#fbaa19]'
+                    }`}>
+                        {race.name}
+                    </h3>
+                    {isNext && (
+                        <span className="bg-black text-[#fbaa19] px-2 py-0.5 text-[10px] font-black tracking-widest uppercase animate-pulse">
+                            NEXT EVENT
+                        </span>
+                    )}
+                </div>
+                <p className={`text-xs sm:text-sm uppercase tracking-wider font-medium mt-1 ${
+                    isNext ? 'text-black/70' : 'text-gray-500 dark:text-gray-400'
+                }`}>
+                    {race.circuit}
+                </p>
+            </div>
+
+            {/* Timings or Results Links */}
+            {isPast ? (
+                <div className="w-full sm:w-auto shrink-0 flex flex-row items-stretch border-t sm:border-t-0 sm:border-l bg-gray-50 dark:bg-black/50 border-black/10 dark:border-white/10">
+                    <Link href={`/f1-results/${race.round}`} className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center border-r border-black/10 dark:border-white/10 hover:bg-[#fbaa19] hover:text-black transition-colors group/link cursor-pointer">
+                        <span className="text-[10px] text-gray-500 group-hover/link:text-black/70 font-bold uppercase tracking-widest mb-1 text-center">F1 RESULTS</span>
+                        <span className="text-black dark:text-white font-mono font-bold text-xs sm:text-sm group-hover/link:text-black text-center">VIEW</span>
+                    </Link>
+                    <Link href={`/fantasy-results/${race.round}`} className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center hover:bg-[#fbaa19] hover:text-black transition-colors group/link cursor-pointer">
+                        <span className="text-[10px] text-[#fbaa19] group-hover/link:text-black/70 font-bold uppercase tracking-widest mb-1 text-center">FANTASY</span>
+                        <span className="text-black dark:text-white font-mono font-bold text-xs sm:text-sm group-hover/link:text-black text-center">RESULTS</span>
+                    </Link>
+                </div>
+            ) : (
+                <div className={`w-full sm:w-auto shrink-0 flex flex-row items-stretch border-t sm:border-t-0 sm:border-l ${
+                    isNext ? 'bg-black/10 border-black/20' : 'bg-gray-50 dark:bg-black/50 border-black/10 dark:border-white/10'
+                }`}>
+                    <div className={`flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center border-r ${
+                        isNext ? 'border-black/20' : 'border-black/10 dark:border-white/10'
+                    }`}>
+                        <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${
+                            isNext ? 'text-black/70' : 'text-gray-500'
+                        }`}>QUALIFYING</span>
+                        <span className={`font-mono font-bold text-xs sm:text-sm text-center ${
+                            isNext ? 'text-black' : 'text-black dark:text-white'
+                        }`}>{race.qualiStart}</span>
+                    </div>
+                    <div className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center">
+                        <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${
+                            isNext ? 'text-black' : 'text-[#fbaa19]'
+                        }`}>RACE START</span>
+                        <span className={`font-mono font-bold text-xs sm:text-sm text-center ${
+                            isNext ? 'text-black' : 'text-black dark:text-white'
+                        }`}>{race.raceStart}</span>
+                    </div>
+                </div>
+            )}
+        </article>
+    );
+};
+
 const Calendar = () => {
     const [races, setRaces] = useState<RaceEvent[]>([]);
     const [nextEvent, setNextEvent] = useState<F1Event | null>(null);
@@ -47,6 +127,8 @@ const Calendar = () => {
         });
         return () => { mounted = false; };
     }, []);
+
+    const nextRaceObj = races.find(r => r.round === nextEvent?.round);
 
     return (
         <div className="w-full max-w-4xl mx-auto flex flex-col gap-6 mt-4">
@@ -68,88 +150,37 @@ const Calendar = () => {
                     <p className="text-[#fbaa19] font-bold uppercase tracking-widest text-sm">LOADING SECURE DATA...</p>
                 </div>
             ) : (
-                <div className="flex flex-col gap-4">
-                    {[...races].reverse().map((race) => {
-                        const isNext = race.round === nextEvent?.round;
-                        const isPast = nextEvent && Number(race.round) < Number(nextEvent.round);
-                        
-                        return (
-                            <article 
-                                key={race.id} 
-                                className={`border flex flex-col sm:flex-row transition-all duration-300 group overflow-hidden ${
-                                    isNext 
-                                        ? 'bg-[#fbaa19] border-[#fbaa19] text-black shadow-[0_0_15px_rgba(251,170,25,0.3)]' 
-                                        : 'bg-white dark:bg-[#1a1a1a] border-black/20 dark:border-[#ffffff3d] hover:border-[#fbaa19]'
-                                } ${isPast ? 'opacity-50 grayscale hover:opacity-100 hover:grayscale-0' : ''}`}
-                            >
-                                {/* Round Number */}
-                                <div className={`w-full sm:w-20 flex sm:flex-col items-center justify-center p-2 sm:p-0 font-black uppercase text-xl sm:text-2xl border-b sm:border-b-0 sm:border-r ${
-                                    isNext ? 'bg-[#e59914] text-black border-[#e59914]' : 'bg-[#fbaa19] text-black border-[#fbaa19]'
-                                }`}>
-                                    <span className="text-xs tracking-widest mr-2 sm:mr-0 sm:mb-1">RND</span>
-                                    {race.round}
-                                </div>
-                                
-                                {/* Race Info */}
-                                <div className="flex-1 p-4 sm:p-6 flex flex-col justify-center">
-                                    <div className="flex items-center gap-3">
-                                        <h3 className={`font-bold uppercase tracking-wider text-lg sm:text-xl transition-colors ${
-                                            isNext ? 'text-black' : 'text-black dark:text-white group-hover:text-[#fbaa19]'
-                                        }`}>
-                                            {race.name}
-                                        </h3>
-                                        {isNext && (
-                                            <span className="bg-black text-[#fbaa19] px-2 py-0.5 text-[10px] font-black tracking-widest uppercase animate-pulse">
-                                                NEXT EVENT
-                                            </span>
-                                        )}
-                                    </div>
-                                    <p className={`text-xs sm:text-sm uppercase tracking-wider font-medium mt-1 ${
-                                        isNext ? 'text-black/70' : 'text-gray-500 dark:text-gray-400'
-                                    }`}>
-                                        {race.circuit}
-                                    </p>
-                                </div>
+                <div className="flex flex-col gap-8">
+                    {/* Pinned Next Event */}
+                    {nextRaceObj && (
+                        <div className="flex flex-col gap-4 border-b-2 border-dashed border-[#fbaa19]/30 pb-8">
+                            <h3 className="text-[#fbaa19] text-sm font-bold tracking-[0.2em] uppercase flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-[#fbaa19] animate-pulse"></span>
+                                Up Next
+                            </h3>
+                            <RaceCard race={nextRaceObj} isNext={true} isPast={false} isFuture={false} />
+                        </div>
+                    )}
 
-                                {/* Timings or Results Links */}
-                                {isPast ? (
-                                    <div className="w-full sm:w-auto shrink-0 flex flex-row items-stretch border-t sm:border-t-0 sm:border-l bg-gray-50 dark:bg-black/50 border-black/10 dark:border-white/10">
-                                        <Link href={`/f1-results/${race.round}`} className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center border-r border-black/10 dark:border-white/10 hover:bg-[#fbaa19] hover:text-black transition-colors group/link cursor-pointer">
-                                            <span className="text-[10px] text-gray-500 group-hover/link:text-black/70 font-bold uppercase tracking-widest mb-1 text-center">F1 RESULTS</span>
-                                            <span className="text-black dark:text-white font-mono font-bold text-xs sm:text-sm group-hover/link:text-black text-center">VIEW</span>
-                                        </Link>
-                                        <Link href={`/fantasy-results/${race.round}`} className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center hover:bg-[#fbaa19] hover:text-black transition-colors group/link cursor-pointer">
-                                            <span className="text-[10px] text-[#fbaa19] group-hover/link:text-black/70 font-bold uppercase tracking-widest mb-1 text-center">FANTASY</span>
-                                            <span className="text-black dark:text-white font-mono font-bold text-xs sm:text-sm group-hover/link:text-black text-center">RESULTS</span>
-                                        </Link>
-                                    </div>
-                                ) : (
-                                    <div className={`w-full sm:w-auto shrink-0 flex flex-row items-stretch border-t sm:border-t-0 sm:border-l ${
-                                        isNext ? 'bg-black/10 border-black/20' : 'bg-gray-50 dark:bg-black/50 border-black/10 dark:border-white/10'
-                                    }`}>
-                                        <div className={`flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center border-r ${
-                                            isNext ? 'border-black/20' : 'border-black/10 dark:border-white/10'
-                                        }`}>
-                                            <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${
-                                                isNext ? 'text-black/70' : 'text-gray-500'
-                                            }`}>QUALIFYING</span>
-                                            <span className={`font-mono font-bold text-xs sm:text-sm text-center ${
-                                                isNext ? 'text-black' : 'text-black dark:text-white'
-                                            }`}>{race.qualiStart}</span>
-                                        </div>
-                                        <div className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center">
-                                            <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${
-                                                isNext ? 'text-black' : 'text-[#fbaa19]'
-                                            }`}>RACE START</span>
-                                            <span className={`font-mono font-bold text-xs sm:text-sm text-center ${
-                                                isNext ? 'text-black' : 'text-black dark:text-white'
-                                            }`}>{race.raceStart}</span>
-                                        </div>
-                                    </div>
-                                )}
-                            </article>
-                        );
-                    })}
+                    {/* All Events List (Chronological) */}
+                    <div className="flex flex-col gap-4">
+                        <h3 className="text-gray-500 text-xs font-bold tracking-[0.2em] uppercase mb-2">Full Season Schedule</h3>
+                        {races.map((race) => {
+                            const isNext = race.round === nextEvent?.round;
+                            const isPast = nextEvent && Number(race.round) < Number(nextEvent.round);
+                            const isFuture = nextEvent && Number(race.round) > Number(nextEvent.round);
+                            
+                            return (
+                                <RaceCard 
+                                    key={race.id} 
+                                    race={race} 
+                                    isNext={isNext} 
+                                    isPast={isPast} 
+                                    isFuture={isFuture} 
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
             )}
         </div>

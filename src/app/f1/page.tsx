@@ -14,19 +14,21 @@ export default function F1Page() {
 
     return (
         <main className="w-full max-w-6xl mx-auto p-4 md:p-8 pt-12 pb-24 flex flex-col items-center justify-start min-h-screen">
-            <header className="w-full mb-8 border-b-4 border-[#fbaa19] pb-6 flex flex-col gap-4">
+            <header className="w-full border-b-4 border-[#fbaa19] pb-6 flex flex-col gap-4">
                 <p className="text-[#fbaa19] text-sm md:text-base font-bold uppercase tracking-[0.2em] font-display">THE PINNACLE OF MOTORSPORT</p>
                 <h1 className="text-black dark:text-white text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-widest font-display mb-2">
                     F1 HUB
                 </h1>
-                
-                {/* Internal Tab Menu */}
-                <div className="flex flex-wrap gap-2 md:gap-4 mt-4">
+            </header>
+            
+            {/* Sticky Internal Tab Menu */}
+            <div className="w-full sticky top-[60px] md:top-[64px] z-40 bg-gray-100 dark:bg-[#0a0a0a] pt-4 mb-8">
+                <div className="flex flex-nowrap overflow-x-auto scrollbar-hide gap-1 md:gap-4 border-b border-black/20 dark:border-[#ffffff3d] pb-0">
                     {F1_TABS.map(tab => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`pb-3 px-2 md:px-4 uppercase font-bold tracking-widest text-xs md:text-sm transition-colors border-b-2 ${
+                            className={`pb-3 px-3 md:px-4 uppercase font-bold tracking-widest text-[10px] md:text-xs transition-colors border-b-2 whitespace-nowrap shrink-0 ${
                                 activeTab === tab.id 
                                 ? 'text-[#fbaa19] border-[#fbaa19]' 
                                 : 'text-gray-500 border-transparent hover:text-black dark:hover:text-white'
@@ -36,7 +38,7 @@ export default function F1Page() {
                         </button>
                     ))}
                 </div>
-            </header>
+            </div>
             
             <div className="w-full">
                 {activeTab === 'calendar' && <Calendar />}
