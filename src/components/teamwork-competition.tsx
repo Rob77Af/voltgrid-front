@@ -16,28 +16,9 @@ const MIAMI_RESULTS = [
     { pos: 5, team: 'Midnight Drivers', drivers: 'A.ALBON / F.ALONSO', pts: 42, gap: '+45' },
 ];
 
-export default function TeamworkCompetition() {
-    const [activeTab, setActiveTab] = useState('race-results');
-
+export default function TeamworkCompetition({ activeTab }: { activeTab: string }) {
     return (
         <div className="w-full flex flex-col gap-6">
-            {/* Header / Sub-nav */}
-            <div className="flex flex-wrap border-b border-black/20 dark:border-[#ffffff3d] gap-2 md:gap-4">
-                {TEAMWORK_TABS.map(tab => (
-                    <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`pb-3 px-2 md:px-4 uppercase font-bold tracking-widest text-xs md:text-sm transition-colors border-b-2 ${
-                            activeTab === tab.id 
-                            ? 'text-[#fbaa19] border-[#fbaa19]' 
-                            : 'text-gray-500 border-transparent hover:text-black dark:hover:text-white'
-                        }`}
-                    >
-                        {tab.label}
-                    </button>
-                ))}
-            </div>
-
             {/* Content Area */}
             <div className="bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] p-4 md:p-6 rounded-sm">
                 {activeTab === 'race-results' && (
