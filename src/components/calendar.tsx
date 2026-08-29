@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { fetchNextEvent, type F1Event } from '@/api/f1-data';
 
 export interface RaceEvent {
@@ -110,29 +111,42 @@ const Calendar = () => {
                                     </p>
                                 </div>
 
-                                {/* Timings */}
-                                <div className={`w-full sm:w-auto shrink-0 flex flex-row items-stretch border-t sm:border-t-0 sm:border-l ${
-                                    isNext ? 'bg-black/10 border-black/20' : 'bg-gray-50 dark:bg-black/50 border-black/10 dark:border-white/10'
-                                }`}>
-                                    <div className={`flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center border-r ${
-                                        isNext ? 'border-black/20' : 'border-black/10 dark:border-white/10'
+                                {/* Timings or Results Links */}
+                                {isPast ? (
+                                    <div className="w-full sm:w-auto shrink-0 flex flex-row items-stretch border-t sm:border-t-0 sm:border-l bg-gray-50 dark:bg-black/50 border-black/10 dark:border-white/10">
+                                        <Link href={`/f1-results/${race.round}`} className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center border-r border-black/10 dark:border-white/10 hover:bg-[#fbaa19] hover:text-black transition-colors group/link cursor-pointer">
+                                            <span className="text-[10px] text-gray-500 group-hover/link:text-black/70 font-bold uppercase tracking-widest mb-1 text-center">F1 RESULTS</span>
+                                            <span className="text-black dark:text-white font-mono font-bold text-xs sm:text-sm group-hover/link:text-black text-center">VIEW</span>
+                                        </Link>
+                                        <Link href={`/fantasy-results/${race.round}`} className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center hover:bg-[#fbaa19] hover:text-black transition-colors group/link cursor-pointer">
+                                            <span className="text-[10px] text-[#fbaa19] group-hover/link:text-black/70 font-bold uppercase tracking-widest mb-1 text-center">FANTASY</span>
+                                            <span className="text-black dark:text-white font-mono font-bold text-xs sm:text-sm group-hover/link:text-black text-center">RESULTS</span>
+                                        </Link>
+                                    </div>
+                                ) : (
+                                    <div className={`w-full sm:w-auto shrink-0 flex flex-row items-stretch border-t sm:border-t-0 sm:border-l ${
+                                        isNext ? 'bg-black/10 border-black/20' : 'bg-gray-50 dark:bg-black/50 border-black/10 dark:border-white/10'
                                     }`}>
-                                        <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${
-                                            isNext ? 'text-black/70' : 'text-gray-500'
-                                        }`}>QUALIFYING</span>
-                                        <span className={`font-mono font-bold text-xs sm:text-sm text-center ${
-                                            isNext ? 'text-black' : 'text-black dark:text-white'
-                                        }`}>{race.qualiStart}</span>
+                                        <div className={`flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center border-r ${
+                                            isNext ? 'border-black/20' : 'border-black/10 dark:border-white/10'
+                                        }`}>
+                                            <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${
+                                                isNext ? 'text-black/70' : 'text-gray-500'
+                                            }`}>QUALIFYING</span>
+                                            <span className={`font-mono font-bold text-xs sm:text-sm text-center ${
+                                                isNext ? 'text-black' : 'text-black dark:text-white'
+                                            }`}>{race.qualiStart}</span>
+                                        </div>
+                                        <div className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center">
+                                            <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${
+                                                isNext ? 'text-black' : 'text-[#fbaa19]'
+                                            }`}>RACE START</span>
+                                            <span className={`font-mono font-bold text-xs sm:text-sm text-center ${
+                                                isNext ? 'text-black' : 'text-black dark:text-white'
+                                            }`}>{race.raceStart}</span>
+                                        </div>
                                     </div>
-                                    <div className="flex-1 min-w-[120px] p-3 flex flex-col items-center justify-center">
-                                        <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${
-                                            isNext ? 'text-black' : 'text-[#fbaa19]'
-                                        }`}>RACE START</span>
-                                        <span className={`font-mono font-bold text-xs sm:text-sm text-center ${
-                                            isNext ? 'text-black' : 'text-black dark:text-white'
-                                        }`}>{race.raceStart}</span>
-                                    </div>
-                                </div>
+                                )}
                             </article>
                         );
                     })}
