@@ -17,9 +17,10 @@ export default function F1Page() {
     React.useEffect(() => {
         const handleScroll = () => {
             if (menuRef.current) {
-                // If the top of the menu is at or below the sticky threshold (64px)
+                // If the top of the menu is at or below the sticky threshold (64px mobile, 80px desktop)
                 const top = menuRef.current.getBoundingClientRect().top;
-                setIsStuck(top <= 65);
+                const threshold = window.innerWidth >= 768 ? 81 : 65;
+                setIsStuck(top <= threshold);
             }
         };
         
@@ -40,14 +41,14 @@ export default function F1Page() {
             {/* Sticky Internal Tab Menu Wrapper */}
             <div 
                 ref={menuRef}
-                className={`w-full sticky top-[60px] md:top-[64px] z-40 transition-all duration-300 mb-8 ${
+                className={`w-full sticky top-[64px] md:top-[80px] z-40 transition-all duration-300 mb-8 ${
                     isStuck 
-                        ? 'bg-gray-100 dark:bg-[#0a0a0a] py-3 shadow-md shadow-black/5 dark:shadow-white/5 border-b border-black/10 dark:border-white/10' 
+                        ? 'bg-gray-100 dark:bg-[#0a0a0a] py-1 shadow-sm border-b border-black/10 dark:border-white/10' 
                         : 'bg-gray-100 dark:bg-[#0a0a0a] pt-4'
                 }`}
             >
                 <div className={`flex flex-nowrap overflow-x-auto scrollbar-hide gap-1 md:gap-4 border-b border-black/20 dark:border-[#ffffff3d] transition-all duration-300 ${
-                    isStuck ? 'pb-1 border-transparent dark:border-transparent' : 'pb-0'
+                    isStuck ? 'pb-0 border-transparent dark:border-transparent' : 'pb-0'
                 }`}>
                     {F1_TABS.map(tab => (
                         <button
