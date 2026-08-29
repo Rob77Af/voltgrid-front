@@ -68,17 +68,18 @@ const Calendar = () => {
                 </div>
             ) : (
                 <div className="flex flex-col gap-4">
-                    {races.map((race) => {
+                    {[...races].reverse().map((race) => {
                         const isNext = race.round === nextEvent?.round;
+                        const isPast = nextEvent && Number(race.round) < Number(nextEvent.round);
                         
                         return (
                             <article 
                                 key={race.id} 
-                                className={`border flex flex-col sm:flex-row transition-colors group overflow-hidden ${
+                                className={`border flex flex-col sm:flex-row transition-all duration-300 group overflow-hidden ${
                                     isNext 
                                         ? 'bg-[#fbaa19] border-[#fbaa19] text-black shadow-[0_0_15px_rgba(251,170,25,0.3)]' 
                                         : 'bg-white dark:bg-[#1a1a1a] border-black/20 dark:border-[#ffffff3d] hover:border-[#fbaa19]'
-                                }`}
+                                } ${isPast ? 'opacity-50 grayscale hover:opacity-100 hover:grayscale-0' : ''}`}
                             >
                                 {/* Round Number */}
                                 <div className={`w-full sm:w-20 flex sm:flex-col items-center justify-center p-2 sm:p-0 font-black uppercase text-xl sm:text-2xl border-b sm:border-b-0 sm:border-r ${
