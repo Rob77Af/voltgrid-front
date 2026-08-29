@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import Settings from '@/components/settings';
 import Calendar from '@/components/calendar';
 
@@ -12,6 +13,13 @@ export default function SuperlicensePage() {
                 <div className="flex flex-col items-center justify-center h-[50vh] gap-6">
                     <h1 className="text-4xl md:text-5xl font-black uppercase tracking-wider font-display text-black dark:text-white mb-4">Superlicense</h1>
                     
+                    <Link 
+                        href="/bet?tab=all-forms"
+                        className="w-64 text-center bg-black dark:bg-[#1a1a1a] text-white border-2 border-black dark:border-[#1a1a1a] px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:bg-white hover:text-black dark:hover:bg-white dark:hover:text-black"
+                    >
+                        Setup
+                    </Link>
+
                     <button 
                         onClick={() => setActiveView('calendar')}
                         className="w-64 bg-white dark:bg-black text-black dark:text-white border-2 border-[#fbaa19] px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:bg-[#fbaa19] hover:text-black"
