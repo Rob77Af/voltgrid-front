@@ -38,36 +38,34 @@ export default function F1Page() {
             </header>
             
             {/* Sticky Internal Tab Menu Wrapper */}
-            <div className="w-full mb-8">
-                <div 
-                    ref={menuRef}
-                    className={`w-full sticky top-[60px] md:top-[64px] z-40 transition-all duration-300 ${
-                        isStuck 
-                            ? 'bg-gray-100 dark:bg-[#0a0a0a] py-3 shadow-md shadow-black/5 dark:shadow-white/5 border-b border-black/10 dark:border-white/10' 
-                            : 'bg-gray-100 dark:bg-[#0a0a0a] pt-4'
-                    }`}
-                >
-                    <div className={`flex flex-nowrap overflow-x-auto scrollbar-hide gap-1 md:gap-4 border-b border-black/20 dark:border-[#ffffff3d] transition-all duration-300 ${
-                        isStuck ? 'pb-1 border-transparent dark:border-transparent' : 'pb-0'
-                    }`}>
-                        {F1_TABS.map(tab => (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`uppercase font-bold tracking-widest transition-all duration-300 border-b-2 whitespace-nowrap shrink-0 ${
-                                    isStuck 
-                                        ? 'pb-2 px-4 text-xs md:text-sm' 
-                                        : 'pb-3 px-3 md:px-4 text-[10px] md:text-xs'
-                                } ${
-                                    activeTab === tab.id 
-                                    ? 'text-[#fbaa19] border-[#fbaa19]' 
-                                    : 'text-gray-500 border-transparent hover:text-black dark:hover:text-white'
-                                }`}
-                            >
-                                {tab.label}
-                            </button>
-                        ))}
-                    </div>
+            <div 
+                ref={menuRef}
+                className={`w-full sticky top-[60px] md:top-[64px] z-40 transition-all duration-300 mb-8 ${
+                    isStuck 
+                        ? 'bg-gray-100 dark:bg-[#0a0a0a] py-3 shadow-md shadow-black/5 dark:shadow-white/5 border-b border-black/10 dark:border-white/10' 
+                        : 'bg-gray-100 dark:bg-[#0a0a0a] pt-4'
+                }`}
+            >
+                <div className={`flex flex-nowrap overflow-x-auto scrollbar-hide gap-1 md:gap-4 border-b border-black/20 dark:border-[#ffffff3d] transition-all duration-300 ${
+                    isStuck ? 'pb-1 border-transparent dark:border-transparent' : 'pb-0'
+                }`}>
+                    {F1_TABS.map(tab => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`uppercase font-bold tracking-widest transition-all duration-300 border-b-2 whitespace-nowrap shrink-0 ${
+                                isStuck 
+                                    ? 'pb-2 px-4 text-xs md:text-sm' 
+                                    : 'pb-3 px-3 md:px-4 text-[10px] md:text-xs'
+                            } ${
+                                activeTab === tab.id 
+                                ? 'text-[#fbaa19] border-[#fbaa19]' 
+                                : 'text-gray-500 border-transparent hover:text-black dark:hover:text-white'
+                            }`}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
                 </div>
             </div>
             

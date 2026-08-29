@@ -13,6 +13,21 @@ const FANTASY_TABS = [
 export default function FantasyClient() {
     const [activeId, setActiveId] = useState('poletime-competition');
     const [activeTab, setActiveTab] = useState('race-results');
+    const [isStuck, setIsStuck] = useState(false);
+    const menuRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const handleScroll = () => {
+            if (menuRef.current) {
+                const top = menuRef.current.getBoundingClientRect().top;
+                setIsStuck(top <= 65);
+            }
+        };
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Check initially
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const renderContent = () => {
         if (activeId === 'teamwork') {
@@ -78,24 +93,39 @@ export default function FantasyClient() {
 
             <CompetitionsRemoteControl activeId={activeId} setActiveId={setActiveId} />
             
-            {/* Global Fantasy Sub-menu */}
-            <div className="flex flex-wrap border-b border-black/20 dark:border-[#ffffff3d] gap-2 md:gap-4 mt-2">
-                {FANTASY_TABS.map(tab => (
-                    <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`pb-3 px-2 md:px-4 uppercase font-bold tracking-widest text-xs md:text-sm transition-colors border-b-2 ${
-                            activeTab === tab.id 
-                            ? 'text-[#fbaa19] border-[#fbaa19]' 
-                            : 'text-gray-500 border-transparent hover:text-black dark:hover:text-white'
-                        }`}
-                    >
-                        {tab.label}
-                    </button>
-                ))}
+            {/* Global Fantasy Sub-menu (Sticky) */}
+            <div 
+                ref={menuRef}
+                className={`w-full sticky top-[60px] md:top-[64px] z-40 transition-all duration-300 ${
+                    isStuck 
+                        ? 'bg-gray-100 dark:bg-[#0a0a0a] py-3 shadow-md shadow-black/5 dark:shadow-white/5 border-b border-black/10 dark:border-white/10' 
+                        : 'bg-transparent pt-4'
+                }`}
+            >
+                <div className={`flex flex-nowrap overflow-x-auto scrollbar-hide gap-1 md:gap-4 border-b border-black/20 dark:border-[#ffffff3d] transition-all duration-300 ${
+                    isStuck ? 'pb-1 border-transparent dark:border-transparent' : 'pb-0'
+                }`}>
+                    {FANTASY_TABS.map(tab => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`uppercase font-bold tracking-widest transition-all duration-300 border-b-2 whitespace-nowrap shrink-0 ${
+                                isStuck 
+                                    ? 'pb-2 px-4 text-xs md:text-sm' 
+                                    : 'pb-3 px-3 md:px-4 text-[10px] md:text-xs'
+                            } ${
+                                activeTab === tab.id 
+                                ? 'text-[#fbaa19] border-[#fbaa19]' 
+                                : 'text-gray-500 border-transparent hover:text-black dark:hover:text-white'
+                            }`}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
+                </div>
             </div>
 
-            <section className="mt-2" aria-live="polite">
+            <section className="mt-2 min-h-screen" aria-live="polite">
                 {renderContent()}
             </section>
         </div>
