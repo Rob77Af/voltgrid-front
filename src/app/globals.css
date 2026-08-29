@@ -56,3 +56,10 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #fbaa19 transparent;
 }
+
+/* Desktop Scale Down (80%) */
+@media (min-width: 1024px) {
+  html {
+    font-size: 80%;
+  }
+}
