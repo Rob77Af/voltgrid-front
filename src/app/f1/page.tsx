@@ -3,14 +3,17 @@ import React, { useState } from 'react';
 import Calendar from '@/components/calendar';
 
 const F1_TABS = [
-    { id: 'calendar', label: 'Calendar' },
-    { id: 'results', label: 'Results' },
+    { id: 'results', label: 'Race Results' },
     { id: 'ranking', label: 'Ranking' },
-    { id: 'rumors', label: 'Transfer Rumors' }
+    { id: 'calendar', label: 'Calendar' },
+    { id: 'teams', label: 'Teams' },
+    { id: 'drivers', label: 'Drivers' },
+    { id: 'stats', label: 'Stats' },
+    { id: 'others', label: 'Others' }
 ];
 
 export default function F1Page() {
-    const [activeTab, setActiveTab] = useState('calendar');
+    const [activeTab, setActiveTab] = useState('results');
     const [isStuck, setIsStuck] = useState(false);
     const menuRef = React.useRef<HTMLDivElement>(null);
 
@@ -84,10 +87,28 @@ export default function F1Page() {
                         <p className="text-gray-500">Championship standings will be available here.</p>
                     </div>
                 )}
-                {activeTab === 'rumors' && (
+                {activeTab === 'teams' && (
                     <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
-                        <h3 className="text-xl font-bold text-black dark:text-white uppercase tracking-widest">Transfer Rumors</h3>
-                        <p className="text-gray-500">Paddock whispers and driver market updates.</p>
+                        <h3 className="text-xl font-bold text-black dark:text-white uppercase tracking-widest">Teams</h3>
+                        <p className="text-gray-500">Constructors details and car specs.</p>
+                    </div>
+                )}
+                {activeTab === 'drivers' && (
+                    <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
+                        <h3 className="text-xl font-bold text-black dark:text-white uppercase tracking-widest">Drivers</h3>
+                        <p className="text-gray-500">Driver profiles and career statistics.</p>
+                    </div>
+                )}
+                {activeTab === 'stats' && (
+                    <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
+                        <h3 className="text-xl font-bold text-black dark:text-white uppercase tracking-widest">Stats</h3>
+                        <p className="text-gray-500">In-depth season analytics and records.</p>
+                    </div>
+                )}
+                {activeTab === 'others' && (
+                    <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
+                        <h3 className="text-xl font-bold text-black dark:text-white uppercase tracking-widest">Others</h3>
+                        <p className="text-gray-500">Additional information, rules, and rumors.</p>
                     </div>
                 )}
             </div>

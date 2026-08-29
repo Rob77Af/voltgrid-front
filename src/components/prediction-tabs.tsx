@@ -46,7 +46,7 @@ const PredictionTabs = () => {
         'evo': { title: 'Evo', desc: 'Select the 5 drivers you predict will gain the most positions.' },
         'head-to-head': { title: 'Head to Head', desc: 'Choose the driver you expect to finish ahead in each matchup.' },
         'misc': { title: 'Misc', desc: 'Answer the following event props. Choose one outcome per question.' },
-        'all-forms': { title: 'All Predictions', desc: 'Review and complete all your predictions before the lights go out.' },
+        'all-forms': { title: 'FULL', desc: 'Review and complete all your predictions before the lights go out.' },
     };
 
     const currentHeader = headerData[activeId];
