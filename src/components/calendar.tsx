@@ -132,18 +132,6 @@ const Calendar = () => {
 
     return (
         <div className="w-full max-w-4xl mx-auto flex flex-col gap-6 mt-4">
-            <header className="border border-black/20 dark:border-[#ffffff3d] p-6 bg-white dark:bg-[#1a1a1a] border-b-2 border-b-[#fbaa19] shadow-md flex items-center justify-between">
-                <div>
-                    <p className="text-[#fbaa19] text-xs font-medium uppercase tracking-[0.14em] mb-2">SEASON CALENDAR</p>
-                    <h2 className="text-black dark:text-white text-2xl md:text-3xl font-display font-bold uppercase tracking-wider">OFFICIAL SCHEDULE</h2>
-                </div>
-                <div className="hidden sm:block">
-                    <div className="w-12 h-12 rounded-full border-4 border-[#fbaa19] flex items-center justify-center font-black text-xl text-black dark:text-white">
-                        F1
-                    </div>
-                </div>
-            </header>
-
             {loading ? (
                 <div className="w-full h-64 flex flex-col items-center justify-center border border-black/20 dark:border-[#ffffff3d] bg-white dark:bg-[#1a1a1a]">
                     <div className="w-8 h-8 border-4 border-[#fbaa19] border-t-transparent rounded-full animate-spin mb-4"></div>
