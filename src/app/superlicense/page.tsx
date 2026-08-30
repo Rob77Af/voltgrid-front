@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Settings from '@/components/settings';
 import Calendar from '@/components/calendar';
+import ReportForm from '@/components/report-form';
 
 export default function SuperlicensePage() {
-    const [activeView, setActiveView] = useState<'menu' | 'settings' | 'calendar'>('menu');
+    const [activeView, setActiveView] = useState<'menu' | 'settings' | 'calendar' | 'report'>('menu');
 
     // Simulated states for dynamic buttons
     const [isSillySeasonOpen, setIsSillySeasonOpen] = useState(false); // Closed state
@@ -25,7 +26,10 @@ export default function SuperlicensePage() {
                         Setup
                     </Link>
 
-                    <button className="w-64 bg-transparent text-black dark:text-white border-2 border-black/20 dark:border-white/20 px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:border-[#fbaa19] hover:text-[#fbaa19]">
+                    <button 
+                        onClick={() => setActiveView('report')}
+                        className="w-64 bg-transparent text-black dark:text-white border-2 border-black/20 dark:border-white/20 px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:border-[#fbaa19] hover:text-[#fbaa19]"
+                    >
                         Report
                     </button>
 
@@ -98,6 +102,7 @@ export default function SuperlicensePage() {
                     </div>
                     {activeView === 'settings' && <Settings />}
                     {activeView === 'calendar' && <Calendar />}
+                    {activeView === 'report' && <ReportForm />}
                 </div>
             )}
         </main>
