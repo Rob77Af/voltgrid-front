@@ -20,7 +20,7 @@ export default function FantasyClient() {
         const handleScroll = () => {
             if (menuRef.current) {
                 const top = menuRef.current.getBoundingClientRect().top;
-                const threshold = window.innerWidth >= 768 ? 81 : 65;
+                const threshold = window.innerWidth >= 768 ? 83 : 67;
                 setIsStuck(top <= threshold);
             }
         };
@@ -99,7 +99,7 @@ export default function FantasyClient() {
             {/* Global Fantasy Sub-menu (Sticky) */}
             <div 
                 ref={menuRef}
-                className={`w-full sticky top-[64px] md:top-[80px] z-40 transition-all duration-300 ${
+                className={`w-full sticky top-[66px] md:top-[82px] z-40 transition-all duration-300 ${
                     isStuck 
                         ? 'bg-gray-100 dark:bg-[#0a0a0a] py-1 shadow-sm border-b border-black/10 dark:border-white/10' 
                         : 'bg-transparent pt-4'

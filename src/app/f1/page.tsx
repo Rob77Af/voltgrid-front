@@ -22,7 +22,7 @@ export default function F1Page() {
             if (menuRef.current) {
                 // If the top of the menu is at or below the sticky threshold (64px mobile, 80px desktop)
                 const top = menuRef.current.getBoundingClientRect().top;
-                const threshold = window.innerWidth >= 768 ? 81 : 65;
+                const threshold = window.innerWidth >= 768 ? 83 : 67;
                 setIsStuck(top <= threshold);
             }
         };
@@ -44,7 +44,7 @@ export default function F1Page() {
             {/* Sticky Internal Tab Menu Wrapper */}
             <div 
                 ref={menuRef}
-                className={`w-full sticky top-[64px] md:top-[80px] z-40 transition-all duration-300 mb-8 ${
+                className={`w-full sticky top-[66px] md:top-[82px] z-40 transition-all duration-300 mb-8 ${
                     isStuck 
                         ? 'bg-gray-100 dark:bg-[#0a0a0a] py-1 shadow-sm border-b border-black/10 dark:border-white/10' 
                         : 'bg-gray-100 dark:bg-[#0a0a0a] pt-4'

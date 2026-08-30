@@ -19,7 +19,7 @@ const Navigation = () => {
     ];
 
     return (
-        <div className="w-full">
+        <>
             <nav className="sticky top-0 z-50 w-full transition-colors border-b-2 border-[#fbaa19] bg-white dark:bg-black">
                 {/* Background texture overlay */}
                 <div className="absolute inset-0 z-0 opacity-10 dark:opacity-[0.08] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://images.pexels.com/photos/6159693/pexels-photo-6159693.jpeg?auto=compress&cs=tinysrgb&h=650&w=940")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
@@ -136,7 +136,7 @@ const Navigation = () => {
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 };
 
