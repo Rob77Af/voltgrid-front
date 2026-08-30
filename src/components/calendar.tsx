@@ -1,35 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { fetchNextEvent, type F1Event } from '@/api/f1-data';
-
-export interface RaceEvent {
-    id: string;
-    round: string;
-    name: string;
-    circuit: string;
-    date: string;
-    qualiStart: string;
-    raceStart: string;
-}
-
-const mockCalendar: RaceEvent[] = [
-    { id: 'r1', round: '01', name: 'BAHRAIN GRAND PRIX', circuit: 'Bahrain International Circuit', date: 'FEB 29 - MAR 02', qualiStart: '01 MAR, 19:00', raceStart: '02 MAR, 18:00' },
-    { id: 'r2', round: '02', name: 'SAUDI ARABIAN GRAND PRIX', circuit: 'Jeddah Corniche Circuit', date: 'MAR 07 - MAR 09', qualiStart: '08 MAR, 20:00', raceStart: '09 MAR, 20:00' },
-    { id: 'r3', round: '03', name: 'AUSTRALIAN GRAND PRIX', circuit: 'Albert Park Circuit', date: 'MAR 22 - MAR 24', qualiStart: '23 MAR, 16:00', raceStart: '24 MAR, 15:00' },
-    { id: 'r4', round: '04', name: 'JAPANESE GRAND PRIX', circuit: 'Suzuka International Racing Course', date: 'APR 05 - APR 07', qualiStart: '06 APR, 15:00', raceStart: '07 APR, 14:00' },
-    { id: 'r5', round: '05', name: 'CHINESE GRAND PRIX', circuit: 'Shanghai International Circuit', date: 'APR 19 - APR 21', qualiStart: '20 APR, 15:00', raceStart: '21 APR, 15:00' },
-    { id: 'r6', round: '06', name: 'MIAMI GRAND PRIX', circuit: 'Miami International Autodrome', date: 'MAY 03 - MAY 05', qualiStart: '04 MAY, 16:00', raceStart: '05 MAY, 16:00' },
-    { id: 'r7', round: '07', name: 'EMILIA ROMAGNA GRAND PRIX', circuit: 'Imola Circuit', date: 'MAY 17 - MAY 19', qualiStart: '18 MAY, 16:00', raceStart: '19 MAY, 15:00' }
-];
-
-const fetchCalendarData = async (): Promise<RaceEvent[]> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(mockCalendar);
-        }, 800);
-    });
-};
+import { fetchNextEvent, type F1Event, type RaceEvent, mockCalendar, fetchCalendarData } from '@/api/f1-data';
 
 const RaceCard = ({ race, isNext, isPast, isFuture }: { race: RaceEvent, isNext: boolean, isPast: boolean | null, isFuture: boolean | null }) => {
     return (
