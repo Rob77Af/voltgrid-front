@@ -197,14 +197,20 @@ export default function FantasyClient() {
                                             </div>
                                             <h4 className="font-bold uppercase tracking-widest text-sm">1. Acertos do Evento</h4>
                                         </div>
-                                        <p className="text-gray-500 text-sm leading-relaxed">
-                                            Seu objetivo inicial é acertar o resultado da corrida. Ao acertar a posição exata de um piloto, você ganha pontos de performance.
+                                        <p className="text-gray-500 text-sm leading-relaxed mb-2">
+                                            Seu objetivo inicial é acertar o resultado da corrida. Ao acertar a posição exata de um piloto, você ganha pontos de performance baseados na F1 real:
                                         </p>
-                                        <div className="mt-auto pt-2 flex flex-wrap gap-1 text-[10px] font-mono">
-                                            <span className="px-2 py-1 bg-[#fbaa19] text-black font-bold">P1: 25</span>
-                                            <span className="px-2 py-1 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300">P2: 18</span>
-                                            <span className="px-2 py-1 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300">P3: 15</span>
-                                            <span className="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-gray-500">Até P10 (1pt)</span>
+                                        <div className="grid grid-cols-5 gap-1 text-[10px] sm:text-xs font-mono text-center">
+                                            <div className="bg-[#fbaa19] text-black font-bold p-1 rounded">P1<br/>25</div>
+                                            <div className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-1 rounded">P2<br/>18</div>
+                                            <div className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-1 rounded">P3<br/>15</div>
+                                            <div className="bg-black/5 dark:bg-white/5 text-gray-600 dark:text-gray-400 p-1 rounded">P4<br/>12</div>
+                                            <div className="bg-black/5 dark:bg-white/5 text-gray-600 dark:text-gray-400 p-1 rounded">P5<br/>10</div>
+                                            <div className="bg-black/5 dark:bg-white/5 text-gray-600 dark:text-gray-400 p-1 rounded">P6<br/>8</div>
+                                            <div className="bg-black/5 dark:bg-white/5 text-gray-600 dark:text-gray-400 p-1 rounded">P7<br/>6</div>
+                                            <div className="bg-black/5 dark:bg-white/5 text-gray-600 dark:text-gray-400 p-1 rounded">P8<br/>4</div>
+                                            <div className="bg-black/5 dark:bg-white/5 text-gray-600 dark:text-gray-400 p-1 rounded">P9<br/>2</div>
+                                            <div className="bg-black/5 dark:bg-white/5 text-gray-600 dark:text-gray-400 p-1 rounded">P10<br/>1</div>
                                         </div>
                                     </div>
 
@@ -214,33 +220,56 @@ export default function FantasyClient() {
                                             <div className="w-10 h-10 rounded-full bg-[#fbaa19]/20 flex items-center justify-center text-[#fbaa19] shrink-0">
                                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                                             </div>
-                                            <h4 className="font-bold uppercase tracking-widest text-sm">2. O Ranking do Grupo (Estilo F1)</h4>
+                                            <h4 className="font-bold uppercase tracking-widest text-sm">2. O Ranking Acumulado no Grupo</h4>
                                         </div>
                                         <p className="text-gray-500 text-sm leading-relaxed mb-4">
-                                            A pontuação que você faz nos palpites serve apenas para te ranquear <strong>contra os outros 21 jogadores do seu grupo</strong> naquele evento. Os pontos do campeonato são distribuídos apenas para o Top 10 do grupo, seguindo rigorosamente o modelo oficial da FIA:
+                                            Os pontos que você faz nos palpites servem para te ranquear <strong>contra os outros 21 jogadores do seu grupo</strong> naquele evento. Após essa apuração, os pontos que vão para o Campeonato Anual são distribuídos apenas para os 10 melhores pontuadores do grupo, idêntico à F1:
                                         </p>
                                         
-                                        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-xs font-mono">
-                                            <div className="bg-black/5 dark:bg-white/5 p-2 rounded border border-black/10 dark:border-white/10">
-                                                <span className="block text-gray-400">1º do Grupo</span>
-                                                <span className="block text-lg font-bold text-[#fbaa19]">25 pts</span>
+                                        <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 text-center text-[10px] sm:text-xs font-mono mb-2">
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-[#fbaa19]/50 shadow-sm">
+                                                <span className="block text-gray-500 mb-1">1º</span>
+                                                <span className="block font-bold text-[#fbaa19]">25</span>
                                             </div>
-                                            <div className="bg-black/5 dark:bg-white/5 p-2 rounded border border-black/10 dark:border-white/10">
-                                                <span className="block text-gray-400">2º do Grupo</span>
-                                                <span className="block text-lg font-bold text-gray-700 dark:text-gray-300">18 pts</span>
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-black/10 dark:border-white/10">
+                                                <span className="block text-gray-500 mb-1">2º</span>
+                                                <span className="block font-bold text-gray-700 dark:text-gray-300">18</span>
                                             </div>
-                                            <div className="bg-black/5 dark:bg-white/5 p-2 rounded border border-black/10 dark:border-white/10">
-                                                <span className="block text-gray-400">3º do Grupo</span>
-                                                <span className="block text-lg font-bold text-gray-700 dark:text-gray-300">15 pts</span>
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-black/10 dark:border-white/10">
+                                                <span className="block text-gray-500 mb-1">3º</span>
+                                                <span className="block font-bold text-gray-700 dark:text-gray-300">15</span>
                                             </div>
-                                            <div className="bg-black/5 dark:bg-white/5 p-2 rounded border border-black/10 dark:border-white/10">
-                                                <span className="block text-gray-400">4º ao 10º</span>
-                                                <span className="block text-lg font-bold text-gray-500">12 a 1</span>
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-black/10 dark:border-white/10">
+                                                <span className="block text-gray-500 mb-1">4º</span>
+                                                <span className="block font-bold text-gray-600 dark:text-gray-400">12</span>
                                             </div>
-                                            <div className="bg-black/5 dark:bg-white/5 p-2 rounded border border-black/10 dark:border-white/10 opacity-50">
-                                                <span className="block text-gray-400">11º ao 22º</span>
-                                                <span className="block text-lg font-bold text-gray-500">0 pts</span>
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-black/10 dark:border-white/10">
+                                                <span className="block text-gray-500 mb-1">5º</span>
+                                                <span className="block font-bold text-gray-600 dark:text-gray-400">10</span>
                                             </div>
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-black/10 dark:border-white/10">
+                                                <span className="block text-gray-500 mb-1">6º</span>
+                                                <span className="block font-bold text-gray-600 dark:text-gray-400">8</span>
+                                            </div>
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-black/10 dark:border-white/10">
+                                                <span className="block text-gray-500 mb-1">7º</span>
+                                                <span className="block font-bold text-gray-600 dark:text-gray-400">6</span>
+                                            </div>
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-black/10 dark:border-white/10">
+                                                <span className="block text-gray-500 mb-1">8º</span>
+                                                <span className="block font-bold text-gray-600 dark:text-gray-400">4</span>
+                                            </div>
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-black/10 dark:border-white/10">
+                                                <span className="block text-gray-500 mb-1">9º</span>
+                                                <span className="block font-bold text-gray-600 dark:text-gray-400">2</span>
+                                            </div>
+                                            <div className="bg-black/5 dark:bg-white/5 p-1 rounded border border-black/10 dark:border-white/10">
+                                                <span className="block text-gray-500 mb-1">10º</span>
+                                                <span className="block font-bold text-gray-600 dark:text-gray-400">1</span>
+                                            </div>
+                                        </div>
+                                        <div className="text-center text-xs text-gray-400 mt-2">
+                                            Do 11º ao 22º colocado: <strong>0 pontos</strong> no acumulado do ranking.
                                         </div>
                                     </div>
                                     
@@ -248,6 +277,55 @@ export default function FantasyClient() {
                                 <div className="text-center mt-4">
                                     <p className="text-sm text-gray-500 font-bold uppercase tracking-widest">
                                         O Campeão Master do seu grupo será aquele que acumular mais pontos no Ranking final!
+                                    </p>
+                                </div>
+                            </div>
+                        ) : activeId === 'milesimus' ? (
+                            <div className="flex flex-col gap-8 max-w-4xl mx-auto p-4 md:p-8">
+                                <div className="text-center mb-8">
+                                    <h3 className="text-2xl md:text-3xl font-black text-black dark:text-white uppercase tracking-widest font-display mb-4">
+                                        MILESIMUS RULES
+                                    </h3>
+                                    <p className="text-gray-500 max-w-2xl mx-auto">
+                                        O ranking global supremo. Aqui não há grupos, apenas a soma bruta e absoluta de todo o seu conhecimento da Fórmula 1.
+                                    </p>
+                                </div>
+
+                                <div className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 p-6 md:p-10 rounded-lg flex flex-col items-center gap-6">
+                                    <div className="w-16 h-16 rounded-full bg-[#fbaa19]/20 flex items-center justify-center text-[#fbaa19] shrink-0 mb-2">
+                                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                    </div>
+                                    <div className="text-center">
+                                        <h4 className="font-black text-xl uppercase tracking-widest mb-4">Como Funciona</h4>
+                                        <p className="text-gray-500 leading-relaxed max-w-2xl mx-auto mb-6">
+                                            A competição Milesimus representa a <strong>soma total dos pontos</strong> conquistados por você de forma absoluta, independente do formulário preenchido. É o acumulado bruto ao longo da temporada.
+                                        </p>
+                                    </div>
+
+                                    <div className="w-full flex flex-col md:flex-row items-center justify-center gap-4 text-sm font-bold uppercase tracking-widest">
+                                        <div className="bg-black/5 dark:bg-white/5 py-3 px-6 rounded-lg text-gray-500 w-full md:w-auto text-center">Poletime</div>
+                                        <div className="text-[#fbaa19] hidden md:block">+</div>
+                                        <div className="bg-black/5 dark:bg-white/5 py-3 px-6 rounded-lg text-gray-500 w-full md:w-auto text-center">Master</div>
+                                        <div className="text-[#fbaa19] hidden md:block">+</div>
+                                        <div className="bg-black/5 dark:bg-white/5 py-3 px-6 rounded-lg text-gray-500 w-full md:w-auto text-center">Evo</div>
+                                        <div className="text-[#fbaa19] hidden md:block">+</div>
+                                        <div className="bg-black/5 dark:bg-white/5 py-3 px-6 rounded-lg text-gray-500 w-full md:w-auto text-center">H2H</div>
+                                        <div className="text-[#fbaa19] hidden md:block">+</div>
+                                        <div className="bg-black/5 dark:bg-white/5 py-3 px-6 rounded-lg text-gray-500 w-full md:w-auto text-center">Misc</div>
+                                    </div>
+                                    
+                                    <div className="mt-4 flex flex-col items-center">
+                                        <div className="w-px h-8 bg-[#fbaa19] mb-4"></div>
+                                        <div className="bg-[#fbaa19] text-black py-4 px-12 rounded-lg text-center shadow-[0_0_15px_rgba(251,170,25,0.3)]">
+                                            <span className="block text-xs uppercase tracking-[0.2em] mb-1">TOTAL ACUMULADO =</span>
+                                            <span className="block text-2xl font-black font-display uppercase tracking-widest">Milesimus Score</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="text-center mt-4">
+                                    <p className="text-sm text-gray-500 font-bold uppercase tracking-widest">
+                                        O jogador que chegar ao final da temporada com o maior Milesimus Score é coroado o Campeão Absoluto do ano!
                                     </p>
                                 </div>
                             </div>
