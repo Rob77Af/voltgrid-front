@@ -82,10 +82,92 @@ export default function FantasyClient() {
                     </div>
                 )}
                 {activeTab === 'rules' && (
-                    <div className="p-12 text-center flex flex-col items-center justify-center gap-4">
-                        <svg className="w-12 h-12 text-[#fbaa19]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                        <h3 className="text-xl font-bold text-black dark:text-white uppercase tracking-widest">Competition Rules</h3>
-                        <p className="text-gray-500">Official rules and point distributions for {getCompetitionTitle(activeId)}.</p>
+                    <div className="flex flex-col">
+                        {activeId === 'poletime-competition' ? (
+                            <div className="flex flex-col gap-8 max-w-3xl mx-auto p-4 md:p-8">
+                                <div className="text-center mb-6">
+                                    <h3 className="text-2xl md:text-3xl font-black text-black dark:text-white uppercase tracking-widest font-display mb-4">
+                                        POLETIME RULES
+                                    </h3>
+                                    <p className="text-gray-500 max-w-xl mx-auto">
+                                        Domine os milissegundos e craque o tempo perfeito na Qualificação.
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                                    <div className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 p-6 rounded-lg flex flex-col gap-3 hover:border-[#fbaa19] transition-colors">
+                                        <div className="w-10 h-10 rounded-full bg-[#fbaa19]/20 flex items-center justify-center text-[#fbaa19] mb-2">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                        </div>
+                                        <h4 className="font-bold uppercase tracking-widest text-sm">O Objetivo</h4>
+                                        <p className="text-gray-500 text-sm leading-relaxed">
+                                            Sua missão é prever com a maior precisão possível qual será o <strong>tempo exato da Pole Position</strong> (o tempo mais rápido do Q3 na sessão de Qualificação).
+                                        </p>
+                                    </div>
+                                    <div className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 p-6 rounded-lg flex flex-col gap-3 hover:border-[#fbaa19] transition-colors">
+                                        <div className="w-10 h-10 rounded-full bg-[#fbaa19]/20 flex items-center justify-center text-[#fbaa19] mb-2">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                        </div>
+                                        <h4 className="font-bold uppercase tracking-widest text-sm">A Matemática</h4>
+                                        <p className="text-gray-500 text-sm leading-relaxed">
+                                            A pontuação máxima perfeita é de <strong>5.000 pontos</strong>. Cada 1 milissegundo (ms) de erro custa 1 ponto.<br/>
+                                            <span className="inline-block mt-2 font-mono text-[#fbaa19] bg-black/5 dark:bg-white/5 p-2 rounded">Pts = 5.000 - GAP(ms)</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-black/5 dark:bg-white/5 border border-dashed border-black/20 dark:border-white/20 p-6 md:p-8 rounded-lg flex flex-col items-center text-center">
+                                    <h4 className="font-bold uppercase tracking-widest text-[#fbaa19] mb-6">Exemplo Prático</h4>
+                                    
+                                    <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 w-full max-w-xl">
+                                        <div className="flex flex-col items-center">
+                                            <span className="text-xs text-gray-500 uppercase tracking-widest mb-1">Tempo Oficial</span>
+                                            <span className="text-xl md:text-2xl font-mono font-black text-black dark:text-white">1:24.000</span>
+                                        </div>
+                                        
+                                        <div className="hidden md:flex flex-col items-center opacity-50">
+                                            <div className="w-16 h-px bg-current"></div>
+                                        </div>
+                                        
+                                        <div className="flex flex-col items-center">
+                                            <span className="text-xs text-gray-500 uppercase tracking-widest mb-1">Seu Palpite</span>
+                                            <span className="text-xl md:text-2xl font-mono font-bold text-gray-400">1:24.250</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="mt-8 pt-6 border-t border-black/10 dark:border-white/10 w-full max-w-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                                        <div className="text-left">
+                                            <span className="block text-xs text-gray-500 uppercase tracking-widest">Gap (Erro)</span>
+                                            <span className="block font-mono font-bold text-red-500">250 ms</span>
+                                        </div>
+                                        <div className="text-right">
+                                            <span className="block text-xs text-gray-500 uppercase tracking-widest">Pontuação Final</span>
+                                            <span className="block text-2xl font-black text-[#fbaa19]">4.750 pts</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="mt-6 p-6 border-l-4 border-[#fbaa19] bg-white dark:bg-[#111]">
+                                    <h4 className="font-bold uppercase tracking-widest text-sm mb-3">Limites (Edge Cases)</h4>
+                                    <ul className="text-gray-500 text-sm space-y-3">
+                                        <li className="flex gap-2">
+                                            <span className="text-[#fbaa19] font-bold">✓</span> 
+                                            <span><strong>Na mosca:</strong> Se você cravar o tempo exato, leva os 5.000 pontos totais!</span>
+                                        </li>
+                                        <li className="flex gap-2">
+                                            <span className="text-[#fbaa19] font-bold">⚠</span> 
+                                            <span><strong>Erro superior a 5s:</strong> Se o gap for maior que 5.000 ms, sua pontuação será <strong>0</strong>. Não existem pontuações negativas no Poletime.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="p-12 text-center flex flex-col items-center justify-center gap-4">
+                                <svg className="w-12 h-12 text-[#fbaa19]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                                <h3 className="text-xl font-bold text-black dark:text-white uppercase tracking-widest">Competition Rules</h3>
+                                <p className="text-gray-500">Official rules and point distributions for {getCompetitionTitle(activeId)}.</p>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
