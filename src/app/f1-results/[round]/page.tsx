@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { mockCalendar } from '@/api/f1-data';
+import RaceRemoteControl from '@/components/race-remote-control';
 
 export default function F1ResultsPage({ params }: { params: { round: string } }) {
     const router = useRouter();
@@ -27,63 +28,16 @@ export default function F1ResultsPage({ params }: { params: { round: string } })
 
     return (
         <main className="w-full max-w-6xl mx-auto p-4 md:p-8 pt-12 pb-24 flex flex-col items-center justify-start min-h-screen">
-            {/* Header with Prev/Next (OPTION 3) */}
-            <header className="w-full flex items-center justify-between border-b-4 border-[#fbaa19] pb-6 mb-6 gap-4">
-                {prevRace ? (
-                    <Link 
-                        href={`/f1-results/${prevRace.round}`}
-                        className="text-xs md:text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-[#fbaa19] transition-colors flex items-center gap-2"
-                    >
-                        <span className="hidden sm:inline">Anterior:</span>
-                        <span className="text-black dark:text-white">R{prevRace.round}</span>
-                    </Link>
-                ) : <div className="w-20"></div>}
-                
-                <div className="text-center flex-1">
-                    <p className="text-[#fbaa19] text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.2em] font-display">OFFICIAL RESULTS</p>
-                    <h1 className="text-black dark:text-white text-xl sm:text-3xl md:text-4xl font-black uppercase tracking-widest font-display mb-1">
-                        {currentRace.name}
-                    </h1>
-                </div>
+            {/* Selected Option 2: Horizontal Remote Control (with opacity & arrows) */}
+            <div className="w-full mb-8">
+                <RaceRemoteControl activeRound={currentRace.round} />
+            </div>
 
-                {nextRace ? (
-                    <Link 
-                        href={`/f1-results/${nextRace.round}`}
-                        className="text-xs md:text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-[#fbaa19] transition-colors flex items-center gap-2"
-                    >
-                        <span className="text-black dark:text-white">R{nextRace.round}</span>
-                        <span className="hidden sm:inline">:Proximo</span>
-                    </Link>
-                ) : <div className="w-20"></div>}
-            </header>
-
-            {/* Horizontal Remote Control (OPTION 2) */}
-            <div className="w-full overflow-x-auto scrollbar-hide mb-8 border-b border-black/10 dark:border-white/10 pb-4">
-                <div className="flex gap-2 min-w-max px-2">
-                    {mockCalendar.map((race) => {
-                        const isActive = race.round === currentRace.round;
-                        // Extracting a 3-letter abbreviation from circuit name or country name isn't easy here, 
-                        // so we'll just use the first word of the name (e.g., "BAHRAIN") or manually map it.
-                        const code = race.name.split(' ')[0].substring(0, 3).toUpperCase();
-                        
-                        return (
-                            <Link 
-                                key={race.id}
-                                href={`/f1-results/${race.round}`}
-                                className={`flex flex-col items-center justify-center p-3 border-2 min-w-[80px] transition-colors ${
-                                    isActive 
-                                    ? 'border-[#fbaa19] bg-[#fbaa19]/10 text-black dark:text-white' 
-                                    : 'border-transparent text-gray-400 hover:text-black dark:hover:text-white hover:border-black/20 dark:hover:border-white/20'
-                                }`}
-                            >
-                                <span className="text-[10px] font-bold tracking-widest">R{race.round}</span>
-                                <span className={`${isActive ? 'text-[#fbaa19]' : 'text-gray-500'} font-black text-sm uppercase`}>
-                                    {code}
-                                </span>
-                            </Link>
-                        );
-                    })}
-                </div>
+            <div className="w-full text-center flex flex-col items-center justify-center mb-8">
+                <p className="text-[#fbaa19] text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.2em] font-display">OFFICIAL RESULTS</p>
+                <h1 className="text-black dark:text-white text-xl sm:text-3xl md:text-4xl font-black uppercase tracking-widest font-display mb-1">
+                    {currentRace.name}
+                </h1>
             </div>
 
             {/* Mock Table to show it works */}
