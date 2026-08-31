@@ -6,9 +6,10 @@ import { mockCalendar } from '@/api/f1-data';
 interface RaceRemoteControlProps {
     activeRound?: string;
     baseUrl?: string;
+    onRoundSelect?: (round: string) => void;
 }
 
-export default function RaceRemoteControl({ activeRound, baseUrl = '/f1-results' }: RaceRemoteControlProps) {
+export default function RaceRemoteControl({ activeRound, baseUrl = '/f1-results', onRoundSelect }: RaceRemoteControlProps) {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
@@ -85,6 +86,12 @@ export default function RaceRemoteControl({ activeRound, baseUrl = '/f1-results'
                         <Link 
                             key={race.id}
                             href={`${baseUrl}/${race.round}`}
+                            onClick={(e) => {
+                                if (onRoundSelect) {
+                                    e.preventDefault();
+                                    onRoundSelect(race.round);
+                                }
+                            }}
                             data-active={isActive}
                             className={`flex flex-col items-center justify-center p-3 border-2 min-w-[80px] shrink-0 transition-colors ${
                                 isActive 
