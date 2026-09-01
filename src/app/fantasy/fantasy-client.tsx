@@ -280,6 +280,143 @@ export default function FantasyClient() {
                                     </p>
                                 </div>
                             </div>
+                        ) : activeId === 'evo' ? (
+                            <div className="flex flex-col gap-8 max-w-4xl mx-auto p-4 md:p-8">
+                                <div className="text-center mb-8">
+                                    <h3 className="text-2xl md:text-3xl font-black text-black dark:text-white uppercase tracking-widest font-display mb-4">
+                                        EVO RULES
+                                    </h3>
+                                    <p className="text-gray-500 max-w-2xl mx-auto">
+                                        A "Bolsa de Valores" da Fórmula 1. Aposte na recuperação dos pilotos e lucre com as ultrapassagens.
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {/* Card 1: Portfólio */}
+                                    <div className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 p-6 rounded-lg flex flex-col gap-3">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <div className="w-10 h-10 rounded-full bg-[#fbaa19]/20 flex items-center justify-center text-[#fbaa19] shrink-0">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
+                                            </div>
+                                            <h4 className="font-bold uppercase tracking-widest text-sm">1. O Portfólio</h4>
+                                        </div>
+                                        <p className="text-gray-500 text-sm leading-relaxed">
+                                            Você deve selecionar exatamente <strong>5 pilotos</strong>. O objetivo é escolher pilotos que você acredita que ganharão o maior número de posições durante a corrida.
+                                        </p>
+                                    </div>
+
+                                    {/* Card 2: Pontuação */}
+                                    <div className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 p-6 rounded-lg flex flex-col gap-3">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <div className="w-10 h-10 rounded-full bg-[#fbaa19]/20 flex items-center justify-center text-[#fbaa19] shrink-0">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path></svg>
+                                            </div>
+                                            <h4 className="font-bold uppercase tracking-widest text-sm">2. A Matemática (Balanço)</h4>
+                                        </div>
+                                        <p className="text-gray-500 text-sm leading-relaxed">
+                                            Seu portfólio sofrerá flutuações positivas e negativas comparando a largada com a chegada:
+                                        </p>
+                                        <ul className="text-gray-500 text-sm mt-2 space-y-2">
+                                            <li className="flex items-center gap-2"><span className="text-green-500 font-bold">+1 pt</span> por cada posição ganha.</li>
+                                            <li className="flex items-center gap-2"><span className="text-red-500 font-bold">-1 pt</span> por cada posição perdida.</li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Card 3: Abandono */}
+                                    <div className="bg-black/5 dark:bg-white/5 border border-dashed border-black/20 dark:border-white/20 p-6 rounded-lg flex flex-col gap-3 md:col-span-2">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-500 shrink-0">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                            </div>
+                                            <h4 className="font-bold uppercase tracking-widest text-sm">3. Regra de DNF (Abandono)</h4>
+                                        </div>
+                                        <p className="text-gray-500 text-sm leading-relaxed">
+                                            Se o seu piloto abandonar a corrida (bater, quebra de motor, etc), a classificação que conta é a <strong>Classificação Final Oficial da FIA</strong> (que vai até o 22º lugar baseada no número de voltas). Um abandono cedo significa terminar em último, gerando saldo negativo alto!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : activeId === 'h2h' ? (
+                            <div className="flex flex-col gap-8 max-w-4xl mx-auto p-4 md:p-8">
+                                <div className="text-center mb-8">
+                                    <h3 className="text-2xl md:text-3xl font-black text-black dark:text-white uppercase tracking-widest font-display mb-4">
+                                        HEAD TO HEAD RULES
+                                    </h3>
+                                    <p className="text-gray-500 max-w-2xl mx-auto">
+                                        A batalha interna. Acerte os 11 duelos da Guerra de Equipes, prevendo quem domina o fim de semana e quem vence a corrida.
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-6">
+                                    {/* Card 1: Duelos */}
+                                    <div className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 p-6 rounded-lg flex flex-col gap-3">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <div className="w-10 h-10 rounded-full bg-[#fbaa19]/20 flex items-center justify-center text-[#fbaa19] shrink-0">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                            </div>
+                                            <h4 className="font-bold uppercase tracking-widest text-sm">1. Os 11 Confrontos Internos</h4>
+                                        </div>
+                                        <p className="text-gray-500 text-sm leading-relaxed">
+                                            O seu primeiro adversário na F1 é sempre o seu companheiro. O objetivo é julgar os confrontos internos de <strong>todas as 11 escuderias do grid</strong> (22 pilotos) e apontar o vencedor da Batalha.
+                                        </p>
+                                    </div>
+
+                                    {/* Card 2: A Matriz de Pontos */}
+                                    <div className="bg-black/5 dark:bg-[#111] border-l-4 border-l-[#fbaa19] border border-black/10 dark:border-white/10 p-6 rounded-lg flex flex-col gap-3">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-10 h-10 rounded-full bg-[#fbaa19] flex items-center justify-center text-black shrink-0">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                            </div>
+                                            <h4 className="font-bold uppercase tracking-widest text-sm text-black dark:text-white">2. A Matriz de Pontuação</h4>
+                                        </div>
+                                        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4">
+                                            O peso da pontuação varia drasticamente se o seu piloto dominou o final de semana inteiro ou se apenas se recuperou na corrida (o que mais importa).
+                                        </p>
+                                        
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center font-mono">
+                                            <div className="bg-white dark:bg-black p-4 rounded border border-green-500/30 flex flex-col">
+                                                <span className="block text-gray-500 text-xs mb-2 uppercase tracking-widest">Domínio Total</span>
+                                                <div className="text-xs text-gray-400 flex flex-col gap-1 mb-3">
+                                                    <span>✓ Ganhou Classif.</span>
+                                                    <span>✓ Ganhou Corrida</span>
+                                                </div>
+                                                <span className="text-2xl font-black text-green-500 mt-auto">+3 pts</span>
+                                            </div>
+                                            
+                                            <div className="bg-white dark:bg-black p-4 rounded border border-[#fbaa19]/30 flex flex-col">
+                                                <span className="block text-gray-500 text-xs mb-2 uppercase tracking-widest">Recuperação</span>
+                                                <div className="text-xs text-gray-400 flex flex-col gap-1 mb-3">
+                                                    <span>✗ Perdeu Classif.</span>
+                                                    <span>✓ Ganhou Corrida</span>
+                                                </div>
+                                                <span className="text-2xl font-black text-[#fbaa19] mt-auto">+1 pt</span>
+                                            </div>
+                                            
+                                            <div className="bg-white dark:bg-black p-4 rounded border border-orange-500/30 flex flex-col">
+                                                <span className="block text-gray-500 text-xs mb-2 uppercase tracking-widest">Decepção</span>
+                                                <div className="text-xs text-gray-400 flex flex-col gap-1 mb-3">
+                                                    <span>✓ Ganhou Classif.</span>
+                                                    <span>✗ Perdeu Corrida</span>
+                                                </div>
+                                                <span className="text-2xl font-black text-orange-500 mt-auto">-1 pt</span>
+                                            </div>
+                                            
+                                            <div className="bg-white dark:bg-black p-4 rounded border border-red-500/30 flex flex-col">
+                                                <span className="block text-gray-500 text-xs mb-2 uppercase tracking-widest">Derrota Total</span>
+                                                <div className="text-xs text-gray-400 flex flex-col gap-1 mb-3">
+                                                    <span>✗ Perdeu Classif.</span>
+                                                    <span>✗ Perdeu Corrida</span>
+                                                </div>
+                                                <span className="text-2xl font-black text-red-500 mt-auto">-3 pts</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="text-center mt-2 p-3 bg-black/5 dark:bg-white/5 rounded text-xs text-gray-500">
+                                        * Assim como no Evo, em caso de <strong>DNF (Abandono)</strong> será considerada a <strong>classificação final oficial da FIA</strong> (até o 22º lugar).
+                                    </div>
+                                </div>
+                            </div>
                         ) : activeId === 'milesimus' ? (
                             <div className="flex flex-col gap-8 max-w-4xl mx-auto p-4 md:p-8">
                                 <div className="text-center mb-8">
@@ -346,6 +483,8 @@ export default function FantasyClient() {
         switch (id) {
             case 'poletime-competition': return 'POLETIME COMPETITION';
             case 'master-competition': return 'MASTER COMPETITION';
+            case 'evo': return 'EVO COMPETITION';
+            case 'h2h': return 'HEAD TO HEAD';
             case 'milesimus': return 'MILESIMUS';
             case 'teamwork': return 'TEAMWORK';
             case 'silly-season': return 'SILLY SEASON';
