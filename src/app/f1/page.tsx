@@ -42,7 +42,7 @@ export default function F1Page() {
         <main className="w-full max-w-6xl mx-auto p-4 md:p-8 pt-12 pb-24 flex flex-col items-center justify-start min-h-screen">
             <header className="w-full border-b-4 border-[#fbaa19] pb-6 flex flex-col gap-4">
                 <p className="text-[#fbaa19] text-sm md:text-base font-bold uppercase tracking-[0.2em] font-display">THE PINNACLE OF MOTORSPORT</p>
-                <h1 className="text-black dark:text-white text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-widest font-display mb-2">
+                <h1 className="text-black dark:text-white text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-black uppercase tracking-widest font-display mb-2">
                     F1 HUB
                 </h1>
             </header>

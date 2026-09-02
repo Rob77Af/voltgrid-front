@@ -34,7 +34,7 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
                 />
             )}
 
-            <div className="flex flex-col gap-3 relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 relative">
                 {picks.map((pick, index) => {
                     const isOpen = openDropdownIndex === index;
                     const pickDetails = pick ? getDriverDetails(pick) : null;

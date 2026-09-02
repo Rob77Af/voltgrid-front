@@ -359,7 +359,7 @@ export default function FantasyClient() {
         <div className="flex flex-col gap-8">
             <header className="mb-4 border-b-4 border-[#fbaa19] pb-6 md:pb-8 flex flex-col gap-4">
                 <p className="text-[#fbaa19] text-sm md:text-base font-bold uppercase tracking-[0.2em] font-display">F1 // FANTASY</p>
-                <h1 className="text-black dark:text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-widest font-display mb-2">
+                <h1 className="text-black dark:text-white text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black uppercase tracking-widest font-display mb-2">
                     {getCompetitionTitle(activeId)}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-2xl">

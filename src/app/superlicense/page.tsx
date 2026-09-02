@@ -17,7 +17,7 @@ export default function SuperlicensePage() {
         <main className="w-full max-w-6xl mx-auto p-4 md:p-8 pt-12 pb-24 flex flex-col items-center justify-start min-h-screen">
             {activeView === 'menu' ? (
                 <div className="flex flex-col items-center justify-center min-h-[50vh] py-8 gap-4 md:gap-6">
-                    <h1 className="text-4xl md:text-5xl font-black uppercase tracking-wider font-display text-black dark:text-white mb-6">Superlicense</h1>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-wider font-display text-black dark:text-white mb-6">Superlicense</h1>
                     
                     <Link 
                         href="/bet?tab=all-forms"
