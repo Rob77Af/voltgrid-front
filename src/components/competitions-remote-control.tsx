@@ -14,17 +14,6 @@ const categories = [
             <path d="M10 10V6h4v4M8 13H5l-2 2M16 13h3l2 2M9 18h6l2 3H7l2-3Z"></path>
         </svg>
     )},
-    { id: 'evo', label: 'Evo Competition', icon: (
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-            <polyline points="17 6 23 6 23 12"></polyline>
-        </svg>
-    )},
-    { id: 'h2h', label: 'H2H', icon: (
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M11.5 5l-2-2m0 0L7.5 5m2-2v6m3 6l2 2m0 0l2-2m-2 2v-6m-4-2H5m14 0h-4"></path>
-        </svg>
-    )},
     { id: 'milesimus', label: 'Milesimus', icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
