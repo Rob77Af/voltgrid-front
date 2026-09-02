@@ -15,8 +15,7 @@ const Navigation = () => {
         { name: 'F1', href: '/f1' },
         { name: 'News', href: '#' },
         { name: 'SocialMedia', href: '#' },
-        { name: 'Fantasy', href: '/fantasy' },
-        { name: 'Race Control', href: '/race-control' }
+        { name: 'Fantasy', href: '/fantasy' }
     ];
 
     return (

@@ -80,6 +80,13 @@ export default function SuperlicensePage() {
                         )}
                     </button>
 
+                    <Link 
+                        href="/race-control"
+                        className="w-64 text-center bg-black dark:bg-white text-white dark:text-black border-2 border-black dark:border-white px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white"
+                    >
+                        Race Control
+                    </Link>
+
                     <button 
                         onClick={() => setActiveView('calendar')}
                         className="w-64 bg-white dark:bg-black text-black dark:text-white border-2 border-[#fbaa19] px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:bg-[#fbaa19] hover:text-black"
