@@ -2,9 +2,30 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const driversList = [
-    "VER", "PER", "HAM", "RUS", "LEC", "SAI", "NOR", "PIA", "ALO", "STR",
-    "GAS", "OCO", "ALB", "SAR", "TSU", "RIC", "BOT", "ZHO", "MAG", "HUL", "BEA", "LAW"
+// Mocked API initial order
+const initialDrivers = [
+    { id: "VER", name: "Max Verstappen", team: "Red Bull Racing", color: "#3671C6" },
+    { id: "PER", name: "Sergio Perez", team: "Red Bull Racing", color: "#3671C6" },
+    { id: "LEC", name: "Charles Leclerc", team: "Ferrari", color: "#E8002D" },
+    { id: "SAI", name: "Carlos Sainz", team: "Ferrari", color: "#E8002D" },
+    { id: "NOR", name: "Lando Norris", team: "McLaren", color: "#FF8000" },
+    { id: "PIA", name: "Oscar Piastri", team: "McLaren", color: "#FF8000" },
+    { id: "HAM", name: "Lewis Hamilton", team: "Mercedes", color: "#27F4D2" },
+    { id: "RUS", name: "George Russell", team: "Mercedes", color: "#27F4D2" },
+    { id: "ALO", name: "Fernando Alonso", team: "Aston Martin", color: "#229971" },
+    { id: "STR", name: "Lance Stroll", team: "Aston Martin", color: "#229971" },
+    { id: "TSU", name: "Yuki Tsunoda", team: "RB", color: "#6692FF" },
+    { id: "RIC", name: "Daniel Ricciardo", team: "RB", color: "#6692FF" },
+    { id: "HUL", name: "Nico Hulkenberg", team: "Haas", color: "#B6BABD" },
+    { id: "MAG", name: "Kevin Magnussen", team: "Haas", color: "#B6BABD" },
+    { id: "ALB", name: "Alexander Albon", team: "Williams", color: "#64C4FF" },
+    { id: "SAR", name: "Logan Sargeant", team: "Williams", color: "#64C4FF" },
+    { id: "OCO", name: "Esteban Ocon", team: "Alpine", color: "#0093cc" },
+    { id: "GAS", name: "Pierre Gasly", team: "Alpine", color: "#0093cc" },
+    { id: "BOT", name: "Valtteri Bottas", team: "Kick Sauber", color: "#52e252" },
+    { id: "ZHO", name: "Guanyu Zhou", team: "Kick Sauber", color: "#52e252" },
+    { id: "BEA", name: "Oliver Bearman", team: "Ferrari", color: "#E8002D" },
+    { id: "LAW", name: "Liam Lawson", team: "RB", color: "#6692FF" }
 ];
 
 const sessions = [
@@ -14,7 +35,25 @@ const sessions = [
 export default function RaceControlPage() {
     const [activeView, setActiveView] = useState<'dashboard' | 'resultados'>('dashboard');
     const [selectedSession, setSelectedSession] = useState(sessions[8]);
-    const [results, setResults] = useState<string[]>(Array(22).fill(''));
+    const [results, setResults] = useState(initialDrivers);
+
+    const moveUp = (index: number) => {
+        if (index === 0) return;
+        const newResults = [...results];
+        const temp = newResults[index - 1];
+        newResults[index - 1] = newResults[index];
+        newResults[index] = temp;
+        setResults(newResults);
+    };
+
+    const moveDown = (index: number) => {
+        if (index === results.length - 1) return;
+        const newResults = [...results];
+        const temp = newResults[index + 1];
+        newResults[index + 1] = newResults[index];
+        newResults[index] = temp;
+        setResults(newResults);
+    };
 
     return (
         <main className="w-full min-h-screen bg-white dark:bg-[#0a0a0a] text-black dark:text-white p-4 md:p-8 pt-12 font-sans pb-24">
@@ -34,7 +73,7 @@ export default function RaceControlPage() {
                 </header>
 
                 {activeView === 'resultados' ? (
-                    <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-4xl mx-auto w-full">
                         <div className="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-4">
                             <h2 className="text-2xl font-black uppercase tracking-widest">Input de Resultados</h2>
                             <button 
@@ -45,45 +84,70 @@ export default function RaceControlPage() {
                             </button>
                         </div>
                         
-                        <div className="bg-gray-50 dark:bg-[#111] border border-black/10 dark:border-white/10 p-6 rounded-sm">
+                        <div className="bg-gray-50 dark:bg-[#111] border border-black/10 dark:border-white/10 p-4 md:p-8 rounded-sm">
                             <div className="mb-8 flex flex-col gap-2">
                                 <label className="text-sm font-bold uppercase tracking-widest text-[#fbaa19]">Sessão</label>
                                 <select 
                                     value={selectedSession}
                                     onChange={(e) => setSelectedSession(e.target.value)}
-                                    className="p-3 bg-white dark:bg-black border-2 border-black/20 dark:border-white/20 text-black dark:text-white font-bold uppercase tracking-widest outline-none focus:border-[#fbaa19]"
+                                    className="p-4 bg-white dark:bg-black border-2 border-black/20 dark:border-white/20 text-black dark:text-white font-bold uppercase tracking-widest outline-none focus:border-[#fbaa19]"
                                 >
                                     {sessions.map(s => <option key={s} value={s}>{s}</option>)}
                                 </select>
                             </div>
 
                             <div className="flex flex-col gap-4">
-                                <label className="text-sm font-bold uppercase tracking-widest text-[#fbaa19]">Classificação Final (1º ao 22º)</label>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {Array.from({ length: 22 }).map((_, i) => (
-                                        <div key={i} className="flex items-center gap-4">
-                                            <div className="w-12 text-right font-black text-xl text-gray-400">P{i + 1}</div>
-                                            <select 
-                                                value={results[i]}
-                                                onChange={(e) => {
-                                                    const newRes = [...results];
-                                                    newRes[i] = e.target.value;
-                                                    setResults(newRes);
-                                                }}
-                                                className="flex-1 p-3 bg-white dark:bg-black border border-black/20 dark:border-white/20 text-black dark:text-white font-bold uppercase tracking-widest outline-none focus:border-[#fbaa19]"
-                                            >
-                                                <option value="">Selecione o piloto</option>
-                                                {driversList.map(d => (
-                                                    <option key={d} value={d} disabled={results.includes(d) && results[i] !== d}>{d}</option>
-                                                ))}
-                                            </select>
+                                <label className="text-sm font-bold uppercase tracking-widest text-[#fbaa19] mb-2 border-b border-black/10 dark:border-white/10 pb-2">
+                                    Classificação Final (Ajuste a ordem)
+                                </label>
+                                <div className="flex flex-col gap-2">
+                                    {results.map((driver, i) => (
+                                        <div 
+                                            key={driver.id} 
+                                            className="flex items-stretch bg-white dark:bg-black border border-black/10 dark:border-white/10 overflow-hidden shadow-sm hover:border-black/30 dark:hover:border-white/30 transition-colors"
+                                            style={{ borderLeftWidth: '6px', borderLeftColor: driver.color }}
+                                        >
+                                            {/* Position */}
+                                            <div className="w-12 md:w-16 flex items-center justify-center bg-black/5 dark:bg-white/5 border-r border-black/10 dark:border-white/10">
+                                                <span className="font-black text-lg text-gray-500">P{i + 1}</span>
+                                            </div>
+                                            
+                                            {/* Driver Info */}
+                                            <div className="flex-1 flex flex-col justify-center px-4 py-2">
+                                                <span className="font-bold uppercase tracking-wider text-black dark:text-white leading-tight">
+                                                    {driver.name} <span className="text-[#fbaa19]">#{driver.id}</span>
+                                                </span>
+                                                <span className="text-xs uppercase tracking-widest font-medium opacity-60">
+                                                    {driver.team}
+                                                </span>
+                                            </div>
+
+                                            {/* Controls */}
+                                            <div className="flex flex-col border-l border-black/10 dark:border-white/10 w-12 md:w-16">
+                                                <button 
+                                                    onClick={() => moveUp(i)}
+                                                    disabled={i === 0}
+                                                    className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-[#1a1a1a] hover:bg-black hover:text-[#fbaa19] dark:hover:bg-white dark:hover:text-black transition-colors disabled:opacity-30 disabled:cursor-not-allowed border-b border-black/10 dark:border-white/10"
+                                                    title="Mover para cima"
+                                                >
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7"></path></svg>
+                                                </button>
+                                                <button 
+                                                    onClick={() => moveDown(i)}
+                                                    disabled={i === results.length - 1}
+                                                    className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-[#1a1a1a] hover:bg-black hover:text-[#fbaa19] dark:hover:bg-white dark:hover:text-black transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                                                    title="Mover para baixo"
+                                                >
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                </button>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
                             
                             <div className="mt-8 pt-6 border-t border-black/10 dark:border-white/10 flex justify-end">
-                                <button className="bg-[#fbaa19] text-black font-black uppercase tracking-widest px-8 py-4 hover:bg-black hover:text-[#fbaa19] dark:hover:bg-white transition-colors border-2 border-[#fbaa19]">
+                                <button className="bg-[#fbaa19] text-black font-black uppercase tracking-widest px-8 py-4 hover:bg-black hover:text-[#fbaa19] dark:hover:bg-white transition-colors border-2 border-[#fbaa19] shadow-lg shadow-[#fbaa19]/20 w-full md:w-auto">
                                     Salvar Resultados Oficiais
                                 </button>
                             </div>
