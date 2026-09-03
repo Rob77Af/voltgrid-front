@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
 
@@ -36,6 +36,19 @@ export default function RaceControlPage() {
     const [activeView, setActiveView] = useState<'dashboard' | 'resultados'>('dashboard');
     const [selectedSession, setSelectedSession] = useState(sessions[8]);
     const [results, setResults] = useState(initialDrivers);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [successMsg, setSuccessMsg] = useState("");
+
+    const handleSaveResults = () => {
+        setIsSubmitting(true);
+        // Simulate API Database submission
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setSuccessMsg("Base de dados sincronizada com sucesso! (MOCK)");
+            console.log("Mock DB - Resultados Oficiais da", selectedSession, ":", results.map((d, i) => `P${i+1}: ${d.id}`));
+            setTimeout(() => setSuccessMsg(""), 5000);
+        }, 1200);
+    };
 
     const moveUp = (index: number) => {
         if (index === 0) return;
@@ -146,9 +159,18 @@ export default function RaceControlPage() {
                                 </div>
                             </div>
                             
-                            <div className="mt-8 pt-6 border-t border-black/10 dark:border-white/10 flex justify-end">
-                                <button className="bg-[#fbaa19] text-black font-black uppercase tracking-widest px-8 py-4 hover:bg-black hover:text-[#fbaa19] dark:hover:bg-white transition-colors border-2 border-[#fbaa19] shadow-lg shadow-[#fbaa19]/20 w-full md:w-auto">
-                                    Salvar Resultados Oficiais
+                            <div className="mt-8 pt-6 border-t border-black/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-end gap-4">
+                                {successMsg && (
+                                    <span className="text-green-500 font-bold uppercase tracking-widest animate-pulse text-sm">
+                                        {successMsg}
+                                    </span>
+                                )}
+                                <button 
+                                    onClick={handleSaveResults}
+                                    disabled={isSubmitting}
+                                    className="bg-[#fbaa19] text-black font-black uppercase tracking-widest px-8 py-4 hover:bg-black hover:text-[#fbaa19] dark:hover:bg-white transition-colors border-2 border-[#fbaa19] shadow-lg shadow-[#fbaa19]/20 w-full md:w-auto disabled:opacity-50 disabled:cursor-wait"
+                                >
+                                    {isSubmitting ? "Sincronizando..." : "Salvar Resultados Oficiais"}
                                 </button>
                             </div>
                         </div>

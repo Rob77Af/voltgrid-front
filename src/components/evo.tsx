@@ -7,6 +7,18 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
     const picks = usePredictionStore(state => state.evo);
     const setPicks = usePredictionStore(state => state.setEvo);
     const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    const handleSubmit = () => {
+        setIsSubmitting(true);
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setIsSuccess(true);
+            console.log("Mock DB - Evo Submetido:", picks);
+            setTimeout(() => setIsSuccess(false), 5000);
+        }, 1200);
+    };
 
     const handleSelect = (index: number, driver: string) => {
         const newPicks = [...picks];
@@ -128,19 +140,19 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
             </div>
             
             {!hideSubmit && (
-                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] mt-4">
+                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
                     <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
-                        {picks.filter(p => p !== '').length === 5
-                            ? <span className="text-[#fbaa19]">All drivers predicted!</span>
-                            : `${picks.filter(p => p !== '').length} / 5 DRIVERS PREDICTED`
-                        }
+                        {picks.filter(p => p !== '').length === 5 
+                            ? <span className="text-[#fbaa19]">Portfolio complete!</span> 
+                            : `Select ${5 - picks.filter(p => p !== '').length} more drivers`}
                     </p>
                     <button 
                         type="button" 
-                        disabled={picks.some(p => p === '')}
+                        onClick={handleSubmit}
+                        disabled={picks.some(p => p === '') || isSubmitting || isSuccess}
                         className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        SUBMIT PREDICTION
+                        {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
                     </button>
                 </footer>
             )}

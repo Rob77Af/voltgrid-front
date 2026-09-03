@@ -1,10 +1,22 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { usePredictionStore } from '@/store/usePredictionStore';
 
 const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: boolean }) => {
     const digits = usePredictionStore(state => state.poletime);
     const setDigits = usePredictionStore(state => state.setPoletime);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    const handleSubmit = () => {
+        setIsSubmitting(true);
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setIsSuccess(true);
+            console.log("Mock DB - Poletime Submetido:", digits.join(''));
+            setTimeout(() => setIsSuccess(false), 5000);
+        }, 1200);
+    };
 
     // Max values for each position:
     // [0] Minutes: 0 to 3
@@ -74,8 +86,13 @@ const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader
                     <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
                         Your pick: <span className="text-black dark:text-white font-bold">{digits[0]}:{digits[1]}{digits[2]}.{digits[3]}{digits[4]}{digits[5]}</span>
                     </p>
-                    <button type="button" className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19]">
-                        SUBMIT PREDICTION
+                    <button 
+                        type="button" 
+                        onClick={handleSubmit}
+                        disabled={isSubmitting || isSuccess}
+                        className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
                     </button>
                 </footer>
             )}

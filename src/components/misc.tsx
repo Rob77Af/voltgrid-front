@@ -1,18 +1,30 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { usePredictionStore } from '@/store/usePredictionStore';
 
 const QUESTIONS = [
-    { id: 'q1', text: 'Safety Car deployed during the race?', options: ['Yes', 'No'] },
-    { id: 'q2', text: 'Better race finish position?', options: ['Williams', 'Audi'] },
-    { id: 'q3', text: 'Will there be a Red Flag session?', options: ['Yes', 'No'] },
-    { id: 'q4', text: 'Fastest Pit Stop team?', options: ['Red Bull', 'McLaren'] },
+    { id: 'q1', text: 'Safety car during the race?', options: ['Yes', 'No'] },
+    { id: 'q2', text: 'Red flag during the race?', options: ['Yes', 'No'] },
+    { id: 'q3', text: 'Will L.SARGEANT DNF?', options: ['Yes', 'No'] },
+    { id: 'q4', text: 'Will both Ferraris finish in top 5?', options: ['Yes', 'No'] },
     { id: 'q5', text: 'M.VERSTAPPEN fastest lap?', options: ['Yes', 'No'] },
 ];
 
 const Misc = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: boolean }) => {
     const answers = usePredictionStore(state => state.misc);
     const setAnswers = usePredictionStore(state => state.setMisc);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    const handleSubmit = () => {
+        setIsSubmitting(true);
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setIsSuccess(true);
+            console.log("Mock DB - Misc Submetido:", answers);
+            setTimeout(() => setIsSuccess(false), 5000);
+        }, 1200);
+    };
 
     const handleSelect = (questionId: string, option: string) => {
         setAnswers(prev => ({
@@ -75,17 +87,18 @@ const Misc = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: b
             {!hideSubmit && (
                 <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
                     <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
-                        {answeredCount === totalQuestions 
-                            ? <span className="text-[#fbaa19]">All {totalQuestions} answered!</span>
-                            : `${answeredCount} of ${totalQuestions} answered`
+                        {answeredCount === totalQuestions
+                            ? <span className="text-[#fbaa19]">All questions answered!</span>
+                            : `${answeredCount} / ${totalQuestions} QUESTIONS ANSWERED`
                         }
                     </p>
                     <button 
                         type="button" 
-                        disabled={answeredCount !== totalQuestions}
+                        onClick={handleSubmit}
+                        disabled={answeredCount !== totalQuestions || isSubmitting || isSuccess}
                         className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#fbaa19] disabled:hover:text-black"
                     >
-                        SUBMIT PREDICTION
+                        {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
                     </button>
                 </footer>
             )}

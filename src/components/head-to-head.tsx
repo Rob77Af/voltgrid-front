@@ -2,9 +2,22 @@
 import React from 'react';
 import { F1_MATCHUPS } from '@/api/f1-data';
 import { usePredictionStore } from '@/store/usePredictionStore';
+import { useState } from 'react';
 const HeadToHead = (props: any) => {
     const picks = usePredictionStore(state => state.h2h);
     const setPicks = usePredictionStore(state => state.setH2H);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    const handleSubmit = () => {
+        setIsSubmitting(true);
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setIsSuccess(true);
+            console.log("Mock DB - H2H Submetido:", picks);
+            setTimeout(() => setIsSuccess(false), 5000);
+        }, 1200);
+    };
 
     const handlePick = (matchupId: string, driverNum: string) => {
         setPicks(prev => ({ ...prev, [matchupId]: driverNum }));
@@ -74,10 +87,11 @@ const HeadToHead = (props: any) => {
                     </p>
                     <button 
                         type="button" 
-                        disabled={countPicks !== F1_MATCHUPS.length}
+                        onClick={handleSubmit}
+                        disabled={countPicks !== F1_MATCHUPS.length || isSubmitting || isSuccess}
                         className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        SUBMIT PREDICTION
+                        {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
                     </button>
                 </footer>
             )}
