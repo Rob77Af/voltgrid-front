@@ -38,6 +38,7 @@ export default function RaceControlPage() {
     const [results, setResults] = useState(initialDrivers);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMsg, setSuccessMsg] = useState("");
+    const [isSessionDropdownOpen, setIsSessionDropdownOpen] = useState(false);
 
     const handleSaveResults = () => {
         setIsSubmitting(true);
@@ -98,15 +99,32 @@ export default function RaceControlPage() {
                         </div>
                         
                         <div className="bg-gray-50 dark:bg-[#111] border border-black/10 dark:border-white/10 p-4 md:p-8 rounded-sm">
-                            <div className="mb-8 flex flex-col gap-2">
+                            <div className="mb-8 flex flex-col gap-2 relative">
                                 <label className="text-sm font-bold uppercase tracking-widest text-[#fbaa19]">Sessão</label>
-                                <select 
-                                    value={selectedSession}
-                                    onChange={(e) => setSelectedSession(e.target.value)}
-                                    className="p-4 bg-white dark:bg-black border-2 border-black/20 dark:border-white/20 text-black dark:text-white font-bold uppercase tracking-widest outline-none focus:border-[#fbaa19]"
+                                <div 
+                                    className="p-4 bg-white dark:bg-[#1a1a1a] border-2 border-black/20 dark:border-white/20 text-black dark:text-white font-bold uppercase tracking-widest cursor-pointer flex justify-between items-center hover:border-[#fbaa19] transition-colors"
+                                    onClick={() => setIsSessionDropdownOpen(!isSessionDropdownOpen)}
                                 >
-                                    {sessions.map(s => <option key={s} value={s}>{s}</option>)}
-                                </select>
+                                    <span>{selectedSession}</span>
+                                    <svg className={`w-5 h-5 transition-transform ${isSessionDropdownOpen ? 'rotate-180 text-[#fbaa19]' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                                
+                                {isSessionDropdownOpen && (
+                                    <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-white dark:bg-[#1a1a1a] border-2 border-[#fbaa19] z-[100] shadow-xl flex flex-col max-h-60 overflow-y-auto">
+                                        {sessions.map(s => (
+                                            <button
+                                                key={s}
+                                                className={`p-4 text-left font-bold uppercase tracking-widest text-sm hover:bg-[#fbaa19] hover:text-black transition-colors ${selectedSession === s ? 'bg-[#fbaa19]/20 text-[#fbaa19]' : 'text-black dark:text-white'}`}
+                                                onClick={() => {
+                                                    setSelectedSession(s);
+                                                    setIsSessionDropdownOpen(false);
+                                                }}
+                                            >
+                                                {s}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
 
                             <div className="flex flex-col gap-4">
