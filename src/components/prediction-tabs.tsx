@@ -9,6 +9,9 @@ import Evo from './evo';
 import Misc from './misc';
 
 import { usePredictionStore } from '@/store/usePredictionStore';
+import { useSwipe } from '@/hooks/useSwipe';
+
+const TABS_ORDER = ['poletime', 'master', 'evo', 'head-to-head', 'misc', 'all-forms'];
 
 const PredictionTabs = () => {
     const [activeId, setActiveId] = useState('head-to-head');
@@ -22,6 +25,17 @@ const PredictionTabs = () => {
     const isMiscValid = Object.keys(misc).length === 5; // QUESTIONS.length
     
     const isAllValid = isTop10Valid && isEvoValid && isH2HValid && isMiscValid;
+
+    const { onTouchStart, onTouchEnd } = useSwipe({
+        onSwipeLeft: () => {
+            const currentIndex = TABS_ORDER.indexOf(activeId);
+            if (currentIndex < TABS_ORDER.length - 1) setActiveId(TABS_ORDER[currentIndex + 1]);
+        },
+        onSwipeRight: () => {
+            const currentIndex = TABS_ORDER.indexOf(activeId);
+            if (currentIndex > 0) setActiveId(TABS_ORDER[currentIndex - 1]);
+        }
+    });
 
     React.useEffect(() => {
         setIsMounted(true);
@@ -52,7 +66,7 @@ const PredictionTabs = () => {
     const currentHeader = headerData[activeId];
 
     return (
-        <>
+        <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} className="w-full">
             <F1BetRemoteControl activeId={activeId} setActiveId={setActiveId} />
             
             <header className="mt-8 mb-8 md:mb-12 border-b-4 border-[#fbaa19] pb-6 md:pb-8 flex flex-col gap-4">
@@ -101,7 +115,7 @@ const PredictionTabs = () => {
                     </footer>
                 )}
             </section>
-        </>
+        </div>
     );
 };
 

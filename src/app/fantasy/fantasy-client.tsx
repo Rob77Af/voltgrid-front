@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import CompetitionsRemoteControl from '@/components/competitions-remote-control';
 import TeamworkCompetition from '@/components/teamwork-competition';
 import RaceRemoteControl from '@/components/race-remote-control';
+import { useSwipe } from '@/hooks/useSwipe';
 
 const FANTASY_TABS = [
     { id: 'race-results', label: 'Race Results' },
@@ -12,11 +13,22 @@ const FANTASY_TABS = [
 ];
 
 export default function FantasyClient() {
-    const [activeId, setActiveId] = useState('poletime-competition');
+    const [activeId, setActiveId] = useState('poletime-competition'); // actually milesimus / teamwork in the control
     const [activeTab, setActiveTab] = useState('race-results');
     const [activeResultRound, setActiveResultRound] = useState('03'); // Default to last mock active event
     const [isStuck, setIsStuck] = useState(false);
     const menuRef = React.useRef<HTMLDivElement>(null);
+
+    const { onTouchStart, onTouchEnd } = useSwipe({
+        onSwipeLeft: () => {
+            const currentIndex = FANTASY_TABS.findIndex(t => t.id === activeTab);
+            if (currentIndex < FANTASY_TABS.length - 1) setActiveTab(FANTASY_TABS[currentIndex + 1].id);
+        },
+        onSwipeRight: () => {
+            const currentIndex = FANTASY_TABS.findIndex(t => t.id === activeTab);
+            if (currentIndex > 0) setActiveTab(FANTASY_TABS[currentIndex - 1].id);
+        }
+    });
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -356,7 +368,7 @@ export default function FantasyClient() {
     };
 
     return (
-        <div className="flex flex-col gap-8">
+        <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} className="flex flex-col gap-8 w-full">
             <header className="mb-4 border-b-4 border-[#fbaa19] pb-6 md:pb-8 flex flex-col gap-4">
                 <p className="text-[#fbaa19] text-sm md:text-base font-bold uppercase tracking-[0.2em] font-display">F1 // FANTASY</p>
                 <h1 className="text-black dark:text-white text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black uppercase tracking-widest font-display mb-2">
