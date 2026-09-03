@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-import { F1_DRIVERS, getDriverDetails } from '@/api/f1-data';
+import { F1_DRIVERS, getDriverDetails, fetchNextEvent, F1Event } from '@/api/f1-data';
 
 const getTeamColor = (team: string) => {
     switch(team) {
@@ -41,7 +41,11 @@ export default function RaceControlPage() {
     const [results, setResults] = useState(initialDrivers);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMsg, setSuccessMsg] = useState("");
-    const [isSessionDropdownOpen, setIsSessionDropdownOpen] = useState(false);
+    const [currentEvent, setCurrentEvent] = useState<F1Event | null>(null);
+
+    useEffect(() => {
+        fetchNextEvent().then(event => setCurrentEvent(event));
+    }, []);
 
     const handleSaveResults = () => {
         setIsSubmitting(true);
@@ -73,61 +77,69 @@ export default function RaceControlPage() {
     };
 
     return (
-        <main className="w-full min-h-screen bg-white dark:bg-[#0a0a0a] text-black dark:text-white p-4 md:p-8 pt-12 font-sans pb-24">
-            <div className="max-w-7xl mx-auto flex flex-col gap-8">
-                
-                {/* Header Section */}
-                <header className="flex flex-col gap-2 border-b-2 border-[#fbaa19] pb-6 relative overflow-hidden">
-                    <div className="flex items-center gap-3 mb-2 text-[#fbaa19]">
-                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-                        </svg>
-                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-widest font-display">Race Control</h1>
-                    </div>
-                    <p className="text-gray-500 uppercase tracking-widest text-sm md:text-base font-bold">
-                        Painel de Governança // Comunidade & Comissários
-                    </p>
-                </header>
+        <div className="w-full flex flex-col min-h-screen bg-gray-50 dark:bg-black text-black dark:text-white pb-24">
+            <header className="w-full p-4 md:p-8 border-b-4 border-[#fbaa19] bg-white dark:bg-[#111]">
+                <div className="max-w-6xl mx-auto flex flex-col gap-4">
+                    <p className="text-[#fbaa19] text-sm md:text-base font-bold uppercase tracking-[0.2em] font-display">F1 // VOLTGRID</p>
+                    <h1 className="text-4xl md:text-5xl font-black uppercase tracking-widest font-display">Race Control</h1>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">Painel de gerenciamento de dados oficiais, pontuação e integridade.</p>
+                </div>
+            </header>
+
+            <main className="flex-1 w-full max-w-6xl mx-auto p-4 md:p-8 mt-4 flex flex-col gap-8">
+                <nav className="flex flex-row gap-4 border-b border-black/10 dark:border-white/10 pb-4 overflow-x-auto scrollbar-hide min-w-max">
+                    <button 
+                        onClick={() => setActiveView('dashboard')}
+                        className={`text-sm md:text-base font-bold uppercase tracking-widest px-4 py-2 border-b-2 transition-colors ${activeView === 'dashboard' ? 'border-[#fbaa19] text-[#fbaa19]' : 'border-transparent text-gray-500 hover:text-black dark:hover:text-white'}`}
+                    >
+                        Visão Geral
+                    </button>
+                    <button 
+                        onClick={() => setActiveView('resultados')}
+                        className={`text-sm md:text-base font-bold uppercase tracking-widest px-4 py-2 border-b-2 transition-colors ${activeView === 'resultados' ? 'border-[#fbaa19] text-[#fbaa19]' : 'border-transparent text-gray-500 hover:text-black dark:hover:text-white'}`}
+                    >
+                        Inserir Resultados
+                    </button>
+                </nav>
 
                 {activeView === 'resultados' ? (
-                    <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-4xl mx-auto w-full">
-                        <div className="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-4">
-                            <h2 className="text-2xl font-black uppercase tracking-widest">Input de Resultados</h2>
-                            <button 
-                                onClick={() => setActiveView('dashboard')}
-                                className="text-sm font-bold uppercase tracking-widest border border-black/20 dark:border-white/20 px-4 py-2 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
-                            >
-                                Voltar
-                            </button>
+                    <section className="flex flex-col gap-6 animate-fade-in">
+                        <div className="flex flex-col gap-2">
+                            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-widest border-l-4 border-[#fbaa19] pl-4">Resultados Oficiais</h2>
+                            <p className="text-gray-600 dark:text-gray-400 text-sm">Atualize os resultados de cada sessão. Impacta diretamente na pontuação dos jogadores no Milesimus.</p>
                         </div>
                         
                         <div className="bg-gray-50 dark:bg-[#111] border border-black/10 dark:border-white/10 p-4 md:p-8 rounded-sm">
-                            <div className="mb-8 flex flex-col gap-2 relative">
-                                <label className="text-sm font-bold uppercase tracking-widest text-[#fbaa19]">Sessão</label>
-                                <div 
-                                    className="p-4 bg-white dark:bg-[#1a1a1a] border-2 border-black/20 dark:border-white/20 text-black dark:text-white font-bold uppercase tracking-widest cursor-pointer flex justify-between items-center hover:border-[#fbaa19] transition-colors"
-                                    onClick={() => setIsSessionDropdownOpen(!isSessionDropdownOpen)}
-                                >
-                                    <span>{selectedSession}</span>
-                                    <svg className={`w-5 h-5 transition-transform ${isSessionDropdownOpen ? 'rotate-180 text-[#fbaa19]' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div className="mb-8 flex flex-col gap-2">
+                                <div className="flex flex-col md:flex-row md:items-end justify-between mb-2 border-b border-black/10 dark:border-white/10 pb-2 gap-2">
+                                    <label className="text-sm font-bold uppercase tracking-widest text-[#fbaa19]">Sessão</label>
+                                    {currentEvent ? (
+                                        <span className="text-xs font-bold uppercase tracking-widest text-gray-500">
+                                            ROUND {currentEvent.round} // {currentEvent.name}
+                                        </span>
+                                    ) : (
+                                        <span className="text-xs font-bold uppercase tracking-widest text-gray-500 animate-pulse">
+                                            LOADING EVENT...
+                                        </span>
+                                    )}
                                 </div>
                                 
-                                {isSessionDropdownOpen && (
-                                    <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-white dark:bg-[#1a1a1a] border-2 border-[#fbaa19] z-[100] shadow-xl flex flex-col max-h-60 overflow-y-auto">
-                                        {sessions.map(s => (
-                                            <button
-                                                key={s}
-                                                className={`p-4 text-left font-bold uppercase tracking-widest text-sm hover:bg-[#fbaa19] hover:text-black transition-colors ${selectedSession === s ? 'bg-[#fbaa19]/20 text-[#fbaa19]' : 'text-black dark:text-white'}`}
-                                                onClick={() => {
-                                                    setSelectedSession(s);
-                                                    setIsSessionDropdownOpen(false);
-                                                }}
-                                            >
-                                                {s}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
+                                <div className="flex overflow-x-auto scrollbar-hide gap-2 py-2">
+                                    {sessions.map(s => (
+                                        <button
+                                            key={s}
+                                            type="button"
+                                            onClick={() => setSelectedSession(s)}
+                                            className={`shrink-0 px-4 py-3 border-2 font-bold uppercase tracking-widest text-xs transition-colors ${
+                                                selectedSession === s 
+                                                    ? 'bg-[#fbaa19] text-black border-[#fbaa19]'
+                                                    : 'bg-white dark:bg-[#1a1a1a] text-black dark:text-white border-black/20 dark:border-white/20 hover:border-[#fbaa19]'
+                                            }`}
+                                        >
+                                            {s}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
 
                             <div className="flex flex-col gap-4">
@@ -195,7 +207,7 @@ export default function RaceControlPage() {
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {/* Left Column: Dashboard content */}
@@ -214,7 +226,7 @@ export default function RaceControlPage() {
                                     <button className="flex flex-col items-start gap-2 p-4 bg-white dark:bg-black border border-black/10 dark:border-white/10 hover:border-[#fbaa19] transition-colors group">
                                         <svg className="w-6 h-6 text-gray-400 group-hover:text-[#fbaa19] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
                                         <span className="font-bold uppercase tracking-widest text-sm">Gerenciar Teamwork</span>
-                                        <span className="text-xs text-gray-500 text-left">Resolução de conflitos de ligas.</span>
+                                        <span className="text-xs text-gray-500 text-left">ResoluÃ§Ã£o de conflitos de ligas.</span>
                                     </button>
                                     <button className="flex flex-col items-start gap-2 p-4 bg-white dark:bg-black border border-black/10 dark:border-white/10 hover:border-[#fbaa19] transition-colors group">
                                         <svg className="w-6 h-6 text-gray-400 group-hover:text-[#fbaa19] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
@@ -234,8 +246,8 @@ export default function RaceControlPage() {
                                 <div className="flex flex-col gap-4">
                                     <div className="bg-white dark:bg-black border-l-4 border-l-[#fbaa19] border border-black/10 dark:border-white/10 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                         <div className="flex flex-col gap-1">
-                                            <span className="font-bold text-sm uppercase tracking-wider">Denúncia: Violação de Prazo</span>
-                                            <span className="text-xs text-gray-500">Usuário @Hamilton44 submeteu aposta após Q1.</span>
+                                            <span className="font-bold text-sm uppercase tracking-wider">DenÃºncia: ViolaÃ§Ã£o de Prazo</span>
+                                            <span className="text-xs text-gray-500">UsuÃ¡rio @Hamilton44 submeteu aposta apÃ³s Q1.</span>
                                         </div>
                                         <div className="flex gap-2 w-full sm:w-auto">
                                             <button className="flex-1 sm:flex-none bg-green-500/10 text-green-600 border border-green-500 px-4 py-2 text-xs font-bold uppercase tracking-widest hover:bg-green-500 hover:text-white transition-colors">Absolver</button>
@@ -264,14 +276,14 @@ export default function RaceControlPage() {
                                     </li>
                                     <li className="flex justify-between pb-2">
                                         <span className="text-gray-400">Diretor Ativo</span>
-                                        <span className="text-[#fbaa19]">VOCÊ</span>
+                                        <span className="text-[#fbaa19]">VOCÃŠ</span>
                                     </li>
                                 </ul>
                             </section>
                         </div>
                     </div>
                 )}
-            </div>
-        </main>
+            </main>
+        </div>
     );
 }
