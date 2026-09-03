@@ -86,20 +86,30 @@ const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader
                     <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide w-full md:w-auto text-center md:text-left">
                         Your pick: <span className="text-black dark:text-white font-bold">{digits[0]}:{digits[1]}{digits[2]}.{digits[3]}{digits[4]}{digits[5]}</span>
                     </p>
-                    <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-                        <button 
-                            type="button" 
-                            onClick={() => setDigits([0,0,0,0,0,0])}
-                            disabled={isSubmitting || isSuccess || digits.every(d => d === 0)}
-                            className="text-xs md:text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-red-500 transition-colors px-2 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            CLEAR
-                        </button>
+                    <div className="flex flex-col md:flex-row w-full md:w-auto gap-3 md:items-center">
+                        <div className="grid grid-cols-2 md:flex gap-3 w-full md:w-auto order-2 md:order-1">
+                            <button 
+                                type="button" 
+                                onClick={() => setDigits([0,0,0,0,0,0])}
+                                disabled={isSubmitting || isSuccess || digits.every(d => d === 0)}
+                                className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-red-500 transition-colors border border-black/10 dark:border-white/10 md:border-transparent p-3 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                CLEAR
+                            </button>
+                            <button 
+                                type="button" 
+                                disabled={isSubmitting || isSuccess}
+                                className="text-xs font-bold uppercase tracking-widest text-[#fbaa19] hover:bg-[#fbaa19] hover:text-black transition-colors border border-[#fbaa19] p-3 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                AI ASSIST
+                            </button>
+                        </div>
                         <button 
                             type="button" 
                             onClick={handleSubmit}
                             disabled={isSubmitting || isSuccess}
-                            className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed flex-1 md:flex-none"
+                            className="w-full md:w-auto order-1 md:order-2 f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
                         </button>
