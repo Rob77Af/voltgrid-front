@@ -19,14 +19,23 @@ export default function FantasyClient() {
     const [isStuck, setIsStuck] = useState(false);
     const menuRef = React.useRef<HTMLDivElement>(null);
 
+    const COMPETITIONS_ORDER = [
+        'poletime-competition',
+        'master-competition',
+        'milesimus',
+        'teamwork',
+        'silly-season',
+        'paddock'
+    ];
+
     const { onTouchStart, onTouchEnd } = useSwipe({
         onSwipeLeft: () => {
-            const currentIndex = FANTASY_TABS.findIndex(t => t.id === activeTab);
-            if (currentIndex < FANTASY_TABS.length - 1) setActiveTab(FANTASY_TABS[currentIndex + 1].id);
+            const currentIndex = COMPETITIONS_ORDER.indexOf(activeId);
+            if (currentIndex < COMPETITIONS_ORDER.length - 1) setActiveId(COMPETITIONS_ORDER[currentIndex + 1]);
         },
         onSwipeRight: () => {
-            const currentIndex = FANTASY_TABS.findIndex(t => t.id === activeTab);
-            if (currentIndex > 0) setActiveTab(FANTASY_TABS[currentIndex - 1].id);
+            const currentIndex = COMPETITIONS_ORDER.indexOf(activeId);
+            if (currentIndex > 0) setActiveId(COMPETITIONS_ORDER[currentIndex - 1]);
         }
     });
 
