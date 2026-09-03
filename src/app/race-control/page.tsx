@@ -2,31 +2,34 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-// Mocked API initial order
-const initialDrivers = [
-    { id: "VER", name: "Max Verstappen", team: "Red Bull Racing", color: "#3671C6" },
-    { id: "PER", name: "Sergio Perez", team: "Red Bull Racing", color: "#3671C6" },
-    { id: "LEC", name: "Charles Leclerc", team: "Ferrari", color: "#E8002D" },
-    { id: "SAI", name: "Carlos Sainz", team: "Ferrari", color: "#E8002D" },
-    { id: "NOR", name: "Lando Norris", team: "McLaren", color: "#FF8000" },
-    { id: "PIA", name: "Oscar Piastri", team: "McLaren", color: "#FF8000" },
-    { id: "HAM", name: "Lewis Hamilton", team: "Mercedes", color: "#27F4D2" },
-    { id: "RUS", name: "George Russell", team: "Mercedes", color: "#27F4D2" },
-    { id: "ALO", name: "Fernando Alonso", team: "Aston Martin", color: "#229971" },
-    { id: "STR", name: "Lance Stroll", team: "Aston Martin", color: "#229971" },
-    { id: "TSU", name: "Yuki Tsunoda", team: "RB", color: "#6692FF" },
-    { id: "RIC", name: "Daniel Ricciardo", team: "RB", color: "#6692FF" },
-    { id: "HUL", name: "Nico Hulkenberg", team: "Haas", color: "#B6BABD" },
-    { id: "MAG", name: "Kevin Magnussen", team: "Haas", color: "#B6BABD" },
-    { id: "ALB", name: "Alexander Albon", team: "Williams", color: "#64C4FF" },
-    { id: "SAR", name: "Logan Sargeant", team: "Williams", color: "#64C4FF" },
-    { id: "OCO", name: "Esteban Ocon", team: "Alpine", color: "#0093cc" },
-    { id: "GAS", name: "Pierre Gasly", team: "Alpine", color: "#0093cc" },
-    { id: "BOT", name: "Valtteri Bottas", team: "Kick Sauber", color: "#52e252" },
-    { id: "ZHO", name: "Guanyu Zhou", team: "Kick Sauber", color: "#52e252" },
-    { id: "BEA", name: "Oliver Bearman", team: "Ferrari", color: "#E8002D" },
-    { id: "LAW", name: "Liam Lawson", team: "RB", color: "#6692FF" }
-];
+import { F1_DRIVERS, getDriverDetails } from '@/api/f1-data';
+
+const getTeamColor = (team: string) => {
+    switch(team) {
+        case 'McLaren': return '#FF8000';
+        case 'Ferrari': return '#E8002D';
+        case 'Mercedes': return '#27F4D2';
+        case 'Red Bull': return '#3671C6';
+        case 'Aston Martin': return '#229971';
+        case 'Alpine': return '#0093cc';
+        case 'Haas': return '#B6BABD';
+        case 'Racing Bulls': return '#6692FF';
+        case 'Cadillac': return '#FFB800';
+        case 'Williams': return '#64C4FF';
+        case 'Audi/Sauber': return '#52e252';
+        default: return '#ffffff';
+    }
+}
+
+const initialDrivers = F1_DRIVERS.map(driverName => {
+    const details = getDriverDetails(driverName);
+    return {
+        id: details.num,
+        name: driverName,
+        team: details.team,
+        color: getTeamColor(details.team)
+    };
+});
 
 const sessions = [
     "FP1", "FP2", "FP3", "Q1", "Q2", "Q3", "Qualy Sprint", "Sprint Race", "Race"

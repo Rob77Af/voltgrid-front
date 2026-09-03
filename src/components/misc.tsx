@@ -85,21 +85,31 @@ const Misc = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: b
             </div>
 
             {!hideSubmit && (
-                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
-                    <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
+                <footer className="f1-predictions-summary flex flex-col md:flex-row items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] gap-4">
+                    <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide w-full md:w-auto text-center md:text-left">
                         {answeredCount === totalQuestions
                             ? <span className="text-[#fbaa19]">All questions answered!</span>
                             : `${answeredCount} / ${totalQuestions} QUESTIONS ANSWERED`
                         }
                     </p>
-                    <button 
-                        type="button" 
-                        onClick={handleSubmit}
-                        disabled={answeredCount !== totalQuestions || isSubmitting || isSuccess}
-                        className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#fbaa19] disabled:hover:text-black"
-                    >
-                        {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
-                    </button>
+                    <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+                        <button 
+                            type="button" 
+                            onClick={() => setAnswers({})}
+                            disabled={isSubmitting || isSuccess || answeredCount === 0}
+                            className="text-xs md:text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-red-500 transition-colors px-2 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            CLEAR
+                        </button>
+                        <button 
+                            type="button" 
+                            onClick={handleSubmit}
+                            disabled={answeredCount !== totalQuestions || isSubmitting || isSuccess}
+                            className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#fbaa19] disabled:hover:text-black flex-1 md:flex-none"
+                        >
+                            {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
+                        </button>
+                    </div>
                 </footer>
             )}
         </div>

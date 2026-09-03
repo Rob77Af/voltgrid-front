@@ -140,20 +140,30 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
             </div>
             
             {!hideSubmit && (
-                <footer className="f1-predictions-summary flex items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d]">
-                    <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide">
+                <footer className="f1-predictions-summary flex flex-col md:flex-row items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] gap-4">
+                    <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide w-full md:w-auto text-center md:text-left">
                         {picks.filter(p => p !== '').length === 5 
                             ? <span className="text-[#fbaa19]">Portfolio complete!</span> 
                             : `Select ${5 - picks.filter(p => p !== '').length} more drivers`}
                     </p>
-                    <button 
-                        type="button" 
-                        onClick={handleSubmit}
-                        disabled={picks.some(p => p === '') || isSubmitting || isSuccess}
-                        className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
-                    </button>
+                    <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+                        <button 
+                            type="button" 
+                            onClick={() => setPicks(Array(5).fill(''))}
+                            disabled={isSubmitting || isSuccess || picks.every(p => p === '')}
+                            className="text-xs md:text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-red-500 transition-colors px-2 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            CLEAR
+                        </button>
+                        <button 
+                            type="button" 
+                            onClick={handleSubmit}
+                            disabled={picks.some(p => p === '') || isSubmitting || isSuccess}
+                            className="f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed flex-1 md:flex-none"
+                        >
+                            {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
+                        </button>
+                    </div>
                 </footer>
             )}
         </div>
