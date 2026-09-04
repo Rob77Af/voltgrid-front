@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import CompetitionsRemoteControl from '@/components/competitions-remote-control';
 import TeamworkCompetition from '@/components/teamwork-competition';
 import RaceRemoteControl from '@/components/race-remote-control';
+import TelemetryLeaderboard from '@/components/telemetry-leaderboard';
 import { useSwipe } from '@/hooks/useSwipe';
 
 const FANTASY_TABS = [
@@ -89,10 +90,8 @@ export default function FantasyClient() {
                     </div>
                 )}
                 {activeTab === 'ranking' && (
-                    <div className="p-12 text-center flex flex-col items-center justify-center gap-4">
-                        <svg className="w-12 h-12 text-[#fbaa19]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                        <h3 className="text-xl font-bold text-black dark:text-white uppercase tracking-widest">Global Ranking</h3>
-                        <p className="text-gray-500">Championship standings will be updated shortly.</p>
+                    <div className="flex flex-col gap-4 animate-fade-in">
+                        <TelemetryLeaderboard />
                     </div>
                 )}
                 {activeTab === 'stats' && (
