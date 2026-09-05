@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Logo from './logo';
+import AuthButton from './auth-button';
 
 const Navigation = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -50,6 +51,9 @@ const Navigation = () => {
 
                     {/* RIGHT: Buttons & Controls */}
                     <div className="flex items-center gap-4">
+                        <div className="hidden md:flex items-center">
+                            <AuthButton />
+                        </div>
                         {/* Desktop Buttons */}
                         <div className="hidden md:flex items-center gap-4">
                             <Link 
