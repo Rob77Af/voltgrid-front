@@ -11,7 +11,6 @@ export function useSupabaseAuth() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // Obter sessao inicial
         const getInitialSession = async () => {
             try {
                 const { data: { session }, error } = await supabase.auth.getSession();
@@ -28,7 +27,6 @@ export function useSupabaseAuth() {
 
         getInitialSession();
 
-        // Escutar mudancas de estado (login, logout, token refresh)
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
             (_event, session) => {
                 setSession(session);
@@ -95,6 +93,38 @@ export function useSupabaseAuth() {
         }
     };
 
+    const resetPassword = async (email: string) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: typeof window !== "undefined" ? `${window.location.origin}/superlicense?reset=true` : undefined
+            });
+            if (error) throw error;
+            return true;
+        } catch (err: any) {
+            setError(err.message);
+            throw err;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const updatePassword = async (newPassword: string) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            const { error } = await supabase.auth.updateUser({ password: newPassword });
+            if (error) throw error;
+            return true;
+        } catch (err: any) {
+            setError(err.message);
+            throw err;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return {
         user,
         session,
@@ -103,5 +133,7 @@ export function useSupabaseAuth() {
         login,
         signup,
         logout,
+        resetPassword,
+        updatePassword
     };
 }
