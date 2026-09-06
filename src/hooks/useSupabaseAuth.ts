@@ -18,7 +18,7 @@ export function useSupabaseAuth() {
                 
                 setSession(session);
                 setUser(session?.user ?? null);
-            } catch (err: any) {
+            } catch (err) {
                 console.error("Error fetching session:", err);
             } finally {
                 setIsLoading(false);
@@ -50,9 +50,10 @@ export function useSupabaseAuth() {
             });
             if (error) throw error;
             return data;
-        } catch (err: any) {
-            setError(err.message);
-            throw err;
+        } catch (err) {
+            const error = err as Error;
+            setError(error.message);
+            throw error;
         } finally {
             setIsLoading(false);
         }
@@ -73,9 +74,10 @@ export function useSupabaseAuth() {
             });
             if (error) throw error;
             return data;
-        } catch (err: any) {
-            setError(err.message);
-            throw err;
+        } catch (err) {
+            const error = err as Error;
+            setError(error.message);
+            throw error;
         } finally {
             setIsLoading(false);
         }
@@ -86,8 +88,8 @@ export function useSupabaseAuth() {
         try {
             const { error } = await supabase.auth.signOut();
             if (error) throw error;
-        } catch (err: any) {
-            console.error("Error signing out:", err.message);
+        } catch (err) {
+            console.error("Error signing out:", (err as Error).message);
         } finally {
             setIsLoading(false);
         }
@@ -102,9 +104,10 @@ export function useSupabaseAuth() {
             });
             if (error) throw error;
             return true;
-        } catch (err: any) {
-            setError(err.message);
-            throw err;
+        } catch (err) {
+            const error = err as Error;
+            setError(error.message);
+            throw error;
         } finally {
             setIsLoading(false);
         }
@@ -117,9 +120,10 @@ export function useSupabaseAuth() {
             const { error } = await supabase.auth.updateUser({ password: newPassword });
             if (error) throw error;
             return true;
-        } catch (err: any) {
-            setError(err.message);
-            throw err;
+        } catch (err) {
+            const error = err as Error;
+            setError(error.message);
+            throw error;
         } finally {
             setIsLoading(false);
         }

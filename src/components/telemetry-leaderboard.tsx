@@ -9,9 +9,10 @@ export default function TelemetryLeaderboard() {
 
     useEffect(() => {
         if (!isLoading) {
-            setLeaderboard(prev => calculateLiveScores(positions, prev));
+            const t = setTimeout(() => setLeaderboard(calculateLiveScores(positions, leaderboard)), 0);
+            return () => clearTimeout(t);
         }
-    }, [positions, isLoading]);
+    }, [positions, isLoading, leaderboard]);
 
     if (isLoading) {
         return (

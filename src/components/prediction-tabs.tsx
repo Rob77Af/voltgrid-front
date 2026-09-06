@@ -38,7 +38,7 @@ const PredictionTabs = () => {
     });
 
     React.useEffect(() => {
-        setIsMounted(true);
+        const t = setTimeout(() => setIsMounted(true), 0);
         if (typeof window !== 'undefined') {
             const params = new URLSearchParams(window.location.search);
             const tab = params.get('tab');
@@ -46,6 +46,7 @@ const PredictionTabs = () => {
                 setActiveId(tab);
             }
         }
+        return () => clearTimeout(t);
     }, []);
 
     if (!isMounted) {

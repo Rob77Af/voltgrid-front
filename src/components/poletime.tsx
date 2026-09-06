@@ -2,6 +2,16 @@
 import React, { useState } from 'react';
 import { usePredictionStore } from '@/store/usePredictionStore';
 
+const DigitButton = ({ value, onClick }: { value: number, onClick: () => void }) => (
+    <button
+        type="button"
+        onClick={onClick}
+        className="w-10 h-16 sm:w-14 sm:h-20 md:w-20 md:h-28 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] flex items-center justify-center text-3xl sm:text-4xl md:text-6xl font-display font-bold text-black dark:text-white hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors select-none focus:outline-none focus:border-[#fbaa19]"
+    >
+        {value}
+    </button>
+);
+
 const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: boolean }) => {
     const digits = usePredictionStore(state => state.poletime);
     const setDigits = usePredictionStore(state => state.setPoletime);
@@ -35,15 +45,7 @@ const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader
         });
     };
 
-    const DigitButton = ({ value, onClick }: { value: number, onClick: () => void }) => (
-        <button
-            type="button"
-            onClick={onClick}
-            className="w-10 h-16 sm:w-14 sm:h-20 md:w-20 md:h-28 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] flex items-center justify-center text-3xl sm:text-4xl md:text-6xl font-display font-bold text-black dark:text-white hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors select-none focus:outline-none focus:border-[#fbaa19]"
-        >
-            {value}
-        </button>
-    );
+
 
     return (
         <div className="w-full flex flex-col gap-8 mt-8">

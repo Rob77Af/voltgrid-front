@@ -25,8 +25,8 @@ export default function AuthButton() {
                 await signup(email, password, username);
             }
             setIsModalOpen(false);
-        } catch (err: any) {
-            setErrorMsg(err.message || "Erro de autenticacao");
+        } catch (err) {
+            setErrorMsg((err as Error).message || "Erro de autenticacao");
         } finally {
             setIsSubmitting(false);
         }

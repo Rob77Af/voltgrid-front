@@ -40,8 +40,8 @@ export default function SuperlicensePage() {
                 await resetPassword(email);
                 setSuccessMsg("Instrucoes de recuperacao enviadas para o seu email.");
             }
-        } catch (err: any) {
-            setErrorMsg(err.message || "Ocorreu um erro. Tente novamente.");
+        } catch (err) {
+            setErrorMsg((err as Error).message || "Ocorreu um erro. Tente novamente.");
         } finally {
             setIsSubmitting(false);
         }

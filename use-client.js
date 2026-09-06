@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 
@@ -16,3 +17,4 @@ function prependUseClient(dir) {
 
 prependUseClient(path.join(__dirname, 'src', 'components'));
 prependUseClient(path.join(__dirname, 'src', 'views'));
+

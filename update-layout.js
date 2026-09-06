@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 // 1. Add Navigation to layout.tsx
 let layoutContent = fs.readFileSync('src/app/layout.tsx', 'utf8');
@@ -40,3 +41,4 @@ termsContent = termsContent.replace(/<Footer><\/Footer>/, '');
 fs.writeFileSync('src/views/terms-conditions.tsx', termsContent);
 
 console.log('Layout updated.');
+

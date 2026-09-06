@@ -17,7 +17,10 @@ export default function Settings() {
     
     // Fix hydration mismatch by rendering safely after mount
     const [mounted, setMounted] = React.useState(false);
-    React.useEffect(() => setMounted(true), []);
+    React.useEffect(() => {
+        const t = setTimeout(() => setMounted(true), 0);
+        return () => clearTimeout(t);
+    }, []);
 
     return (
         <div className="w-full">
