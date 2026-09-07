@@ -43,7 +43,7 @@ const PredictionTabs = () => {
             const params = new URLSearchParams(window.location.search);
             const tab = params.get('tab');
             if (tab) {
-                setActiveId(tab);
+                const t2 = setTimeout(() => setActiveId(tab), 0);
             }
         }
         return () => clearTimeout(t);

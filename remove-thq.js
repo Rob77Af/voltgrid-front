@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 
@@ -22,3 +23,4 @@ function removeTeleportHQ(dir) {
 
 removeTeleportHQ(path.join(__dirname, 'src', 'views'));
 removeTeleportHQ(path.join(__dirname, 'src', 'components'));
+

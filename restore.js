@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 let content = fs.readFileSync('.playground/views/bet-now.js', 'utf8');
 
@@ -18,3 +19,4 @@ content = '"use client";\n' + content;
 
 fs.writeFileSync('src/views/bet-now.tsx', content);
 console.log('Restored bet-now.tsx');
+

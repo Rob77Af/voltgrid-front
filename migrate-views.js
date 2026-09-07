@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 
@@ -82,3 +83,4 @@ fs.readdirSync(viewsDir).forEach(file => {
 });
 fs.rmdirSync(viewsDir);
 console.log('Removed views directory.');
+

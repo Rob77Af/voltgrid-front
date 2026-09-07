@@ -8,12 +8,13 @@ export default function ThemeWrapper({ children }: { children: React.ReactNode }
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
+        const t = setTimeout(() => setMounted(true), 0);
         if (mode === 'dark') {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
         }
+        return () => clearTimeout(t);
     }, [mode]);
 
     // Get the CSS variable names based on the theme

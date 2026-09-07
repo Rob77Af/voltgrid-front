@@ -115,7 +115,7 @@ export default function RaceControlPage() {
                                     <label className="text-sm font-bold uppercase tracking-widest text-[#fbaa19]">Sessão</label>
                                     {currentEvent ? (
                                         <span className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                                            ROUND {currentEvent.round} // {currentEvent.name}
+                                            ROUND {currentEvent.round} {"//"} {currentEvent.name}
                                         </span>
                                     ) : (
                                         <span className="text-xs font-bold uppercase tracking-widest text-gray-500 animate-pulse">

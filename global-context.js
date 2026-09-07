@@ -16,7 +16,8 @@ export const GlobalProvider = ({ initialLocales, children }) => {
         }
 
         const currentLangValue = locales.find((el) => el.short === localeValue)
-        setLocale(currentLangValue)
+        const t = setTimeout(() => setLocale(currentLangValue), 0)
+        return () => clearTimeout(t)
     }, [locales, localeValue])
 
     const value = useMemo(() => {

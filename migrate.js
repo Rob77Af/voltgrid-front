@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 
@@ -76,3 +77,4 @@ allCssImports.forEach(cssPath => {
 fs.writeFileSync(globalsCssPath, globalsCssContent);
 
 console.log('Migration of files complete.');
+

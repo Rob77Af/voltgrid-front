@@ -9,7 +9,8 @@ const Navigation = () => {
 
     // Close menu when route changes or component mounts
     useEffect(() => {
-        setIsMobileMenuOpen(false);
+        const t = setTimeout(() => setIsMobileMenuOpen(false), 0);
+        return () => clearTimeout(t);
     }, []);
 
     const navLinks = [

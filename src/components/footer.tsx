@@ -9,7 +9,10 @@ import Logo from './logo'
 
 const Footer = () => {
     const [mounted, setMounted] = React.useState(false);
-    React.useEffect(() => setMounted(true), []);
+    React.useEffect(() => {
+        const t = setTimeout(() => setMounted(true), 0);
+        return () => clearTimeout(t);
+    }, []);
     // Try to safely access the store outside of SSR to prevent hydration issues,
     // though for simple props it's often fine. We'll use a local var or require the hook.
     // Instead of importing the hook (which might conflict if I don't have it), let's just use CSS injection to hide/show the logos

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 
@@ -39,3 +40,4 @@ processDir(path.join(__dirname, 'src', 'components'));
 processDir(path.join(__dirname, 'src', 'views'));
 
 console.log('Cleanup script executed.');
+

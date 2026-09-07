@@ -3,7 +3,7 @@ import React from 'react';
 import { F1_MATCHUPS } from '@/api/f1-data';
 import { usePredictionStore } from '@/store/usePredictionStore';
 import { useState } from 'react';
-const HeadToHead = (props: any) => {
+const HeadToHead = (props: React.HTMLAttributes<HTMLDivElement>) => {
     const picks = usePredictionStore(state => state.h2h);
     const setPicks = usePredictionStore(state => state.setH2H);
     const [isSubmitting, setIsSubmitting] = useState(false);
