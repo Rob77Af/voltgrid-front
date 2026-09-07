@@ -2,11 +2,11 @@ import { createBrowserClient } from '@supabase/ssr';
 
 export function createClient() {
   return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder'
   );
 }
 
-// Global instance for simple client components that don't need SSR state
+// Global instance for simple client components
 export const supabase = createClient();
 
