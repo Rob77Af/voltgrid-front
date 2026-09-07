@@ -250,6 +250,13 @@ export default function SuperlicensePage() {
                     >
                         System Settings
                     </button>
+
+                    <button 
+                        onClick={() => logout()}
+                        className="w-64 bg-transparent text-gray-500 border-2 border-transparent px-8 py-4 font-bold uppercase tracking-widest text-xs transition-colors hover:text-red-500 hover:border-red-500/30"
+                    >
+                        [ LOGOUT ]
+                    </button>
                 </div>
             ) : (
                 <div className="w-full animate-fade-in">

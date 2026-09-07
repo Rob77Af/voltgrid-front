@@ -110,6 +110,10 @@ const Navigation = () => {
                         </button>
                     </div>
                     
+                    <div className="flex justify-center mb-8">
+                        <AuthButton />
+                    </div>
+
                     <div className="flex flex-col gap-6 flex-grow">
                         {navLinks.map((link, index) => (
                             <Link 
