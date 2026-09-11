@@ -231,7 +231,13 @@ export default function SuperlicensePage() {
                     <button 
                         className="w-64 bg-transparent text-black dark:text-white border-2 border-black/20 dark:border-white/20 px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:border-[#fbaa19] hover:text-[#fbaa19]"
                     >
-                        My Temwork
+                        My Teamwork
+                    </button>
+
+                    <button 
+                        className="w-64 bg-transparent text-black dark:text-white border-2 border-black/20 dark:border-white/20 px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:border-[#fbaa19] hover:text-[#fbaa19]"
+                    >
+                        Paddock
                     </button>
 
                     <button 
