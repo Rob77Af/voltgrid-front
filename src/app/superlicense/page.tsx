@@ -7,13 +7,12 @@ import ReportForm from "@/components/report-form";
 import { useSupabaseAuth } from "@/hooks/useSupabaseAuth";
 
 export default function SuperlicensePage() {
-    const { user, isLoading, login, signup, resetPassword } = useSupabaseAuth();
+    const { user, isLoading, login, signup, resetPassword, loginWithProvider } = useSupabaseAuth();
     
     // Auth View states
-    const [authMode, setAuthMode] = useState<"login" | "signup" | "recover">("login");
+    const [authMode, setAuthMode] = useState<"login" | "signup" | "recover" | "magic_link">("login");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const [successMsg, setSuccessMsg] = useState("");
@@ -34,11 +33,14 @@ export default function SuperlicensePage() {
             if (authMode === "login") {
                 await login(email, password);
             } else if (authMode === "signup") {
-                await signup(email, password, username);
-                setSuccessMsg("Conta criada com sucesso! Verifique seu email se necessario.");
+                await signup(email, password);
+                setSuccessMsg("Conta criada com sucesso! Verifique seu email se necessário.");
+            } else if (authMode === "magic_link") {
+                await signup(email, undefined);
+                setSuccessMsg("Magic Link enviado! Verifique sua caixa de entrada.");
             } else if (authMode === "recover") {
                 await resetPassword(email);
-                setSuccessMsg("Instrucoes de recuperacao enviadas para o seu email.");
+                setSuccessMsg("Instruções de recuperação enviadas para o seu email.");
             }
         } catch (err) {
             setErrorMsg((err as Error).message || "Ocorreu um erro. Tente novamente.");
@@ -81,19 +83,6 @@ export default function SuperlicensePage() {
                             </div>
                         )}
                         
-                        {authMode === "signup" && (
-                            <div className="flex flex-col gap-1">
-                                <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Apelido (Username)</label>
-                                <input 
-                                    type="text" 
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    className="bg-gray-50 dark:bg-black border border-black/20 dark:border-white/20 p-4 text-black dark:text-white focus:border-[#fbaa19] focus:outline-none transition-colors"
-                                    required 
-                                />
-                            </div>
-                        )}
-                        
                         <div className="flex flex-col gap-1">
                             <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Email</label>
                             <input 
@@ -105,7 +94,7 @@ export default function SuperlicensePage() {
                             />
                         </div>
                         
-                        {authMode !== "recover" && (
+                        {(authMode === "login" || authMode === "signup") && (
                             <div className="flex flex-col gap-1">
                                 <label className="text-xs font-bold uppercase tracking-widest text-gray-500 flex justify-between">
                                     <span>Senha</span>
@@ -113,7 +102,7 @@ export default function SuperlicensePage() {
                                         <button 
                                             type="button" 
                                             onClick={() => setAuthMode("recover")}
-                                            className="text-[#fbaa19] hover:underline"
+                                            className="text-[#fbaa19] hover:text-white transition-colors"
                                         >
                                             Esqueceu?
                                         </button>
@@ -132,10 +121,47 @@ export default function SuperlicensePage() {
                         <button 
                             type="submit"
                             disabled={isSubmitting}
-                            className="mt-4 bg-[#fbaa19] text-black font-black uppercase tracking-widest p-4 hover:bg-yellow-500 transition-colors disabled:opacity-50"
+                            className="mt-2 bg-[#fbaa19] text-black font-black uppercase tracking-widest p-4 hover:bg-yellow-500 transition-colors disabled:opacity-50"
                         >
-                            {isSubmitting ? "Processando..." : authMode === "login" ? "Acessar Sistema" : authMode === "signup" ? "Emitir Licenca" : "Recuperar Acesso"}
+                            {isSubmitting ? "Processando..." : authMode === "login" ? "Acessar Sistema" : authMode === "signup" ? "Emitir Licença (Senha)" : authMode === "magic_link" ? "Enviar Magic Link" : "Recuperar Acesso"}
                         </button>
+
+                        <div className="flex items-center gap-4 my-2">
+                            <div className="h-px bg-black/10 dark:bg-white/10 flex-1"></div>
+                            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Ou Acesso Rápido</span>
+                            <div className="h-px bg-black/10 dark:bg-white/10 flex-1"></div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2">
+                            <button 
+                                type="button"
+                                onClick={() => loginWithProvider('google')}
+                                className="border border-black/20 dark:border-white/20 p-3 flex items-center justify-center gap-2 hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors uppercase text-xs font-bold tracking-widest"
+                            >
+                                Google
+                            </button>
+                            <button 
+                                type="button"
+                                onClick={() => loginWithProvider('twitter')}
+                                className="border border-black/20 dark:border-white/20 p-3 flex items-center justify-center gap-2 hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors uppercase text-xs font-bold tracking-widest"
+                            >
+                                X (Twitter)
+                            </button>
+                            <button 
+                                type="button"
+                                onClick={() => loginWithProvider('facebook')}
+                                className="border border-black/20 dark:border-white/20 p-3 flex items-center justify-center gap-2 hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors uppercase text-xs font-bold tracking-widest"
+                            >
+                                Facebook
+                            </button>
+                            <button 
+                                type="button"
+                                onClick={() => setAuthMode(authMode === "magic_link" ? "login" : "magic_link")}
+                                className="border border-black/20 dark:border-white/20 p-3 flex items-center justify-center gap-2 hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors uppercase text-xs font-bold tracking-widest bg-black/5 dark:bg-white/5"
+                            >
+                                Magic Link
+                            </button>
+                        </div>
                         
                         <div className="flex flex-col gap-2 mt-4 text-center">
                             {authMode !== "login" && (
@@ -144,16 +170,16 @@ export default function SuperlicensePage() {
                                     onClick={() => setAuthMode("login")}
                                     className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-black dark:hover:text-white transition-colors"
                                 >
-                                    Voltar para o Login
+                                    Voltar para o Login com Senha
                                 </button>
                             )}
-                            {authMode === "login" && (
+                            {(authMode === "login" || authMode === "magic_link") && (
                                 <button 
                                     type="button"
                                     onClick={() => setAuthMode("signup")}
                                     className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-black dark:hover:text-white transition-colors"
                                 >
-                                    Novo Piloto? Solicite sua Superlicenca
+                                    Novo Piloto? Crie uma senha
                                 </button>
                             )}
                         </div>
