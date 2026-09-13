@@ -58,10 +58,8 @@ export default function SuperlicensePage() {
         );
     }
 
-    if (!user) {
-        return (
-            <main className="w-full min-h-[80vh] flex flex-col items-center justify-center p-4">
-                <div className="bg-white dark:bg-[#111] border border-black/20 dark:border-white/20 w-full max-w-md flex flex-col relative shadow-2xl transition-all">
+    const loginForm = (
+        <div className="bg-white dark:bg-[#111] border border-black/20 dark:border-white/20 w-full max-w-md flex flex-col relative shadow-2xl transition-all">
                     <div className="p-8 border-b-4 border-[#fbaa19] text-center bg-black">
                         <h1 className="text-3xl font-black uppercase tracking-widest text-[#fbaa19] font-display">
                             Superlicense
@@ -185,13 +183,12 @@ export default function SuperlicensePage() {
                         </div>
                     </form>
                 </div>
-            </main>
-        );
-    }
+    );
 
     // AUTHENTICATED VIEW
     return (
-        <main className="w-full max-w-6xl mx-auto p-4 md:p-8 pt-12 pb-24 flex flex-col items-center justify-start min-h-screen">
+        <>
+        <main className={`w-full max-w-6xl mx-auto p-4 md:p-8 pt-12 pb-24 flex flex-col items-center justify-start min-h-screen ${!user ? 'pointer-events-none blur-sm opacity-50' : ''}`}>
             {activeView === "menu" ? (
                 <div className="flex flex-col items-center justify-center min-h-[50vh] py-8 gap-4 md:gap-6 animate-fade-in">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-wider font-display text-black dark:text-white mb-6">
@@ -309,5 +306,11 @@ export default function SuperlicensePage() {
                 </div>
             )}
         </main>
+        {!user && (
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+                {loginForm}
+            </div>
+        )}
+        </>
     );
 }
