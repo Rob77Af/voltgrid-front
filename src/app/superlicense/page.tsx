@@ -4,6 +4,7 @@ import Link from "next/link";
 import Settings from "@/components/settings";
 import Calendar from "@/components/calendar";
 import ReportForm from "@/components/report-form";
+import SillySeason from "@/components/silly-season";
 import { useSupabaseAuth } from "@/hooks/useSupabaseAuth";
 
 export default function SuperlicensePage() {
@@ -18,8 +19,7 @@ export default function SuperlicensePage() {
     const [successMsg, setSuccessMsg] = useState("");
 
     // Superlicense states
-    const [activeView, setActiveView] = useState<"menu" | "settings" | "calendar" | "report">("menu");
-    const [isSillySeasonOpen, setIsSillySeasonOpen] = useState(false);
+    const [activeView, setActiveView] = useState<"menu" | "settings" | "calendar" | "report" | "silly_season">("menu");
     const [hasVotingAlert, setHasVotingAlert] = useState(true);
     const isVotingOpen = hasVotingAlert;
 
@@ -210,19 +210,10 @@ export default function SuperlicensePage() {
                     </button>
 
                     <button 
-                        disabled={!isSillySeasonOpen}
-                        className={`w-64 border-2 px-8 py-4 font-bold uppercase tracking-widest text-sm transition-all relative flex items-center justify-center gap-2 ${
-                            isSillySeasonOpen 
-                                ? "bg-white dark:bg-black text-black dark:text-white border-black/50 dark:border-white/50 hover:border-[#fbaa19] hover:text-[#fbaa19]" 
-                                : "bg-gray-100 dark:bg-[#111] text-gray-400 dark:text-gray-600 border-gray-300 dark:border-[#333] cursor-not-allowed opacity-60"
-                        }`}
+                        onClick={() => setActiveView("silly_season")}
+                        className="w-64 bg-white dark:bg-black text-black dark:text-white border-2 border-black/50 dark:border-white/50 px-8 py-4 font-bold uppercase tracking-widest text-sm transition-all hover:border-[#fbaa19] hover:text-[#fbaa19]"
                     >
                         Silly Season
-                        {!isSillySeasonOpen && (
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
-                        )}
                     </button>
 
                     <button 
@@ -303,6 +294,7 @@ export default function SuperlicensePage() {
                     {activeView === "settings" && <Settings />}
                     {activeView === "calendar" && <Calendar />}
                     {activeView === "report" && <ReportForm />}
+                    {activeView === "silly_season" && <SillySeason />}
                 </div>
             )}
         </main>
