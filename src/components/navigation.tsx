@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Logo from './logo';
-import AuthButton from './auth-button';
+import { useSupabaseAuth } from "@/hooks/useSupabaseAuth";
 
 const Navigation = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { user } = useSupabaseAuth();
 
     // Close menu when route changes or component mounts
     useEffect(() => {
@@ -52,9 +53,6 @@ const Navigation = () => {
 
                     {/* RIGHT: Buttons & Controls */}
                     <div className="flex items-center gap-4">
-                        <div className="hidden md:flex items-center">
-                            <AuthButton />
-                        </div>
                         {/* Desktop Buttons */}
                         <div className="hidden md:flex items-center gap-4">
                             <Link 
@@ -67,7 +65,7 @@ const Navigation = () => {
                                 href="/superlicense" 
                                 className="bg-transparent text-black dark:text-white border border-black/20 dark:border-white/20 px-5 py-2 text-sm font-bold uppercase tracking-wider rounded-sm hover:border-[#fbaa19] hover:text-[#fbaa19] dark:hover:border-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
                             >
-                                Superlicense
+                                {user ? user.email : "Superlicense"}
                             </Link>
                         </div>
 
@@ -110,9 +108,6 @@ const Navigation = () => {
                         </button>
                     </div>
                     
-                    <div className="flex justify-center mb-8">
-                        <AuthButton />
-                    </div>
 
                     <div className="flex flex-col gap-6 flex-grow">
                         {navLinks.map((link, index) => (
@@ -140,7 +135,7 @@ const Navigation = () => {
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="bg-transparent text-black dark:text-white border-2 border-black/20 dark:border-white/20 w-full text-center px-6 py-4 text-lg font-bold uppercase tracking-wider rounded-sm hover:border-[#fbaa19] hover:text-[#fbaa19] dark:hover:border-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
                         >
-                            Superlicense
+                            {user ? user.email : "Superlicense"}
                         </Link>
                     </div>
                 </div>
