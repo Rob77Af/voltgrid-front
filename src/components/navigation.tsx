@@ -48,7 +48,7 @@ const Navigation = () => {
 
     return (
         <>
-            <nav className={`sticky top-0 z-50 w-full transition-all duration-300 border-b-2 border-[#fbaa19] bg-white dark:bg-black ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
+            <nav className={`sticky top-0 z-50 w-full transition-all duration-300 bg-gradient-to-b from-black to-[#111] ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
                 {/* Background texture overlay */}
                 <div className="absolute inset-0 z-0 opacity-10 dark:opacity-[0.08] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://images.pexels.com/photos/6159693/pexels-photo-6159693.jpeg?auto=compress&cs=tinysrgb&h=650&w=940")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                 
@@ -57,8 +57,7 @@ const Navigation = () => {
                     <div className="flex items-center">
                         <Link href="/" className="flex items-center h-8">
                             <div className="flex items-center h-full">
-                                <div className="block dark:hidden"><Logo isOnDarkBackground={false} /></div>
-                                <div className="hidden dark:block"><Logo isOnDarkBackground={true} /></div>
+                                <Logo isOnDarkBackground={true} />
                             </div>
                         </Link>
                     </div>
@@ -69,7 +68,7 @@ const Navigation = () => {
                             <Link 
                                 key={index} 
                                 href={link.href}
-                                className="text-black dark:text-white text-sm font-semibold uppercase tracking-widest hover:text-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
+                                className="text-white text-sm font-semibold uppercase tracking-widest hover:text-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
                             >
                                 {link.name}
                             </Link>
@@ -88,7 +87,7 @@ const Navigation = () => {
                             </Link>
                             <Link 
                                 href="/superlicense" 
-                                className="bg-transparent text-black dark:text-white border border-black/20 dark:border-white/20 px-5 py-2 text-sm font-bold uppercase tracking-wider rounded-sm hover:border-[#fbaa19] hover:text-[#fbaa19] dark:hover:border-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
+                                className="bg-transparent text-white border border-white/20 px-5 py-2 text-sm font-bold uppercase tracking-wider rounded-sm hover:border-[#fbaa19] hover:text-[#fbaa19] dark:hover:border-[#fbaa19] dark:hover:text-[#fbaa19] transition-colors"
                             >
                                 {user ? user.email : "Superlicense"}
                             </Link>
@@ -98,7 +97,7 @@ const Navigation = () => {
                         <div className="md:hidden flex items-center">
                             <button
                                 aria-label="Open menu"
-                                className="text-black dark:text-white p-2"
+                                className="text-white p-2"
                                 onClick={() => setIsMobileMenuOpen(true)}
                             >
                                 <svg fill="none" width="28" height="28" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round">
