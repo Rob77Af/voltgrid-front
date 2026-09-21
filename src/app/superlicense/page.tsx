@@ -8,7 +8,7 @@ import SillySeason from "@/components/silly-season";
 import { useSupabaseAuth } from "@/hooks/useSupabaseAuth";
 
 export default function SuperlicensePage() {
-    const { user, isLoading, login, signup, resetPassword, loginWithProvider } = useSupabaseAuth();
+    const { user, isLoading, login, signup, resetPassword, loginWithProvider, logout } = useSupabaseAuth();
     
     // Auth View states
     const [authMode, setAuthMode] = useState<"login" | "signup" | "recover" | "magic_link">("login");
