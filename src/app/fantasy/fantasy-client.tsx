@@ -5,6 +5,9 @@ import TeamworkCompetition from '@/components/teamwork-competition';
 import RaceRemoteControl from '@/components/race-remote-control';
 import TelemetryLeaderboard from '@/components/telemetry-leaderboard';
 import { useSwipe } from '@/hooks/useSwipe';
+import FantasyIntro from '@/components/fantasy-intro';
+import CompetitionHero from '@/components/competition-hero';
+import { useSupabaseAuth } from '@/hooks/useSupabaseAuth';
 
 const FANTASY_TABS = [
     { id: 'race-results', label: 'Race Results' },
@@ -14,6 +17,7 @@ const FANTASY_TABS = [
 ];
 
 export default function FantasyClient() {
+    const { user, isLoading } = useSupabaseAuth();
     const [activeId, setActiveId] = useState('poletime-competition'); // actually milesimus / teamwork in the control
     const [activeTab, setActiveTab] = useState('race-results');
     const [activeResultRound, setActiveResultRound] = useState('03'); // Default to last mock active event
@@ -377,15 +381,8 @@ export default function FantasyClient() {
 
     return (
         <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} className="flex flex-col gap-8 w-full">
-            <header className="mb-4 border-b-4 border-[#fbaa19] pb-6 md:pb-8 flex flex-col gap-4">
-                <p className="text-[#fbaa19] text-sm md:text-base font-bold uppercase tracking-[0.2em] font-display">F1 // FANTASY</p>
-                <h1 className="text-black dark:text-white text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black uppercase tracking-widest font-display mb-2">
-                    {getCompetitionTitle(activeId)}
-                </h1>
-                <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-2xl">
-                    Select a competition below to view your standing and global performance.
-                </p>
-            </header>
+            {!isLoading && !user && <FantasyIntro />}
+            <CompetitionHero activeId={activeId} />
 
             <CompetitionsRemoteControl activeId={activeId} setActiveId={setActiveId} />
             
