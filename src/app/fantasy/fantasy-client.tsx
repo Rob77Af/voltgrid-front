@@ -382,9 +382,14 @@ export default function FantasyClient() {
     return (
         <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} className="flex flex-col gap-8 w-full">
             {!isLoading && !user && <FantasyIntro />}
-            <CompetitionHero activeId={activeId} />
-
-            <CompetitionsRemoteControl activeId={activeId} setActiveId={setActiveId} />
+            <div className="flex flex-col md:flex-row gap-4 w-full items-stretch min-h-[300px]">
+                <div className="w-full md:w-1/4 flex-shrink-0 order-2 md:order-1">
+                    <CompetitionsRemoteControl activeId={activeId} setActiveId={setActiveId} />
+                </div>
+                <div className="w-full md:w-3/4 flex-shrink-0 order-1 md:order-2">
+                    <CompetitionHero activeId={activeId} />
+                </div>
+            </div>
             
             {/* Global Fantasy Sub-menu (Sticky) */}
             <div 
