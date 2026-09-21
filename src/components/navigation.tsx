@@ -6,6 +6,8 @@ import { useSupabaseAuth } from "@/hooks/useSupabaseAuth";
 
 const Navigation = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
     const { user } = useSupabaseAuth();
 
     // Close menu when route changes or component mounts
@@ -13,6 +15,29 @@ const Navigation = () => {
         const t = setTimeout(() => setIsMobileMenuOpen(false), 0);
         return () => clearTimeout(t);
     }, []);
+
+    // Hide navbar on scroll down, show on scroll up
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            
+            // Only trigger if scroll difference is more than 10px to avoid micro-jumps
+            if (Math.abs(currentScrollY - lastScrollY) < 10) return;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // Scrolling down past 100px -> hide
+                setIsVisible(false);
+            } else {
+                // Scrolling up -> show
+                setIsVisible(true);
+            }
+            
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollY]);
 
     const navLinks = [
         { name: 'F1', href: '/f1' },
@@ -23,11 +48,11 @@ const Navigation = () => {
 
     return (
         <>
-            <nav className="sticky top-0 z-50 w-full transition-colors border-b-2 border-[#fbaa19] bg-white dark:bg-black">
+            <nav className={`sticky top-0 z-50 w-full transition-all duration-300 border-b-2 border-[#fbaa19] bg-white dark:bg-black ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
                 {/* Background texture overlay */}
                 <div className="absolute inset-0 z-0 opacity-10 dark:opacity-[0.08] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://images.pexels.com/photos/6159693/pexels-photo-6159693.jpeg?auto=compress&cs=tinysrgb&h=650&w=940")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                 
-                <div className="relative z-10 flex items-center justify-between w-full h-16 md:h-20 max-w-7xl mx-auto px-4 md:px-8">
+                <div className="relative z-10 flex items-center justify-between w-full h-14 md:h-16 max-w-7xl mx-auto px-4 md:px-8">
                     {/* LEFT: Logo */}
                     <div className="flex items-center">
                         <Link href="/" className="flex items-center h-8">
