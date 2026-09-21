@@ -49,7 +49,7 @@ export default function CompetitionHero({ activeId }: CompetitionHeroProps) {
     const data = getHeroData(activeId);
 
     return (
-        <header id="competitions" className="relative w-full overflow-hidden mb-6 md:mb-8 border-b-4 border-[#fbaa19]">
+        <header id="competitions" className="relative w-full h-full overflow-hidden border-b-4 border-[#fbaa19] flex flex-col">
             {/* Background Image Container with height */}
             <div className="absolute inset-0 w-full h-full bg-black">
                 <div 
@@ -66,7 +66,7 @@ export default function CompetitionHero({ activeId }: CompetitionHeroProps) {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 w-full p-6 md:p-10 pt-16 md:pt-20 flex flex-col gap-2 min-h-[300px] justify-end">
+            <div className="relative z-10 w-full p-6 md:p-10 pt-16 md:pt-20 flex flex-col gap-2 min-h-[300px] flex-grow justify-end">
                 <div className="flex items-center gap-4 mb-2">
                     <div className="w-8 h-1 bg-[#fbaa19]"></div>
                     <p className="text-[#fbaa19] text-xs font-bold uppercase tracking-[0.3em] font-display">

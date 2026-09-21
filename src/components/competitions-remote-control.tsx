@@ -37,15 +37,15 @@ interface Props {
 
 const CompetitionsRemoteControl = ({ activeId, setActiveId }: Props) => {
     return (
-        <div className="w-full flex p-1 relative box-border min-h-[4.5rem] overflow-x-auto overflow-y-hidden items-stretch flex-row bg-white dark:bg-[#0a0a0a] border border-black/20 dark:border-[#ffffff3d] rounded-sm">
-            <nav aria-label="Competition categories" className="flex flex-row w-full gap-1 items-stretch flex-nowrap min-w-max">
+        <div className="w-full flex p-1 relative box-border min-h-[4.5rem] md:h-full overflow-x-auto md:overflow-y-auto md:overflow-x-hidden items-stretch flex-row md:flex-col bg-white dark:bg-[#0a0a0a] border border-black/20 dark:border-[#ffffff3d] rounded-sm">
+            <nav aria-label="Competition categories" className="flex flex-row md:flex-col w-full gap-1 items-stretch flex-nowrap min-w-max md:min-w-0 md:h-full">
                 {categories.map(cat => (
                     <button
                         key={cat.id}
                         type="button"
                         onClick={() => setActiveId(cat.id)}
                         aria-pressed={activeId === cat.id}
-                        className={`w-24 sm:w-28 md:w-32 shrink-0 flex flex-col justify-center items-center gap-1 p-2 px-2 cursor-pointer uppercase font-bold tracking-widest text-[9px] sm:text-[10px] md:text-xs transition-colors border-b-2 ${
+                        className={`w-24 sm:w-28 md:w-full md:flex-1 shrink-0 flex flex-col justify-center items-center gap-1 md:gap-2 p-2 px-2 md:px-4 cursor-pointer uppercase font-bold tracking-widest text-[9px] sm:text-[10px] md:text-xs transition-colors border-b-2 md:border-b-0 md:border-l-4 ${
                             activeId === cat.id 
                                 ? "bg-[#fbaa19] text-black border-[#fbaa19]" 
                                 : "bg-transparent text-gray-600 dark:text-gray-400 border-transparent hover:text-black dark:hover:text-[#fbaa19] hover:bg-gray-100 dark:hover:bg-[#1a1a1a]"
