@@ -5,10 +5,27 @@ import Settings from "@/components/settings";
 import Calendar from "@/components/calendar";
 import ReportForm from "@/components/report-form";
 import SillySeason from "@/components/silly-season";
+import Onboarding from "@/components/onboarding";
 import { useSupabaseAuth } from "@/hooks/useSupabaseAuth";
+import { supabase } from "@/utils/supabase";
 
 export default function SuperlicensePage() {
     const { user, isLoading, login, signup, resetPassword, loginWithProvider, logout } = useSupabaseAuth();
+    
+    // Profile State
+    const [profile, setProfile] = React.useState<any>(null);
+    const [loadingProfile, setLoadingProfile] = React.useState(false);
+
+    React.useEffect(() => {
+        if (user) {
+            setLoadingProfile(true);
+            supabase.from('profiles').select('*').eq('id', user.id).single()
+                .then(({ data }) => setProfile(data))
+                .finally(() => setLoadingProfile(false));
+        } else {
+            setProfile(null);
+        }
+    }, [user]);
     
     // Auth View states
     const [authMode, setAuthMode] = useState<"login" | "signup" | "recover" | "magic_link">("login");
