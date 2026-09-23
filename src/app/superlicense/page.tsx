@@ -206,7 +206,14 @@ export default function SuperlicensePage() {
     return (
         <>
         <main className={`w-full max-w-6xl mx-auto p-4 md:p-8 pt-12 pb-24 flex flex-col items-center justify-start min-h-screen ${!user ? 'pointer-events-none blur-sm opacity-50' : ''}`}>
-            {activeView === "menu" ? (
+            {loadingProfile ? (
+                <div className="flex flex-col items-center justify-center min-h-[50vh] py-8 gap-4 animate-pulse">
+                    <div className="w-12 h-12 rounded-full border-4 border-[#fbaa19] border-t-transparent animate-spin mb-4"></div>
+                    <p className="text-[#fbaa19] font-bold uppercase tracking-widest text-xs">VERIFICANDO PERFIL...</p>
+                </div>
+            ) : profile && profile.setup_completed === false ? (
+                <Onboarding onComplete={() => setProfile({ ...profile, setup_completed: true })} />
+            ) : activeView === "menu" ? (
                 <div className="flex flex-col items-center justify-center min-h-[50vh] py-8 gap-4 md:gap-6 animate-fade-in">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-wider font-display text-black dark:text-white mb-6">
                         Superlicense
