@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Settings from "@/components/settings";
+import SetupForm from "@/components/setup-form";
 import Calendar from "@/components/calendar";
 import ReportForm from "@/components/report-form";
 import SillySeason from "@/components/silly-season";
@@ -36,7 +37,7 @@ export default function SuperlicensePage() {
     const [successMsg, setSuccessMsg] = useState("");
 
     // Superlicense states
-    const [activeView, setActiveView] = useState<"menu" | "settings" | "calendar" | "report" | "silly_season">("menu");
+    const [activeView, setActiveView] = useState<"menu" | "settings" | "setup" | "calendar" | "report" | "silly_season">("menu");
     const [hasVotingAlert, setHasVotingAlert] = useState(true);
     const isVotingOpen = hasVotingAlert;
 
@@ -219,12 +220,12 @@ export default function SuperlicensePage() {
                         Superlicense
                     </h1>
                     
-                    <Link 
-                        href="/bet?tab=all-forms"
-                        className="w-64 text-center bg-black dark:bg-[#1a1a1a] text-white border-2 border-black dark:border-[#1a1a1a] px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:bg-white hover:text-black dark:hover:bg-white dark:hover:text-black"
-                    >
-                        Setup
-                    </Link>
+                    <button 
+                            onClick={() => setActiveView("setup")}
+                            className="w-64 text-center bg-black dark:bg-[#1a1a1a] text-white border-2 border-black dark:border-[#1a1a1a] px-8 py-4 font-bold uppercase tracking-widest text-sm transition-colors hover:bg-white hover:text-black dark:hover:bg-white dark:hover:text-black"
+                        >
+                            Setup
+                        </button>
 
                     <button 
                         onClick={() => setActiveView("report")}
@@ -315,6 +316,7 @@ export default function SuperlicensePage() {
                             Back to Superlicense
                         </button>
                     </div>
+                    {activeView === "setup" && <SetupForm />}
                     {activeView === "settings" && <Settings />}
                     {activeView === "calendar" && <Calendar />}
                     {activeView === "report" && <ReportForm />}
