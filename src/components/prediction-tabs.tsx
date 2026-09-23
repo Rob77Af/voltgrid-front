@@ -11,10 +11,10 @@ import Misc from './misc';
 import { usePredictionStore } from '@/store/usePredictionStore';
 import { useSwipe } from '@/hooks/useSwipe';
 
-const TABS_ORDER = ['poletime', 'master', 'evo', 'head-to-head', 'misc', 'all-forms'];
+const TABS_ORDER = ['all-forms', 'poletime', 'master', 'evo', 'head-to-head', 'misc'];
 
 const PredictionTabs = () => {
-    const [activeId, setActiveId] = useState('head-to-head');
+    const [activeId, setActiveId] = useState('all-forms');
     const [isMounted, setIsMounted] = useState(false);
 
     // Global validation for ALL forms

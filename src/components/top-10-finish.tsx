@@ -98,8 +98,18 @@ const Top10Finish = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHea
 
                                 {/* Custom Dropdown Menu */}
                                 {isOpen && (
-                                    <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-gray-50 dark:bg-[#0a0a0a] border border-[#fbaa19] max-h-[400px] md:max-h-[500px] overflow-y-auto shadow-2xl shadow-black/50 z-[100]">
-                                        <div className="flex flex-col py-2">
+                                    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 bg-black/90 backdrop-blur-md md:bg-transparent md:backdrop-blur-none md:absolute md:top-[calc(100%+4px)] md:inset-auto md:p-0 md:left-0 md:w-full md:block" onClick={() => setOpenDropdownIndex(null)}>
+                                        <div className="w-full w-full max-w-sm md:max-w-none bg-gray-50 dark:bg-[#0a0a0a] border border-[#fbaa19] max-h-[85vh] md:max-h-[500px] overflow-y-auto shadow-2xl shadow-black/50 flex flex-col relative rounded-sm md:rounded-none" onClick={(e) => e.stopPropagation()}>
+                                            
+                                            {/* Mobile Header */}
+                                            <div className="md:hidden sticky top-0 z-10 flex justify-between items-center p-4 bg-[#fbaa19] text-black font-black uppercase tracking-widest shadow-md">
+                                                <span>Select Driver</span>
+                                                <button onClick={(e) => { e.stopPropagation(); setOpenDropdownIndex(null); }}>
+                                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                                </button>
+                                            </div>
+
+                                            <div className="flex flex-col py-2">
                                             {F1_DRIVERS.map(driver => {
                                                 const isPickedHere = pick === driver;
                                                 const isPickedElsewhere = picks.includes(driver) && !isPickedHere;
@@ -137,6 +147,7 @@ const Top10Finish = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHea
                                                     </div>
                                                 );
                                             })}
+                                        </div>
                                         </div>
                                     </div>
                                 )}

@@ -2,6 +2,12 @@
 import React, { useState } from 'react';
 
 const categories = [
+    { id: 'all-forms', label: 'FULL', icon: (
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
+            <rect x="4" y="4" rx="1" width="16" height="16"></rect>
+            <path d="M4 10h16M4 16h16M10 4v16M16 4v16"></path>
+        </svg>
+    )},
     { id: 'poletime', label: 'Poletime', icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
             <circle r="7" cx="12" cy="13"></circle>
@@ -31,12 +37,6 @@ const categories = [
             <path d="M5 3v18M5 4h13l-3 4 3 4H5"></path>
             <path d="M8 8h2M12 6h2M8 12h2"></path>
         </svg>
-    )},
-    { id: 'all-forms', label: 'FULL', icon: (
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
-            <rect x="4" y="4" rx="1" width="16" height="16"></rect>
-            <path d="M4 10h16M4 16h16M10 4v16M16 4v16"></path>
-        </svg>
     )}
 ];
 
@@ -48,15 +48,15 @@ interface Props {
 const F1BetRemoteControl = ({ activeId, setActiveId }: Props) => {
 
     return (
-        <div className="w-full flex p-1 relative box-border min-h-[4.5rem] overflow-x-auto overflow-y-hidden items-stretch flex-row bg-white dark:bg-[#0a0a0a] border border-black/20 dark:border-[#ffffff3d] rounded-sm">
-            <nav aria-label="Prediction categories" className="flex flex-row w-full gap-1 items-stretch flex-nowrap min-w-max">
+        <div className="w-full flex p-0.5 sm:p-1 relative box-border min-h-[4rem] sm:min-h-[4.5rem] overflow-hidden items-stretch flex-row bg-white dark:bg-[#0a0a0a] border border-black/20 dark:border-[#ffffff3d] rounded-sm">
+            <nav aria-label="Prediction categories" className="flex flex-row w-full gap-0.5 sm:gap-1 items-stretch flex-nowrap">
                 {categories.map(cat => (
                     <button
                         key={cat.id}
                         type="button"
                         onClick={() => setActiveId(cat.id)}
                         aria-pressed={activeId === cat.id}
-                        className={`w-24 sm:w-28 md:w-32 shrink-0 flex flex-col justify-center items-center gap-1 p-2 px-2 cursor-pointer uppercase font-bold tracking-widest text-[9px] sm:text-[10px] md:text-xs transition-colors border-b-2 ${
+                        className={`flex-1 flex flex-col justify-center items-center gap-0.5 sm:gap-1 p-1 sm:p-2 cursor-pointer uppercase font-bold tracking-tighter sm:tracking-widest text-[8px] sm:text-[10px] md:text-xs transition-colors border-b-2 ${
                             activeId === cat.id 
                                 ? "bg-[#fbaa19] text-black border-[#fbaa19]" 
                                 : "bg-transparent text-gray-600 dark:text-gray-400 border-transparent hover:text-black dark:hover:text-[#fbaa19] hover:bg-gray-100 dark:hover:bg-[#1a1a1a]"
