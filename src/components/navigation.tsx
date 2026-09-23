@@ -6,8 +6,7 @@ import { useSupabaseAuth } from "@/hooks/useSupabaseAuth";
 
 const Navigation = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isVisible, setIsVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    
     const { user } = useSupabaseAuth();
 
     // Close menu when route changes or component mounts
@@ -16,28 +15,7 @@ const Navigation = () => {
         return () => clearTimeout(t);
     }, []);
 
-    // Hide navbar on scroll down, show on scroll up
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            
-            // Only trigger if scroll difference is more than 10px to avoid micro-jumps
-            if (Math.abs(currentScrollY - lastScrollY) < 10) return;
 
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                // Scrolling down past 100px -> hide
-                setIsVisible(false);
-            } else {
-                // Scrolling up -> show
-                setIsVisible(true);
-            }
-            
-            setLastScrollY(currentScrollY);
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY]);
 
     const navLinks = [
         { name: 'F1', href: '/f1' },
@@ -48,7 +26,7 @@ const Navigation = () => {
 
     return (
         <>
-            <nav className={`sticky top-0 z-50 w-full transition-all duration-300 bg-gradient-to-b from-black to-[#111] ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
+            <nav className="sticky top-0 z-50 w-full bg-gradient-to-b from-black to-[#111] border-b border-white/5">
                 {/* Background texture overlay */}
                 <div className="absolute inset-0 z-0 opacity-10 dark:opacity-[0.08] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://images.pexels.com/photos/6159693/pexels-photo-6159693.jpeg?auto=compress&cs=tinysrgb&h=650&w=940")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                 
