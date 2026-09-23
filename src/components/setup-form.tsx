@@ -8,12 +8,15 @@ export default function SetupForm() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [generatingAvatar, setGeneratingAvatar] = useState(false);
+    const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+    const [aiError, setAiError] = useState<string | null>(null);
     
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
         nationality: '',
-        org_color: '#fbaa19'
+        org_color: ''
     });
 
     useEffect(() => {
@@ -22,7 +25,7 @@ export default function SetupForm() {
             try {
                 const { data, error } = await supabase
                     .from('profiles')
-                    .select('first_name, last_name, nationality, org_color')
+                    .select('first_name, last_name, nationality, org_color, avatar_url')
                     .eq('id', user.id)
                     .single();
                 
@@ -70,6 +73,46 @@ export default function SetupForm() {
             
             setSuccess(true);
             setTimeout(() => setSuccess(false), 3000);
+            
+            // Trigger AI Generation if fields exist
+            if (formData.first_name && formData.nationality) {
+                setGeneratingAvatar(true);
+                setAiError(null);
+                
+                try {
+                    const res = await fetch('/api/generate-avatar', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            firstName: formData.first_name,
+                            lastName: formData.last_name,
+                            nationality: formData.nationality,
+                            orgColorRef: formData.org_color
+                        })
+                    });
+                    
+                    const resData = await res.json();
+                    
+                    if (!res.ok) {
+                        throw new Error(resData.error || 'Failed to generate AI avatar');
+                    }
+                    
+                    if (resData.imageUrl) {
+                        setAvatarUrl(resData.imageUrl);
+                        // Save URL to profile
+                        await supabase
+                            .from('profiles')
+                            .update({ avatar_url: resData.imageUrl })
+                            .eq('id', user.id);
+                    }
+                } catch (genErr: any) {
+                    console.error('Avatar generation error:', genErr);
+                    setAiError(genErr.message);
+                } finally {
+                    setGeneratingAvatar(false);
+                }
+            }
+
         } catch (err) {
             console.error("Error saving profile:", err);
             alert("Error saving your profile details.");
@@ -150,33 +193,53 @@ export default function SetupForm() {
 
                 <div className="flex flex-col gap-2">
                     <label htmlFor="org_color" className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
-                        Organization Color (Optional)
+                        Organization Color Reference (Optional)
                     </label>
-                    <div className="flex items-center gap-4">
-                        <input
-                            type="color"
-                            id="org_color"
-                            name="org_color"
-                            value={formData.org_color}
-                            onChange={handleChange}
-                            className="w-16 h-12 cursor-pointer bg-transparent border-0 p-0"
-                        />
-                        <span className="text-sm font-bold uppercase tracking-widest text-black dark:text-white">
-                            {formData.org_color}
-                        </span>
-                    </div>
+                    <input
+                        type="text"
+                        id="org_color"
+                        name="org_color"
+                        value={formData.org_color}
+                        onChange={handleChange}
+                        className="bg-black/5 dark:bg-white/5 border border-black/20 dark:border-white/20 p-3 text-black dark:text-white uppercase font-bold tracking-wider focus:outline-none focus:border-[#fbaa19] transition-colors"
+                        placeholder="e.g. Fluminense, Ferrari, Cyberpunk"
+                    />
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-1">
+                        Our AI will mix this reference (70%) with your nationality colors (30%) to generate your avatar.
+                    </p>
                 </div>
 
-                {/* AI Avatar Preview placeholder */}
-                <div className="mt-4 p-6 border border-dashed border-black/30 dark:border-white/30 flex flex-col items-center justify-center gap-4">
-                    <div className="w-32 h-32 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center overflow-hidden border-2 border-[#fbaa19]">
-                        <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
+                {/* AI Avatar Preview */}
+                <div className="mt-4 p-6 border border-dashed border-black/30 dark:border-white/30 flex flex-col items-center justify-center gap-4 relative">
+                    <div className="w-32 h-32 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center overflow-hidden border-2 border-[#fbaa19] relative">
+                        {avatarUrl ? (
+                            <img src={avatarUrl} alt="Driver Avatar" className="w-full h-full object-cover" />
+                        ) : (
+                            <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        )}
+                        
+                        {generatingAvatar && (
+                            <div className="absolute inset-0 bg-black/70 flex items-center justify-center backdrop-blur-sm">
+                                <div className="w-8 h-8 rounded-full border-4 border-[#fbaa19] border-t-transparent animate-spin"></div>
+                            </div>
+                        )}
                     </div>
+                    
                     <p className="text-xs font-bold uppercase tracking-widest text-gray-500 text-center max-w-sm">
-                        AI Avatar Generation will be triggered after you save your profile details.
+                        {generatingAvatar 
+                            ? 'AI is researching references and generating your avatar...'
+                            : avatarUrl 
+                                ? 'Your provisional AI Avatar' 
+                                : 'AI Avatar Generation will be triggered after you save your profile details.'}
                     </p>
+                    
+                    {aiError && (
+                        <p className="text-xs font-bold uppercase tracking-widest text-red-500 text-center bg-red-500/10 p-2 border border-red-500/30">
+                            {aiError}
+                        </p>
+                    )}
                 </div>
 
                 <button 
