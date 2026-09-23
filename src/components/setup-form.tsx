@@ -220,8 +220,14 @@ export default function SetupForm() {
                             </svg>
                         )}
                         
+                        <img 
+                            src="/avatar-overlay.png" 
+                            alt="Avatar Frame Overlay" 
+                            className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10"
+                        />
+
                         {generatingAvatar && (
-                            <div className="absolute inset-0 bg-black/70 flex items-center justify-center backdrop-blur-sm">
+                            <div className="absolute inset-0 bg-black/70 flex items-center justify-center backdrop-blur-sm z-20">
                                 <div className="w-8 h-8 rounded-full border-4 border-[#fbaa19] border-t-transparent animate-spin"></div>
                             </div>
                         )}
