@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import RaceRemoteControl from "@/components/race-remote-control";
+import NextRaceHero from "@/components/next-race-hero";
 import { useJolpicaStandings, useJolpicaCalendar, useJolpicaRaceResults, JolpicaRace } from "@/hooks/useJolpica";
 
 const F1_TABS = [
@@ -14,11 +15,11 @@ const F1_TABS = [
 ];
 
 function DriverRankingTable() {
-    const { drivers, isLoading } = useJolpicaStandings("2024");
+    const { drivers, isLoading } = useJolpicaStandings("current");
     if (isLoading) return <div className="p-8 text-center animate-pulse text-[#fbaa19] font-bold">CARREGANDO RANKING...</div>;
     return (
         <div className="flex flex-col w-full border border-black/20 dark:border-white/10 bg-white dark:bg-[#111]">
-            <div className="bg-[#fbaa19] text-black font-black uppercase tracking-widest p-4 text-xl">Campeonato de Pilotos (2024)</div>
+            <div className="bg-[#fbaa19] text-black font-black uppercase tracking-widest p-4 text-xl">Campeonato de Pilotos (2026)</div>
             <div className="flex flex-col">
                 {drivers.map((d, i) => (
                     <div key={d.Driver.driverId} className="flex items-center p-3 md:p-4 border-b border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
@@ -39,11 +40,11 @@ function DriverRankingTable() {
 }
 
 function ConstructorRankingTable() {
-    const { constructors, isLoading } = useJolpicaStandings("2024");
+    const { constructors, isLoading } = useJolpicaStandings("current");
     if (isLoading) return null;
     return (
         <div className="flex flex-col w-full border border-black/20 dark:border-white/10 bg-white dark:bg-[#111]">
-            <div className="bg-black text-[#fbaa19] border-b-2 border-[#fbaa19] font-black uppercase tracking-widest p-4 text-xl">Campeonato de Construtores (2024)</div>
+            <div className="bg-black text-[#fbaa19] border-b-2 border-[#fbaa19] font-black uppercase tracking-widest p-4 text-xl">Campeonato de Construtores (2026)</div>
             <div className="flex flex-col">
                 {constructors.map((c, i) => (
                     <div key={c.Constructor.constructorId} className="flex items-center p-3 md:p-4 border-b border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
@@ -63,11 +64,11 @@ function ConstructorRankingTable() {
 }
 
 function CalendarView() {
-    const { races, isLoading } = useJolpicaCalendar("2024");
+    const { races, isLoading } = useJolpicaCalendar("current");
     if (isLoading) return <div className="p-8 text-center animate-pulse text-[#fbaa19] font-bold">CARREGANDO CALENDARIO...</div>;
     return (
         <div className="flex flex-col gap-4">
-            <h2 className="text-2xl font-black uppercase tracking-widest border-l-4 border-[#fbaa19] pl-4">Calendario Oficial da Temporada (2024)</h2>
+            <h2 className="text-2xl font-black uppercase tracking-widest border-l-4 border-[#fbaa19] pl-4">Calendario Oficial da Temporada (2026)</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 {races.map((race) => (
                     <div key={race.round} className="flex flex-col bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 p-4 hover:border-[#fbaa19] transition-colors group">
@@ -87,12 +88,12 @@ function CalendarView() {
 }
 
 function RaceResultsView({ round }: { round: string }) {
-    const { results, isLoading } = useJolpicaRaceResults("2024", round);
+    const { results, isLoading } = useJolpicaRaceResults("current", round);
     if (isLoading) return <div className="p-8 text-center animate-pulse text-[#fbaa19] font-bold">BUSCANDO CLASSIFICACAO OFICIAL...</div>;
     if (!results || results.length === 0) return <div className="p-8 text-center text-gray-500 uppercase tracking-widest border border-dashed border-gray-400">Resultados nao disponiveis para este round ainda.</div>;
     return (
         <div className="flex flex-col w-full border border-black/20 dark:border-white/10 bg-white dark:bg-[#111]">
-            <div className="bg-[#fbaa19] text-black font-black uppercase tracking-widest p-4 text-xl">Classificacao Oficial (2024 - Round {round})</div>
+            <div className="bg-[#fbaa19] text-black font-black uppercase tracking-widest p-4 text-xl">Classificacao Oficial (2026 - Round {round})</div>
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                     <thead>
