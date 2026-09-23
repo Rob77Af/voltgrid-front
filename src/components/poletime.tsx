@@ -83,8 +83,7 @@ const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader
                 </div>
             </div>
 
-            {!hideSubmit && (
-                <footer className="f1-predictions-summary flex flex-col md:flex-row items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] gap-4">
+            <footer className="f1-predictions-summary flex flex-col md:flex-row items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] gap-4">
                     <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide w-full md:w-auto text-center md:text-left">
                         Your pick: <span className="text-black dark:text-white font-bold">{digits[0]}:{digits[1]}{digits[2]}.{digits[3]}{digits[4]}{digits[5]}</span>
                     </p>
@@ -107,7 +106,8 @@ const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader
                                 AI ASSIST
                             </button>
                         </div>
-                        <button 
+                        {!hideSubmit && (
+<button 
                             type="button" 
                             onClick={handleSubmit}
                             disabled={isSubmitting || isSuccess}
@@ -115,9 +115,9 @@ const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader
                         >
                             {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
                         </button>
+)}
                     </div>
                 </footer>
-            )}
         </div>
     );
 };

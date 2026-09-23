@@ -150,8 +150,7 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
                 })}
             </div>
             
-            {!hideSubmit && (
-                <footer className="f1-predictions-summary flex flex-col md:flex-row items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] gap-4">
+            <footer className="f1-predictions-summary flex flex-col md:flex-row items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] gap-4">
                     <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide w-full md:w-auto text-center md:text-left">
                         {picks.filter(p => p !== '').length === 5 
                             ? <span className="text-[#fbaa19]">Portfolio complete!</span> 
@@ -176,7 +175,8 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
                                 AI ASSIST
                             </button>
                         </div>
-                        <button 
+                        {!hideSubmit && (
+<button 
                             type="button" 
                             onClick={handleSubmit}
                             disabled={picks.some(p => p === '') || isSubmitting || isSuccess}
@@ -184,9 +184,9 @@ const Evo = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: bo
                         >
                             {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
                         </button>
+)}
                     </div>
                 </footer>
-            )}
         </div>
     );
 };

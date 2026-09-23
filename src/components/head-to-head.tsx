@@ -77,8 +77,7 @@ const HeadToHead = (props: React.HTMLAttributes<HTMLDivElement>) => {
                 })}
             </div>
             
-            {!props.hideSubmit && (
-                <footer className="f1-predictions-summary flex flex-col md:flex-row items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] gap-4">
+            <footer className="f1-predictions-summary flex flex-col md:flex-row items-center justify-between p-4 bg-white dark:bg-[#1a1a1a] border border-black/20 dark:border-[#ffffff3d] gap-4">
                     <p className="f1-summary-copy text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium tracking-wide w-full md:w-auto text-center md:text-left">
                         {countPicks === F1_MATCHUPS.length 
                             ? <span className="text-[#fbaa19]">All matchups predicted!</span>
@@ -104,7 +103,8 @@ const HeadToHead = (props: React.HTMLAttributes<HTMLDivElement>) => {
                                 AI ASSIST
                             </button>
                         </div>
-                        <button 
+                        {!props.hideSubmit && (
+<button 
                             type="button" 
                             onClick={handleSubmit}
                             disabled={countPicks !== F1_MATCHUPS.length || isSubmitting || isSuccess}
@@ -112,9 +112,9 @@ const HeadToHead = (props: React.HTMLAttributes<HTMLDivElement>) => {
                         >
                             {isSubmitting ? 'SUBMITTING...' : isSuccess ? '✔ SAVED' : 'SUBMIT PREDICTION'}
                         </button>
+)}
                     </div>
                 </footer>
-            )}
         </div>
     )
 }
