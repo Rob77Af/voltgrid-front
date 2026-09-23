@@ -18,7 +18,20 @@ const PredictionTabs = () => {
     const [isMounted, setIsMounted] = useState(false);
 
     // Global validation for ALL forms
-    const { top10, evo, h2h, misc } = usePredictionStore();
+    const { top10, evo, h2h, misc, setPoletime, setTop10, setEvo, setH2H, setMisc } = usePredictionStore();
+
+    const handleClearAll = () => {
+        setPoletime([0,0,0,0,0,0]);
+        setTop10(Array(10).fill(''));
+        setEvo(Array(5).fill(''));
+        setH2H({});
+        setMisc({});
+    };
+
+    const handleAIAssistAll = () => {
+        // TODO: AI logic for all forms
+        console.log("AI Assist All triggered");
+    };
     const isTop10Valid = top10.every(p => p !== '');
     const isEvoValid = evo.every(p => p !== '');
     const isH2HValid = Object.keys(h2h).length === 11; // F1_MATCHUPS.length
