@@ -16,7 +16,7 @@ export async function POST(request: Request) {
             ? `The top horizontal stripes must use the official flag colors of ${nationality}, and the bottom horizontal stripes must use the official colors of ${orgColorRef}.`
             : `All horizontal stripes must use the official flag colors of ${nationality}.`;
 
-        const prompt = `A premium racing emblem consisting entirely of sleek, horizontal stripes inside a perfect circle. ${orgColorInstruction} Cinematic, neon-noir aesthetic, glossy metallic finish, high contrast. No faces, no text, no letters, no typography, no complex drawings. Just minimalist, clean horizontal color stripes forming a circular badge.`;
+        const prompt = `A retro racing helmet background design consisting entirely of bold horizontal stripes inside a perfect circle. ${orgColorInstruction} Classic 1960s, 1970s, and 1980s vintage motorsport aesthetic. Flat, clean retro racing stripes with a matte finish. No neon, no dark noir, no faces, no text, no letters, no typography, no complex drawings. Just minimalist, vintage horizontal color stripes forming a circular racing badge.`;
 
         // Switch to Pollinations.ai for FREE generation without API keys
         const encodedPrompt = encodeURIComponent(prompt);
