@@ -4,10 +4,7 @@ import React from 'react';
 const CompetitionLabel = ({ firstWord }: { firstWord: string }) => {
     const letters = 'COMPETITION'.split('');
     return (
-        <div 
-            className="flex flex-col items-stretch justify-center"
-            style={{ textShadow: '0 2px 6px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3)' }}
-        >
+        <div className="flex flex-col items-stretch justify-center">
             <span className="font-black uppercase leading-none text-xs sm:text-sm md:text-base tracking-tight text-center">
                 {firstWord}
             </span>

@@ -10,14 +10,16 @@ export default function CompetitionHero({ activeId }: CompetitionHeroProps) {
         switch (id) {
             case 'poletime-competition': 
                 return {
-                    title: 'POLETIME COMPETITION',
+                    title: 'POLETIME',
+                    hasLockup: true,
                     subtitle: 'PREDICT THE FASTEST',
                     description: 'Prove your qualifying expertise. Guess the exact times, pole sitters, and fastest laps before the red lights go out.',
                     image: 'https://images.unsplash.com/photo-1502744688674-c619d1586c9e?q=80&w=2070&auto=format&fit=crop'
                 };
             case 'master-competition': 
                 return {
-                    title: 'MASTER COMPETITION',
+                    title: 'MASTER',
+                    hasLockup: true,
                     subtitle: 'MANAGE YOUR GARAGE',
                     description: 'The ultimate fantasy experience. Build your dream team, manage your budget, and outsmart your rivals throughout the season.',
                     image: 'https://images.unsplash.com/photo-1536616035905-24c8b211a7f0?q=80&w=2070&auto=format&fit=crop'
@@ -25,6 +27,7 @@ export default function CompetitionHero({ activeId }: CompetitionHeroProps) {
             case 'milesimus': 
                 return {
                     title: 'MILESIMUS',
+                    hasLockup: true,
                     subtitle: 'THE ABSOLUTE CROWN',
                     description: 'No forms, no drafts. Just pure accumulation. The Milesimus sums all your points across every competition to crown the ultimate champion.',
                     image: 'https://images.unsplash.com/photo-1540066019607-e5f6f48718f7?q=80&w=2074&auto=format&fit=crop'
@@ -32,6 +35,7 @@ export default function CompetitionHero({ activeId }: CompetitionHeroProps) {
             case 'teamwork': 
                 return {
                     title: 'TEAMWORK',
+                    hasLockup: true,
                     subtitle: 'RACING GUILDS',
                     description: 'Join forces with other managers. Combine your scores, coordinate strategies, and fight for the Constructors Championship.',
                     image: 'https://images.unsplash.com/photo-1505322022379-7c3353ee6291?q=80&w=2000&auto=format&fit=crop'
@@ -39,6 +43,7 @@ export default function CompetitionHero({ activeId }: CompetitionHeroProps) {
             default: 
                 return {
                     title: 'COMPETITIONS',
+                    hasLockup: false,
                     subtitle: 'CHOOSE YOUR PATH',
                     description: 'Select a competition below to view your standing and global performance.',
                     image: 'https://images.unsplash.com/photo-1541348263662-e06836264be8?q=80&w=2069&auto=format&fit=crop'
@@ -73,9 +78,18 @@ export default function CompetitionHero({ activeId }: CompetitionHeroProps) {
                         {data.subtitle}
                     </p>
                 </div>
-                <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-widest font-display mb-2 drop-shadow-lg">
-                    {data.title}
-                </h1>
+                <div className="flex flex-col items-stretch inline-flex w-max max-w-full mb-3" style={{ filter: "drop-shadow(0px 4px 8px rgba(0,0,0,0.8)) drop-shadow(0px 2px 4px rgba(0,0,0,0.6))" }}>
+                    <span className="text-white text-5xl sm:text-6xl md:text-7xl font-black uppercase font-display leading-none tracking-tight">
+                        {data.title}
+                    </span>
+                    {data.hasLockup && (
+                        <div className="w-full flex justify-between items-center text-[#fbaa19] text-[10px] sm:text-[12px] md:text-[14px] font-black leading-none mt-1 opacity-95">
+                            {'COMPETITION'.split('').map((letter, i) => (
+                                <span key={i}>{letter}</span>
+                            ))}
+                        </div>
+                    )}
+                </div>
                 <p className="text-gray-300 text-sm md:text-base max-w-2xl font-medium tracking-wide">
                     {data.description}
                 </p>
