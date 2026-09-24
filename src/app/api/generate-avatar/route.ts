@@ -13,10 +13,10 @@ export async function POST(request: Request) {
         }
 
         const orgColorInstruction = orgColorRef 
-            ? `The top horizontal stripes must use the official flag colors of ${nationality}, and the bottom horizontal stripes must use the official colors of ${orgColorRef}.`
-            : `All horizontal stripes must use the official flag colors of ${nationality}.`;
+            ? `The pattern must creatively mix the official flag colors of ${nationality} and the official colors of ${orgColorRef}.`
+            : `The pattern must creatively use the official flag colors of ${nationality}.`;
 
-        const prompt = `PURELY ABSTRACT GRAPHIC DESIGN. A minimalist geometric pattern consisting ONLY of thick, flat, horizontal stripes. ${orgColorInstruction} 1970s retro minimalist aesthetic, flat matte colors, no shading, no gradients, no 3D elements. IMPORTANT: Do NOT draw any objects, NO helmets, NO badges, NO cars, and NO text. This is strictly an abstract geometric color background of straight horizontal lines.`;
+        const prompt = `PURELY ABSTRACT GRAPHIC DESIGN. A minimalist geometric pattern consisting ONLY of solid color bands and stripes. Preferably horizontal stripes, but can also include diagonal, vertical, or intersecting crossing bands. ${orgColorInstruction} 1970s retro minimalist aesthetic, using ONLY flat matte solid colors. Absolutely NO shading, NO gradients, NO 3D elements. IMPORTANT: Do NOT draw any objects, NO helmets, NO badges, NO cars, and NO text. This is strictly an abstract geometric color background of intersecting solid color stripes.`;
 
         // Switch to Pollinations.ai for FREE generation without API keys
         const encodedPrompt = encodeURIComponent(prompt);
