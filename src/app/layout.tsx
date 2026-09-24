@@ -20,7 +20,30 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={allFontVariables}>
+    <html lang="en" className={allFontVariables} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                let mode = 'dark';
+                const stored = localStorage.getItem('voltgrid-theme-storage');
+                if (stored) {
+                  const parsed = JSON.parse(stored);
+                  if (parsed.state && parsed.state.mode) {
+                    mode = parsed.state.mode;
+                  }
+                }
+                if (mode === 'dark') {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body>
         <GlobalProvider initialLocales={undefined}>
           <ThemeWrapper>
