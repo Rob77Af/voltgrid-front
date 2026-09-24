@@ -98,12 +98,48 @@ export default function SetupForm() {
                     }
                     
                     if (resData.imageUrl) {
+                        // First show the generated image immediately
                         setAvatarUrl(resData.imageUrl);
-                        // Save URL to profile
-                        await supabase
-                            .from('profiles')
-                            .update({ avatar_url: resData.imageUrl })
-                            .eq('id', user.id);
+                        
+                        try {
+                            // 1. Download the image blob from Pollinations
+                            const imgRes = await fetch(resData.imageUrl);
+                            const imgBlob = await imgRes.blob();
+                            
+                            // 2. Upload to Supabase Storage
+                            const fileName = `${user.id}-${Date.now()}.jpg`;
+                            const { error: uploadError } = await supabase.storage
+                                .from('avatars')
+                                .upload(fileName, imgBlob, {
+                                    contentType: 'image/jpeg',
+                                    upsert: true
+                                });
+                                
+                            if (uploadError) throw uploadError;
+                            
+                            // 3. Get the public URL
+                            const { data: publicUrlData } = supabase.storage
+                                .from('avatars')
+                                .getPublicUrl(fileName);
+                                
+                            const finalAvatarUrl = publicUrlData.publicUrl;
+                            
+                            // Update local state with the permanent URL
+                            setAvatarUrl(finalAvatarUrl);
+                            
+                            // 4. Save the permanent Supabase URL to the profile
+                            const { error: updateError } = await supabase
+                                .from('profiles')
+                                .update({ avatar_url: finalAvatarUrl })
+                                .eq('id', user.id);
+                                
+                            if (updateError) throw updateError;
+                            
+                            console.log("Avatar successfully uploaded and saved to Supabase Storage!");
+                        } catch (storageErr: any) {
+                            console.error("Storage upload error:", storageErr);
+                            setAiError("Failed to upload image to Supabase Storage.");
+                        }
                     }
                 } catch (genErr: any) {
                     console.error('Avatar generation error:', genErr);
