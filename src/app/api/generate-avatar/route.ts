@@ -45,8 +45,11 @@ export async function POST(request: Request) {
         if (!response.ok) {
             const errorData = await response.json();
             console.error("OpenAI Error:", errorData);
+            
+            // Return the specific OpenAI error so we can see it on the frontend
+            const errorMessage = errorData.error?.message || 'Failed to generate image from AI.';
             return NextResponse.json(
-                { error: 'Failed to generate image from AI.' },
+                { error: `OpenAI Error: ${errorMessage}` },
                 { status: 500 }
             );
         }
