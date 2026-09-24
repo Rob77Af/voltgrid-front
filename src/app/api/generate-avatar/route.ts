@@ -13,10 +13,10 @@ export async function POST(request: Request) {
         }
 
         const orgColorInstruction = orgColorRef 
-            ? `Also, strictly research the official colors of "${orgColorRef}". The final image must contain exactly 30% of the colors representing the country "${nationality}" and 70% of the official colors representing "${orgColorRef}".`
-            : `The final image must predominantly feature the colors of the country "${nationality}".`;
+            ? `The top horizontal stripes must use the official flag colors of ${nationality}, and the bottom horizontal stripes must use the official colors of ${orgColorRef}.`
+            : `All horizontal stripes must use the official flag colors of ${nationality}.`;
 
-        const prompt = `A stylized, premium circular profile avatar for a racing driver named ${firstName} ${lastName}. The avatar should have a cinematic, neon-noir racing aesthetic (deep blacks, high contrast). ${orgColorInstruction}. The image should be perfectly centered, circular composition, with no text or typography. High-end digital art style, suitable for a racing game profile.`;
+        const prompt = `A premium racing emblem consisting entirely of sleek, horizontal stripes inside a perfect circle. ${orgColorInstruction} Cinematic, neon-noir aesthetic, glossy metallic finish, high contrast. No faces, no text, no letters, no typography, no complex drawings. Just minimalist, clean horizontal color stripes forming a circular badge.`;
 
         // Switch to Pollinations.ai for FREE generation without API keys
         const encodedPrompt = encodeURIComponent(prompt);
