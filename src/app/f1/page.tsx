@@ -5,7 +5,7 @@ import NextRaceHero from "@/components/next-race-hero";
 import { useJolpicaStandings, useJolpicaCalendar, useJolpicaRaceResults, JolpicaRace } from "@/hooks/useJolpica";
 
 const F1_TABS = [
-    { id: "results", label: "Race Results" },
+    { id: "results", label: "Results" },
     { id: "ranking", label: "Ranking" },
     { id: "calendar", label: "Calendar" },
     { id: "teams", label: "Teams" },
@@ -153,7 +153,7 @@ export default function F1Page() {
                 </h1>
             </header>
             
-            <div className="w-full sticky top-[64px] md:top-[80px] z-30 bg-gray-50 dark:bg-black pt-4 pb-0 mb-8 border-b-2 border-black/10 dark:border-white/10">
+            <div className="w-full bg-gray-50 dark:bg-black pt-4 pb-0 mb-8 border-b-2 border-black/10 dark:border-white/10">
                 <div 
                     ref={menuRef}
                     className="flex flex-row overflow-x-auto scrollbar-hide min-w-max w-full snap-x snap-mandatory"
@@ -162,15 +162,12 @@ export default function F1Page() {
                         <button 
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`snap-start shrink-0 font-bold uppercase tracking-widest transition-all duration-300 border-b-4 ${
-                                isStuck 
-                                    ? "pb-4 px-4 md:px-6 text-xs md:text-sm" 
-                                    : "pb-3 px-3 md:px-4 text-[10px] md:text-xs"
-                            } ${
+                            className={`snap-start shrink-0 font-bold uppercase tracking-widest transition-all duration-300 py-3 px-4 md:px-6 text-[10px] md:text-xs ${
                                 activeTab === tab.id 
-                                ? "text-[#fbaa19] border-[#fbaa19]" 
-                                : "text-gray-500 border-transparent hover:text-black dark:hover:text-white"
-                            }`}
+                                ? "bg-[#fbaa19] text-black" 
+                                : "text-gray-500 hover:text-black dark:hover:text-white"
+                            }`
+                            }
                         >
                             {tab.label}
                         </button>

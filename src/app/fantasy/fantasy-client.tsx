@@ -10,7 +10,7 @@ import CompetitionHero from '@/components/competition-hero';
 import { useSupabaseAuth } from '@/hooks/useSupabaseAuth';
 
 const FANTASY_TABS = [
-    { id: 'race-results', label: 'Race Results' },
+    { id: 'race-results', label: 'Results' },
     { id: 'ranking', label: 'Ranking' },
     { id: 'stats', label: 'Stats' },
     { id: 'rules', label: 'Rules' }
@@ -400,21 +400,15 @@ export default function FantasyClient() {
                         : 'bg-transparent pt-4'
                 }`}
             >
-                <div className={`flex flex-nowrap overflow-x-auto scrollbar-hide gap-1 md:gap-4 border-b border-black/20 dark:border-[#ffffff3d] transition-all duration-300 ${
-                    isStuck ? 'pb-0 border-transparent dark:border-transparent' : 'pb-0'
-                }`}>
+                <div className="flex flex-nowrap overflow-x-auto scrollbar-hide gap-1 md:gap-4 border-b border-black/20 dark:border-[#ffffff3d] transition-all duration-300 pb-0">
                     {FANTASY_TABS.map(tab => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`uppercase font-bold tracking-widest transition-all duration-300 border-b-2 whitespace-nowrap shrink-0 ${
-                                isStuck 
-                                    ? 'pb-2 px-4 text-xs md:text-sm' 
-                                    : 'pb-3 px-3 md:px-4 text-[10px] md:text-xs'
-                            } ${
+                            className={`uppercase font-bold tracking-widest transition-all duration-300 py-3 px-4 md:px-6 text-[10px] md:text-xs whitespace-nowrap shrink-0 ${
                                 activeTab === tab.id 
-                                ? 'text-[#fbaa19] border-[#fbaa19]' 
-                                : 'text-gray-500 border-transparent hover:text-black dark:hover:text-white'
+                                ? "bg-[#fbaa19] text-black" 
+                                : "text-gray-500 hover:text-black dark:hover:text-white"
                             }`}
                         >
                             {tab.label}
