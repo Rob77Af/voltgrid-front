@@ -1,26 +1,45 @@
 "use client";
 import React from 'react';
 
+const CompetitionLabel = ({ firstWord }: { firstWord: string }) => {
+    const letters = 'COMPETITION'.split('');
+    return (
+        <div 
+            className="flex flex-col items-stretch justify-center"
+            style={{ textShadow: '0 2px 6px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3)' }}
+        >
+            <span className="font-black uppercase leading-none text-xs sm:text-sm md:text-base tracking-tight text-center">
+                {firstWord}
+            </span>
+            <div className="w-full flex justify-between items-center text-[5.5px] sm:text-[6px] md:text-[7px] font-bold opacity-90 leading-none mt-[2px] md:mt-1">
+                {letters.map((letter, i) => (
+                    <span key={i} className="leading-none">{letter}</span>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 const categories = [
-    { id: 'poletime-competition', label: 'Poletime Competition', icon: (
+    { id: 'poletime-competition', firstWord: 'Poletime', icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
             <circle r="7" cx="12" cy="13"></circle>
             <path d="M12 13l3-3M9 3h6M12 3v3M5 6l-1.5-1.5"></path>
         </svg>
     )},
-    { id: 'master-competition', label: 'Master Competition', icon: (
+    { id: 'master-competition', firstWord: 'Master', icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinejoin="round">
             <path d="M8 10h8l-1 8H9l-1-8Z"></path>
             <path d="M10 10V6h4v4M8 13H5l-2 2M16 13h3l2 2M9 18h6l2 3H7l2-3Z"></path>
         </svg>
     )},
-    { id: 'milesimus', label: 'Milesimus', icon: (
+    { id: 'milesimus', firstWord: 'Milesimus', icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M12 6v6l4 2"></path>
         </svg>
     )},
-    { id: 'teamwork', label: 'Teamwork', icon: (
+    { id: 'teamwork', firstWord: 'Teamwork', icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
             <circle cx="9" cy="7" r="4"></circle>
@@ -54,7 +73,7 @@ const CompetitionsRemoteControl = ({ activeId, setActiveId }: Props) => {
                         <div aria-hidden="true" className="w-5 h-5 md:w-6 md:h-6 flex justify-center items-center shrink-0">
                             {cat.icon}
                         </div>
-                        <span className="whitespace-normal break-words text-center leading-tight">{cat.label}</span>
+                        <CompetitionLabel firstWord={cat.firstWord} />
                     </button>
                 ))}
             </nav>
