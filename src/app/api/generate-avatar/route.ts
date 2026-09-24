@@ -16,7 +16,7 @@ export async function POST(request: Request) {
             ? `The top horizontal stripes must use the official flag colors of ${nationality}, and the bottom horizontal stripes must use the official colors of ${orgColorRef}.`
             : `All horizontal stripes must use the official flag colors of ${nationality}.`;
 
-        const prompt = `A retro racing helmet background design consisting entirely of bold horizontal stripes inside a perfect circle. ${orgColorInstruction} Classic 1960s, 1970s, and 1980s vintage motorsport aesthetic. Flat, clean retro racing stripes with a matte finish. No neon, no dark noir, no faces, no text, no letters, no typography, no complex drawings. Just minimalist, vintage horizontal color stripes forming a circular racing badge.`;
+        const prompt = `PURELY ABSTRACT GRAPHIC DESIGN. A minimalist geometric pattern consisting ONLY of thick, flat, horizontal stripes. ${orgColorInstruction} 1970s retro minimalist aesthetic, flat matte colors, no shading, no gradients, no 3D elements. IMPORTANT: Do NOT draw any objects, NO helmets, NO badges, NO cars, and NO text. This is strictly an abstract geometric color background of straight horizontal lines.`;
 
         // Switch to Pollinations.ai for FREE generation without API keys
         const encodedPrompt = encodeURIComponent(prompt);
