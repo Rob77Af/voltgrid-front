@@ -12,57 +12,37 @@ export async function POST(request: Request) {
             );
         }
 
-        const apiKey = process.env.OPENAI_API_KEY;
-        
-        if (!apiKey) {
-            return NextResponse.json(
-                { error: 'OPENAI_API_KEY is not configured on the server.' },
-                { status: 500 }
-            );
-        }
-
         const orgColorInstruction = orgColorRef 
             ? `Also, strictly research the official colors of "${orgColorRef}". The final image must contain exactly 30% of the colors representing the country "${nationality}" and 70% of the official colors representing "${orgColorRef}".`
             : `The final image must predominantly feature the colors of the country "${nationality}".`;
 
         const prompt = `A stylized, premium circular profile avatar for a racing driver named ${firstName} ${lastName}. The avatar should have a cinematic, neon-noir racing aesthetic (deep blacks, high contrast). ${orgColorInstruction}. The image should be perfectly centered, circular composition, with no text or typography. High-end digital art style, suitable for a racing game profile.`;
 
-        const response = await fetch('https://api.openai.com/v1/images/generations', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-                model: "dall-e-3",
-                prompt: prompt,
-                n: 1,
-                size: "1024x1024",
-                response_format: "url"
-            })
-        });
+        // Switch to Pollinations.ai for FREE generation without API keys
+        const encodedPrompt = encodeURIComponent(prompt);
+        const seed = Math.floor(Math.random() * 100000000);
+        
+        // We request the image from pollinations. It returns the image buffer directly.
+        const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&nologo=true&seed=${seed}`;
+
+        // Fetch to ensure it generates before responding, and to catch errors
+        const response = await fetch(imageUrl);
 
         if (!response.ok) {
-            const errorData = await response.json();
-            console.error("OpenAI Error:", errorData);
-            
-            // Return the specific OpenAI error so we can see it on the frontend
-            const errorMessage = errorData.error?.message || 'Failed to generate image from AI.';
+            console.error("Free AI Error:", response.statusText);
             return NextResponse.json(
-                { error: `OpenAI Error: ${errorMessage}` },
+                { error: `Free AI API Error: ${response.statusText}` },
                 { status: 500 }
             );
         }
 
-        const data = await response.json();
-        const imageUrl = data.data[0].url;
-
+        // Return the direct URL to the client
         return NextResponse.json({ imageUrl });
 
-    } catch (error) {
+    } catch (error: any) {
         console.error("Avatar generation error:", error);
         return NextResponse.json(
-            { error: 'Internal server error' },
+            { error: error.message || 'Internal server error' },
             { status: 500 }
         );
     }
