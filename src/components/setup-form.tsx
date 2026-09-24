@@ -25,7 +25,7 @@ export default function SetupForm() {
             try {
                 const { data, error } = await supabase
                     .from('profiles')
-                    .select('first_name, last_name, nationality, org_color, avatar_url')
+                    .select('first_name, last_name, nationality, org_color, avatar_url, driver_number, slug')
                     .eq('id', user.id)
                     .single();
                 
@@ -61,15 +61,36 @@ export default function SetupForm() {
         try {
             const { error } = await supabase
                 .from('profiles')
+                // Fetch existing profile to check if we already have a slug/number
+            const { data: currentProfile } = await supabase.from('profiles').select('driver_number, slug').eq('id', user.id).single();
+            
+            let driverNumber = currentProfile?.driver_number;
+            let slug = currentProfile?.slug;
+            
+            if (!driverNumber) {
+                // Temporary logic: assign a random number between 23 and 99
+                driverNumber = Math.floor(Math.random() * (99 - 23 + 1)) + 23;
+            }
+            if (!slug && formData.first_name && formData.last_name) {
+                // e.g. "Ayrton Senna" -> "a.senna99"
+                const firstInitial = formData.first_name.charAt(0).toLowerCase();
+                const lastName = formData.last_name.toLowerCase().replace(/\s+/g, '');
+                slug = `${firstInitial}.${lastName}${driverNumber}`;
+            }
+
+            const { error: profileUpdateError } = await supabase
+                .from('profiles')
                 .update({
                     first_name: formData.first_name,
                     last_name: formData.last_name,
                     nationality: formData.nationality,
-                    org_color: formData.org_color
+                    org_color: formData.org_color,
+                    driver_number: driverNumber,
+                    slug: slug
                 })
                 .eq('id', user.id);
 
-            if (error) throw error;
+            if (profileUpdateError) throw profileUpdateError;
             
             setSuccess(true);
             setTimeout(() => setSuccess(false), 3000);
