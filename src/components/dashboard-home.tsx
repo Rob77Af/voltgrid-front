@@ -17,65 +17,91 @@ export default function DashboardHome({ profile, setActiveView, logout }: Dashbo
     return (
         <div className="w-full flex flex-col xl:flex-row gap-6 md:gap-8 animate-fade-in mt-4 md:mt-8">
             
-            {/* LEFT COLUMN: AVATAR & CREDENTIALS */}
-            <div className="w-full xl:w-72 shrink-0 flex flex-col gap-6">
-                {/* Avatar Box */}
-                <div className="bg-white dark:bg-[#0a0a0a] border border-black/10 dark:border-white/10 p-6 flex flex-col items-center text-center shadow-lg relative overflow-hidden group">
+            {/* LEFT COLUMN: AVATAR, CREDENTIALS, HONORS, HISTORY */}
+            <div className="w-full xl:w-[22rem] shrink-0 flex flex-col gap-6">
+                
+                {/* Profile Box */}
+                <div className="bg-white dark:bg-[#0a0a0a] border border-black/10 dark:border-white/10 p-6 md:p-8 flex flex-col items-center text-center shadow-lg relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-full h-2 bg-[#fbaa19]"></div>
                     
-                    <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#fbaa19] mb-4 shadow-xl">
-                        {/* Avatar */}
+                    {/* AVATAR BIGGER, NO BORDER */}
+                    <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden mb-6 shadow-2xl">
+                        {/* Background IA */}
                         <img 
                             src={avatarUrl} 
-                            alt="Driver Avatar" 
+                            alt="Driver Avatar Background" 
                             className="w-full h-full object-cover"
                         />
+                        {/* Overlay Capacete PNG */}
                         <img 
                             src="/avatar-overlay.png" 
                             alt="Helmet overlay" 
-                            className="absolute inset-0 w-full h-full object-contain pointer-events-none drop-shadow-2xl"
+                            className="absolute inset-0 w-full h-full object-contain pointer-events-none drop-shadow-2xl scale-[1.05]"
                             onError={(e) => { e.currentTarget.style.display = 'none'; }}
                         />
                     </div>
                     
-                    <h2 className="text-2xl font-black uppercase tracking-widest font-display text-black dark:text-white">
+                    <h2 className="text-3xl font-black uppercase tracking-widest font-display text-black dark:text-white">
                         {driverName} <span className="text-[#fbaa19]">#{driverNumber}</span>
                     </h2>
                     
-                    <div className="w-full flex flex-col gap-2 mt-4 text-left border-t border-black/10 dark:border-white/10 pt-4">
+                    <div className="w-full flex flex-col gap-3 mt-6 text-left border-t border-black/10 dark:border-white/10 pt-6">
                         <div className="flex justify-between items-center text-xs uppercase font-bold tracking-widest">
                             <span className="text-gray-500">Team</span>
-                            <span className="text-black dark:text-white">To be assigned</span>
+                            <span className="text-black dark:text-white bg-black/5 dark:bg-white/5 px-2 py-1">To be assigned</span>
                         </div>
                         <div className="flex justify-between items-center text-xs uppercase font-bold tracking-widest">
                             <span className="text-gray-500">Nat</span>
-                            <span className="text-black dark:text-white">{profile?.nationality || '---'}</span>
+                            <span className="text-black dark:text-white bg-black/5 dark:bg-white/5 px-2 py-1">{profile?.nationality || '---'}</span>
                         </div>
                         <div className="flex justify-between items-center text-xs uppercase font-bold tracking-widest">
                             <span className="text-gray-500">Org</span>
-                            <span className="text-black dark:text-white truncate max-w-[120px]">{profile?.org_color || '---'}</span>
+                            <span className="text-black dark:text-white bg-black/5 dark:bg-white/5 px-2 py-1 truncate max-w-[120px]">{profile?.org_color || '---'}</span>
+                        </div>
+                    </div>
+
+                    {/* HONORS DISCRETE (SAME BOX) */}
+                    <div className="w-full mt-6 border-t border-black/10 dark:border-white/10 pt-4 text-left">
+                        <span className="text-[9px] uppercase tracking-widest font-bold text-gray-500 mb-2 block">Driver Honors</span>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
+                                <span className="text-[#fbaa19]">🏆</span> Campeão Poletime 2025
+                            </div>
+                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
+                                <span className="text-gray-400">🥇</span> Vencedor Etapa Japão
+                            </div>
+                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
+                                <span className="text-red-500">🏎️</span> 1º Lugar Silly Season Ferrari
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* HONORS */}
+                {/* HISTORY BOX */}
                 <div className="bg-white dark:bg-[#0a0a0a] border border-black/10 dark:border-white/10 p-6 shadow-lg relative">
-                    <div className="absolute top-0 left-0 w-1 h-full bg-[#fbaa19]"></div>
-                    <h3 className="text-sm font-black uppercase tracking-widest mb-4">Driver Honors</h3>
-                    <ul className="flex flex-col gap-3">
-                        <li className="flex items-center gap-3 bg-gray-50 dark:bg-[#111] p-2 border border-black/5 dark:border-white/5">
-                            <div className="w-8 h-8 bg-[#fbaa19]/20 text-[#fbaa19] flex items-center justify-center font-black text-xs shrink-0 rounded-sm">🏆</div>
-                            <span className="text-[10px] uppercase font-bold tracking-wide leading-tight">Campeão Poletime 2025</span>
-                        </li>
-                        <li className="flex items-center gap-3 bg-gray-50 dark:bg-[#111] p-2 border border-black/5 dark:border-white/5">
-                            <div className="w-8 h-8 bg-gray-300 dark:bg-gray-700 text-black dark:text-white flex items-center justify-center font-black text-xs shrink-0 rounded-sm">🥇</div>
-                            <span className="text-[10px] uppercase font-bold tracking-wide leading-tight">Vencedor Etapa Japão (Poletime)</span>
-                        </li>
-                        <li className="flex items-center gap-3 bg-gray-50 dark:bg-[#111] p-2 border border-black/5 dark:border-white/5">
-                            <div className="w-8 h-8 bg-red-500/20 text-red-500 flex items-center justify-center font-black text-xs shrink-0 rounded-sm">🏎️</div>
-                            <span className="text-[10px] uppercase font-bold tracking-wide leading-tight">1º Lugar Silly Season Ferrari</span>
-                        </li>
-                    </ul>
+                    <div className="absolute top-0 left-0 w-1 h-full bg-black dark:bg-white"></div>
+                    <h3 className="text-sm font-black uppercase tracking-widest mb-4">Activity History</h3>
+                    <div className="flex flex-col gap-0 border-l-2 border-black/10 dark:border-white/10 ml-2">
+                        
+                        <div className="relative pl-4 pb-4">
+                            <div className="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-[#fbaa19]"></div>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">2h ago</p>
+                            <p className="text-xs font-bold uppercase tracking-widest text-black dark:text-white">Make Prediction for Austrália GP</p>
+                        </div>
+                        
+                        <div className="relative pl-4 pb-4">
+                            <div className="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-black dark:bg-white"></div>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Yesterday</p>
+                            <p className="text-xs font-bold uppercase tracking-widest text-black dark:text-white">Confirm Silly Season</p>
+                        </div>
+
+                        <div className="relative pl-4 pb-2">
+                            <div className="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-black dark:bg-white"></div>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">3 days ago</p>
+                            <p className="text-xs font-bold uppercase tracking-widest text-black dark:text-white">Updated Driver Setup</p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

@@ -268,7 +268,7 @@ export default function SetupForm() {
 
                 {/* AI Avatar Preview */}
                 <div className="mt-4 p-6 border border-dashed border-black/30 dark:border-white/30 flex flex-col items-center justify-center gap-4 relative">
-                    <div className="w-32 h-32 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center overflow-hidden border-2 border-[#fbaa19] relative">
+                    <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center overflow-hidden relative shadow-2xl">
                         {avatarUrl ? (
                             <img src={avatarUrl} alt="Driver Avatar" className="w-full h-full object-cover" />
                         ) : (
@@ -280,7 +280,7 @@ export default function SetupForm() {
                         <img 
                             src="/avatar-overlay.png" 
                             alt="Avatar Frame Overlay" 
-                            className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10"
+                            className="absolute inset-0 w-full h-full object-contain pointer-events-none z-10 scale-[1.05]"
                         />
 
                         {generatingAvatar && (
@@ -290,13 +290,15 @@ export default function SetupForm() {
                         )}
                     </div>
                     
-                    <p className="text-xs font-bold uppercase tracking-widest text-gray-500 text-center max-w-sm">
-                        {generatingAvatar 
-                            ? 'AI is researching references and generating your avatar...'
-                            : avatarUrl 
-                                ? 'Your provisional AI Avatar' 
-                                : 'AI Avatar Generation will be triggered after you save your profile details.'}
-                    </p>
+                    {generatingAvatar ? (
+                        <p className="text-xs font-bold uppercase tracking-widest text-[#fbaa19] text-center max-w-sm">
+                            AI is generating your avatar...
+                        </p>
+                    ) : avatarUrl ? (
+                        <p className="text-xs font-bold uppercase tracking-widest text-gray-500 text-center max-w-sm">
+                            Your provisional AI Avatar
+                        </p>
+                    ) : null}
                     
                     {aiError && (
                         <p className="text-xs font-bold uppercase tracking-widest text-red-500 text-center bg-red-500/10 p-2 border border-red-500/30">
