@@ -37,6 +37,11 @@ export interface JolpicaRace {
     Circuit: { circuitName: string; Location: { locality: string; country: string } };
     date: string;
     time: string;
+    FirstPractice?: { date: string; time: string };
+    SecondPractice?: { date: string; time: string };
+    ThirdPractice?: { date: string; time: string };
+    Qualifying?: { date: string; time: string };
+    Sprint?: { date: string; time: string };
 }
 
 export interface JolpicaRaceResult {

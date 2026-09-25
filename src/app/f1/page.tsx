@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import NextRaceHero from "@/components/next-race-hero";
+import RaceEventHero from "@/components/next-race-hero";
+import F1CalendarModal from "@/components/f1-calendar-modal";
 import { useJolpicaStandings } from "@/hooks/useJolpica";
 import { useOpenF1Session } from "@/hooks/useOpenF1";
 
@@ -124,6 +125,8 @@ function RaceResultsView({ round, session }: { round: string, session: string })
 export default function F1Page() {
     const [view, setView] = useState<"results" | "ranking">("results");
     const [sessionTab, setSessionTab] = useState<"fp1" | "fp2" | "fp3" | "quali" | "sprint" | "race">("race");
+    const [selectedRound, setSelectedRound] = useState<string>("last");
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
     const sessionTabs = [
         { id: "fp1", label: "FP1" },
@@ -134,11 +137,24 @@ export default function F1Page() {
         { id: "race", label: "RACE" }
     ];
 
+    const handleSelectRound = (round: string) => {
+        setSelectedRound(round);
+        setIsCalendarOpen(false);
+        setView("results");
+    };
+
     return (
-        <main className="w-full min-h-screen pb-24 bg-gray-50 dark:bg-black">
+        <main className="w-full min-h-screen pb-24 bg-gray-50 dark:bg-black relative">
             
+            <F1CalendarModal 
+                isOpen={isCalendarOpen} 
+                onClose={() => setIsCalendarOpen(false)} 
+                onSelectRound={handleSelectRound}
+                currentSelectedRound={selectedRound}
+            />
+
             {/* HERO COMUNICA O EVENTO DIRETAMENTE */}
-            <NextRaceHero />
+            <RaceEventHero selectedRound={selectedRound} onOpenCalendar={() => setIsCalendarOpen(true)} />
 
             <div className="w-full max-w-7xl mx-auto px-4 md:px-8 mt-[-20px] md:mt-[-32px] relative z-20">
                 
@@ -182,7 +198,7 @@ export default function F1Page() {
                         </div>
 
                         {/* TABELA DE RESULTADOS */}
-                        <RaceResultsView round="last" session={sessionTab} />
+                        <RaceResultsView round={selectedRound} session={sessionTab} />
                     </div>
                 ) : (
                     <div className="flex flex-col animate-fade-in gap-8">
