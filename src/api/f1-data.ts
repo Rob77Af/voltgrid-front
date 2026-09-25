@@ -56,18 +56,36 @@ export interface F1Event {
 }
 
 export const fetchNextEvent = async (): Promise<F1Event> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({
-                round: '06',
-                name: 'MIAMI GRAND PRIX',
-                circuit: 'MIAMI INT. AUTODROME',
-                date: 'MAY 05, 2024',
-                time: '16:00 EST',
+    try {
+        const response = await fetch('https://api.jolpi.ca/ergast/f1/current/next.json', { cache: 'no-store' });
+        const data = await response.json();
+        const races = data.MRData?.RaceTable?.Races;
+        if (races && races.length > 0) {
+            const nextRace = races[0];
+            const dateObj = new Date(`${nextRace.date}T00:00:00Z`);
+            const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }).toUpperCase();
+            
+            return {
+                round: nextRace.round.padStart(2, '0'),
+                name: nextRace.raceName.toUpperCase(),
+                circuit: nextRace.Circuit.circuitName.toUpperCase(),
+                date: dateStr,
+                time: nextRace.time ? nextRace.time.replace(':00Z', ' UTC') : 'TBA',
                 status: 'OPEN'
-            });
-        }, 800);
-    });
+            };
+        }
+    } catch (e) {
+        console.error("Failed to fetch live F1 data", e);
+    }
+    
+    return {
+        round: '00',
+        name: 'AWAITING NEXT EVENT',
+        circuit: 'TBA',
+        date: 'TBA',
+        time: 'TBA',
+        status: 'CLOSED'
+    };
 };
 
 export interface RaceEvent {

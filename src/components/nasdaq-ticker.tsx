@@ -11,59 +11,53 @@ export default function NasdaqTicker() {
 
     if (!event) {
         return (
-            <div className="w-full bg-[#0a0a0a] border-b border-[#ffffff1a] h-10 flex items-center px-4 overflow-hidden text-xs font-mono text-[#fbaa19]">
+            <div className="w-full bg-[#0a0a0a] border-y border-[#00ff00]/20 h-10 flex items-center px-4 overflow-hidden text-xs font-mono text-[#00ff00]">
                 <div className="w-full max-w-7xl mx-auto flex gap-4">
-                    <span className="animate-pulse">CONNECTING TO MARKET DATA...</span>
+                    <span className="animate-pulse tracking-widest">CONNECTING TO JOLPI F1 LIVE DATA...</span>
                 </div>
             </div>
         );
     }
 
+    // A string to display multiple times for the marquee effect
+    const tickerText = `MKT: ${event.status} | RND ${event.round} | EVT ${event.name} | LOC ${event.circuit} | DATE ${event.date} | TIME ${event.time}`;
+
     return (
-        <div className="w-full bg-[#0a0a0a] text-white border-b border-[#ffffff1a] h-10 flex items-center px-4 overflow-x-auto overflow-y-hidden text-[10px] md:text-xs font-mono uppercase whitespace-nowrap scrollbar-hide">
-            <div className="flex items-center gap-4 md:gap-6 w-full max-w-7xl mx-auto">
-                
-                <div className="flex items-center gap-2 text-white">
-                    <div className="w-2 h-2 bg-[#00ff00] rounded-full animate-pulse shadow-[0_0_8px_#00ff00]"></div>
-                    <span className="font-bold tracking-widest text-[#00ff00]">MKT: {event.status}</span>
+        <div className="w-full bg-[#0a0a0a] border-y border-[#00ff00]/20 h-10 flex items-center overflow-hidden relative">
+            
+            {/* Gradient masks for smooth fading on edges */}
+            <div className="absolute left-0 top-0 w-8 h-full bg-gradient-to-r from-[#0a0a0a] to-transparent z-10"></div>
+            <div className="absolute right-0 top-0 w-8 h-full bg-gradient-to-l from-[#0a0a0a] to-transparent z-10"></div>
+            
+            <style dangerouslySetInnerHTML={{__html: `
+                @keyframes marquee-right {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(0%); }
+                }
+                @keyframes marquee-left {
+                    0% { transform: translateX(0%); }
+                    100% { transform: translateX(-100%); }
+                }
+                .animate-marquee-lr {
+                    display: inline-block;
+                    white-space: nowrap;
+                    animation: marquee-right 30s linear infinite;
+                }
+            `}} />
+
+            <div className="flex whitespace-nowrap text-[#00ff00] text-xs font-mono font-bold tracking-[0.2em] uppercase w-full">
+                <div className="animate-marquee-lr flex gap-12 shrink-0 px-6">
+                    <span>{tickerText}</span>
+                    <span>{tickerText}</span>
+                    <span>{tickerText}</span>
+                    <span>{tickerText}</span>
                 </div>
-
-                <div className="text-gray-700">|</div>
-
-                <div className="flex items-center gap-2">
-                    <span className="text-gray-400">RND</span>
-                    <span className="font-bold text-[#fbaa19]">{event.round}</span>
+                <div className="animate-marquee-lr flex gap-12 shrink-0 px-6" aria-hidden="true">
+                    <span>{tickerText}</span>
+                    <span>{tickerText}</span>
+                    <span>{tickerText}</span>
+                    <span>{tickerText}</span>
                 </div>
-
-                <div className="text-gray-700">|</div>
-
-                <div className="flex items-center gap-2">
-                    <span className="text-gray-400">EVT</span>
-                    <span className="font-bold">{event.name}</span>
-                    <span className="text-[#00ff00]">?</span>
-                </div>
-
-                <div className="text-gray-700">|</div>
-
-                <div className="flex items-center gap-2">
-                    <span className="text-gray-400">LOC</span>
-                    <span className="font-bold">{event.circuit}</span>
-                </div>
-
-                <div className="text-gray-700 hidden sm:block">|</div>
-
-                <div className="hidden sm:flex items-center gap-2">
-                    <span className="text-gray-400">DATE</span>
-                    <span className="font-bold">{event.date}</span>
-                </div>
-
-                <div className="text-gray-700 hidden md:block">|</div>
-
-                <div className="flex items-center gap-2 ml-auto">
-                    <span className="text-gray-400">TIME</span>
-                    <span className="font-bold text-[#00ff00]">{event.time}</span>
-                </div>
-
             </div>
         </div>
     );
