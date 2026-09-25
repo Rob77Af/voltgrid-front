@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import RaceEventHero from "@/components/next-race-hero";
 import F1CalendarModal from "@/components/f1-calendar-modal";
-import { useJolpicaStandings } from "@/hooks/useJolpica";
+import { useJolpicaStandings, useJolpicaRaceResults } from "@/hooks/useJolpica";
 import { useOpenF1Session } from "@/hooks/useOpenF1";
 
 
@@ -56,13 +56,22 @@ function ConstructorRankingTable() {
 }
 
 function RaceResultsView({ round, session }: { round: string, session: string }) {
-    // OpenF1 is used to fetch granular data for ANY session (FP1, FP2, FP3, Quali, Race)
-    const { results, isLoading, error } = useOpenF1Session(session);
+    const isOfficialSession = ['race', 'quali', 'sprint'].includes(session);
+    
+    // Hooks are always called, but we use the results of the relevant one based on isOfficialSession
+    const jolpi = useJolpicaRaceResults("current", round, isOfficialSession ? (session as any) : "race");
+    const openf1 = useOpenF1Session(session);
+
+    const isLoading = isOfficialSession ? jolpi.isLoading : openf1.isLoading;
+    const results = isOfficialSession ? jolpi.results : openf1.results;
+    const error = isOfficialSession ? null : openf1.error;
     
     if (isLoading) return (
         <div className="p-12 text-center animate-pulse flex flex-col items-center justify-center border border-dashed border-gray-400/30 bg-black/5 dark:bg-white/5">
-            <div className="w-8 h-8 rounded-full border-4 border-[#00ff00] border-t-transparent animate-spin mb-4"></div>
-            <p className="text-[#00ff00] font-bold tracking-widest uppercase text-xs">Sincronizando telemetria (OpenF1)...</p>
+            <div className={`w-8 h-8 rounded-full border-4 border-t-transparent animate-spin mb-4 ${isOfficialSession ? 'border-[#fbaa19]' : 'border-[#00ff00]'}`}></div>
+            <p className={`font-bold tracking-widest uppercase text-xs ${isOfficialSession ? 'text-[#fbaa19]' : 'text-[#00ff00]'}`}>
+                {isOfficialSession ? 'Buscando Classificação Oficial (FIA)...' : 'Sincronizando telemetria (OpenF1)...'}
+            </p>
         </div>
     );
     
@@ -77,16 +86,16 @@ function RaceResultsView({ round, session }: { round: string, session: string })
     if (!results || results.length === 0) {
         return (
             <div className="p-12 text-center text-gray-500 uppercase tracking-widest border border-dashed border-gray-400/30 bg-black/5 dark:bg-white/5">
-                Resultados ou posições não disponíveis para esta sessão ainda.
+                Resultados não disponíveis para esta sessão ainda.
             </div>
         );
     }
 
     return (
         <div className="flex flex-col w-full border border-black/20 dark:border-white/10 bg-white dark:bg-[#111]">
-            <div className="bg-[#00ff00]/10 text-[#00ff00] border-b-2 border-[#00ff00]/20 font-black uppercase tracking-widest p-4 text-xs md:text-sm flex justify-between items-center">
-                <span>OpenF1 Live Telemetry Engine</span>
-                <span className="animate-pulse">● LIVE</span>
+            <div className={`border-b-2 font-black uppercase tracking-widest p-4 text-xs md:text-sm flex justify-between items-center ${isOfficialSession ? 'bg-[#fbaa19] text-black border-[#fbaa19]' : 'bg-[#00ff00]/10 text-[#00ff00] border-[#00ff00]/20'}`}>
+                <span>{isOfficialSession ? `Classificação Oficial (${session})` : 'OpenF1 Live Telemetry Engine'}</span>
+                {!isOfficialSession && <span className="animate-pulse">● LIVE</span>}
             </div>
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
@@ -96,23 +105,23 @@ function RaceResultsView({ round, session }: { round: string, session: string })
                             <th className="p-3">N</th>
                             <th className="p-3">Piloto</th>
                             <th className="p-3 hidden sm:table-cell">Equipe</th>
-                            <th className="p-3 text-right">Telemetria/Status</th>
+                            <th className="p-3 text-right">Tempo/Status</th>
                             <th className="p-3 text-right">Pts</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {results.map((r, index) => (
+                        {results.map((r: any, index: number) => (
                             <tr key={r.number || index} className="border-b border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                                 <td className="p-3 font-black text-gray-400">{r.position}</td>
                                 <td className="p-3 font-bold text-[#fbaa19]">{r.number}</td>
                                 <td className="p-3 font-bold text-black dark:text-white uppercase tracking-widest whitespace-nowrap">
                                     {r.Driver.givenName.charAt(0)}. {r.Driver.familyName}
                                 </td>
-                                <td className="p-3 text-[10px] md:text-xs text-gray-500 uppercase hidden sm:table-cell whitespace-nowrap">{r.Constructor.name}</td>
+                                <td className="p-3 text-[10px] md:text-xs text-gray-500 uppercase hidden sm:table-cell whitespace-nowrap">{r.Constructor?.name || 'Unknown'}</td>
                                 <td className="p-3 text-right text-[10px] uppercase text-gray-500">
-                                    <span className="bg-[#00ff00]/10 text-[#00ff00] px-2 py-1 rounded-sm border border-[#00ff00]/20">Validating</span>
+                                    {isOfficialSession ? (r.Time?.time || r.status) : <span className="bg-[#00ff00]/10 text-[#00ff00] px-2 py-1 rounded-sm border border-[#00ff00]/20">Validating</span>}
                                 </td>
-                                <td className="p-3 text-right font-black text-gray-400 text-sm md:text-lg">{r.points}</td>
+                                <td className="p-3 text-right font-black text-[#fbaa19] text-sm md:text-lg">{isOfficialSession ? r.points : (r.position <= 10 ? '?' : '-')}</td>
                             </tr>
                         ))}
                     </tbody>

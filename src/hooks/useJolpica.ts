@@ -110,31 +110,55 @@ export function useJolpicaCalendar(year: string = "2024") {
     return { races, isLoading };
 }
 
-export function useJolpicaRaceResults(year: string = "2024", round: string) {
+export function useJolpicaRaceResults(year: string = "2024", round: string, sessionType: "race" | "quali" | "sprint" = "race") {
     const [results, setResults] = useState<JolpicaRaceResult[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (!round) return;
         async function fetchResults() {
             try {
                 setIsLoading(true);
-                const res = await fetch(`https://api.jolpi.ca/ergast/f1/${year}/${round}/results.json`);
+                let endpoint = "results";
+                if (sessionType === "quali") endpoint = "qualifying";
+                if (sessionType === "sprint") endpoint = "sprint";
+
+                const res = await fetch(`https://api.jolpi.ca/ergast/f1/${year}/${round}/${endpoint}.json`);
                 const data = await res.json();
-                if (data.MRData.RaceTable.Races.length > 0) {
-                    setResults(data.MRData.RaceTable.Races[0].Results || []);
+                
+                const races = data.MRData.RaceTable.Races;
+                if (races.length > 0) {
+                    if (sessionType === "quali") {
+                        // Map QualifyingResults to standard JolpicaRaceResult
+                        const mapped = (races[0].QualifyingResults || []).map((q: any) => ({
+                            number: q.number,
+                            position: q.position,
+                            points: "0",
+                            Driver: q.Driver,
+                            Constructor: q.Constructor,
+                            grid: "-",
+                            laps: "-",
+                            status: "Qualifying",
+                            Time: { millis: "0", time: q.Q3 || q.Q2 || q.Q1 || "No Time" }
+                        }));
+                        setResults(mapped);
+                    } else if (sessionType === "sprint") {
+                        setResults(races[0].SprintResults || []);
+                    } else {
+                        setResults(races[0].Results || []);
+                    }
                 } else {
                     setResults([]);
                 }
             } catch (err) {
-                console.error("Failed to fetch race results:", err);
+                console.error(`Failed to fetch ${sessionType} results:`, err);
                 setResults([]);
             } finally {
                 setIsLoading(false);
             }
         }
         fetchResults();
-    }, [year, round]);
+    }, [year, round, sessionType]);
 
     return { results, isLoading };
 }
