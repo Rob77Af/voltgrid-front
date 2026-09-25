@@ -41,7 +41,7 @@ export default function NextRaceHero() {
     };
 
     return (
-        <div className="w-full relative overflow-hidden mb-8 border-b-4 border-[#fbaa19] bg-black text-white p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
+        <div className="w-full relative overflow-hidden border-b-4 border-[#fbaa19] bg-black text-white p-8 md:p-12 flex flex-col md:flex-row items-center md:items-end justify-center md:justify-start gap-8 md:gap-12 group min-h-[50vh] md:min-h-[65vh]">
             {/* Background Texture & Gradient */}
             <div 
                 className="absolute inset-0 z-0 opacity-40 mix-blend-overlay grayscale group-hover:scale-105 transition-transform duration-1000" 
