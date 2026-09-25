@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import NextRaceHero from "@/components/next-race-hero";
-import { useJolpicaStandings, useJolpicaRaceResults } from "@/hooks/useJolpica";
+import { useJolpicaStandings } from "@/hooks/useJolpica";
+import { useOpenF1Session } from "@/hooks/useOpenF1";
+
 
 function DriverRankingTable() {
     const { drivers, isLoading } = useJolpicaStandings("current");
@@ -53,17 +55,20 @@ function ConstructorRankingTable() {
 }
 
 function RaceResultsView({ round, session }: { round: string, session: string }) {
-    // Note: Ergast API primarily supplies Race, Quali, and Sprint natively in simple endpoints.
-    // For FP1, FP2, FP3 we simulate a "No Data" response for now as Ergast doesn't carry full practice timing.
-    const { results, isLoading } = useJolpicaRaceResults("current", round);
+    // OpenF1 is used to fetch granular data for ANY session (FP1, FP2, FP3, Quali, Race)
+    const { results, isLoading, error } = useOpenF1Session(session);
     
-    if (isLoading) return <div className="p-8 text-center animate-pulse text-[#fbaa19] font-bold">BUSCANDO CLASSIFICACAO OFICIAL...</div>;
+    if (isLoading) return (
+        <div className="p-12 text-center animate-pulse flex flex-col items-center justify-center border border-dashed border-gray-400/30 bg-black/5 dark:bg-white/5">
+            <div className="w-8 h-8 rounded-full border-4 border-[#00ff00] border-t-transparent animate-spin mb-4"></div>
+            <p className="text-[#00ff00] font-bold tracking-widest uppercase text-xs">Sincronizando telemetria (OpenF1)...</p>
+        </div>
+    );
     
-    if (session !== 'race') {
+    if (error) {
         return (
-            <div className="p-12 text-center text-gray-500 uppercase tracking-widest border border-dashed border-gray-400/30 bg-black/5 dark:bg-white/5">
-                <span className="text-2xl block mb-2">⏱️</span>
-                Dados de telemetria para a sessão <strong>{session}</strong> não estão disponíveis na API pública da FIA no momento.
+            <div className="p-12 text-center text-red-500 uppercase tracking-widest border border-dashed border-red-500/30 bg-red-500/5">
+                Erro ao carregar telemetria: {error}
             </div>
         );
     }
@@ -71,34 +76,42 @@ function RaceResultsView({ round, session }: { round: string, session: string })
     if (!results || results.length === 0) {
         return (
             <div className="p-12 text-center text-gray-500 uppercase tracking-widest border border-dashed border-gray-400/30 bg-black/5 dark:bg-white/5">
-                Resultados não disponíveis para este evento ainda.
+                Resultados ou posições não disponíveis para esta sessão ainda.
             </div>
         );
     }
 
     return (
         <div className="flex flex-col w-full border border-black/20 dark:border-white/10 bg-white dark:bg-[#111]">
+            <div className="bg-[#00ff00]/10 text-[#00ff00] border-b-2 border-[#00ff00]/20 font-black uppercase tracking-widest p-4 text-xs md:text-sm flex justify-between items-center">
+                <span>OpenF1 Live Telemetry Engine</span>
+                <span className="animate-pulse">● LIVE</span>
+            </div>
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="bg-black/5 dark:bg-white/5 text-gray-500 uppercase tracking-widest text-xs">
+                        <tr className="bg-black/5 dark:bg-white/5 text-gray-500 uppercase tracking-widest text-[10px] md:text-xs">
                             <th className="p-3">Pos</th>
                             <th className="p-3">N</th>
                             <th className="p-3">Piloto</th>
                             <th className="p-3 hidden sm:table-cell">Equipe</th>
-                            <th className="p-3 text-right">Tempo/Grid</th>
+                            <th className="p-3 text-right">Telemetria/Status</th>
                             <th className="p-3 text-right">Pts</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {results.map((r) => (
-                            <tr key={r.number} className="border-b border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                        {results.map((r, index) => (
+                            <tr key={r.number || index} className="border-b border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                                 <td className="p-3 font-black text-gray-400">{r.position}</td>
                                 <td className="p-3 font-bold text-[#fbaa19]">{r.number}</td>
-                                <td className="p-3 font-bold text-black dark:text-white uppercase tracking-widest">{r.Driver.givenName.charAt(0)}. {r.Driver.familyName}</td>
-                                <td className="p-3 text-sm text-gray-500 uppercase hidden sm:table-cell">{r.Constructor.name}</td>
-                                <td className="p-3 text-right text-xs uppercase text-gray-500">{r.Time?.time || r.status}</td>
-                                <td className="p-3 text-right font-black text-[#fbaa19] text-lg">{r.points}</td>
+                                <td className="p-3 font-bold text-black dark:text-white uppercase tracking-widest whitespace-nowrap">
+                                    {r.Driver.givenName.charAt(0)}. {r.Driver.familyName}
+                                </td>
+                                <td className="p-3 text-[10px] md:text-xs text-gray-500 uppercase hidden sm:table-cell whitespace-nowrap">{r.Constructor.name}</td>
+                                <td className="p-3 text-right text-[10px] uppercase text-gray-500">
+                                    <span className="bg-[#00ff00]/10 text-[#00ff00] px-2 py-1 rounded-sm border border-[#00ff00]/20">Validating</span>
+                                </td>
+                                <td className="p-3 text-right font-black text-gray-400 text-sm md:text-lg">{r.points}</td>
                             </tr>
                         ))}
                     </tbody>
