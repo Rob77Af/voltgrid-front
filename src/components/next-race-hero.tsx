@@ -55,9 +55,9 @@ export default function RaceEventHero({ selectedRound, onOpenCalendar }: Props) 
             
             {/* Background Texture & Gradient */}
             <div 
-                className="absolute inset-0 z-0 opacity-40 mix-blend-overlay grayscale group-hover:scale-105 transition-transform duration-1000" 
+                className="absolute inset-0 z-0 opacity-60 mix-blend-screen group-hover:scale-105 transition-transform duration-1000" 
                 style={{ 
-                    backgroundImage: 'url("https://images.unsplash.com/photo-1541348263662-e06836264be8?q=80&w=2069&auto=format&fit=crop")', 
+                    backgroundImage: 'url("/f1_hero_banner.jpg")', 
                     backgroundSize: 'cover', 
                     backgroundPosition: 'center' 
                 }}

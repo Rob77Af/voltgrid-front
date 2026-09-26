@@ -7,9 +7,9 @@ export default function FantasyIntro() {
         <div className="w-full relative overflow-hidden mb-8 border border-[#fbaa19]/30 bg-black text-white p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-8 md:gap-12">
             {/* Background Texture & Gradient */}
             <div 
-                className="absolute inset-0 z-0 opacity-30 mix-blend-overlay grayscale" 
+                className="absolute inset-0 z-0 opacity-60 mix-blend-screen" 
                 style={{ 
-                    backgroundImage: 'url("https://images.unsplash.com/photo-1541348263662-e06836264be8?q=80&w=2069&auto=format&fit=crop")', 
+                    backgroundImage: 'url("/fantasy_hero_banner.jpg")', 
                     backgroundSize: 'cover', 
                     backgroundPosition: 'center' 
                 }}
