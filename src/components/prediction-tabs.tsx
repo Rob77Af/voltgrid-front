@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useState } from 'react';
 import F1BetRemoteControl from './f1-bet-remote-control';
 import HeadToHead from './head-to-head';
@@ -29,7 +29,7 @@ const PredictionTabs = () => {
 
     const handleSubmitAll = async () => {
         if (!user) {
-            alert('Você precisa estar logado (Superlicense) para enviar suas previsões.');
+            alert('Voce precisa estar logado (Superlicense) para enviar suas previsoes.');
             return;
         }
 
@@ -39,7 +39,7 @@ const PredictionTabs = () => {
 
         const payload = {
             user_id: user.id,
-            round: 'current', // Podemos tornar isso dinâmico depois
+            round: 'current', // Podemos tornar isso dinÃ¢mico depois
             poletime: formattedPoletime,
             top10,
             evo,
@@ -167,12 +167,7 @@ const PredictionTabs = () => {
                         <h3 className="text-black font-black uppercase text-xl md:text-2xl tracking-widest font-display">
                             {isAllValid ? 'ALL SELECTIONS COMPLETE' : 'INCOMPLETE SELECTIONS'}
                         </h3>
-                        <button 
-                            disabled={!isAllValid}
-                            className="bg-black text-[#fbaa19] border-2 border-black font-black uppercase tracking-widest px-12 py-4 text-lg md:text-xl transition-all hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:cursor-not-allowed"
-                        >
-                            SUBMIT ALL PREDICTIONS
-                        </button>
+                        <button onClick={handleSubmitAll} disabled={!isAllValid || isSubmitting || isSuccess} className="bg-black text-[#fbaa19] border-2 border-black font-black uppercase tracking-widest px-12 py-4 text-lg md:text-xl transition-all hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:cursor-not-allowed">{isSubmitting ? 'ENVIANDO...' : isSuccess ? '✔ SALVO' : 'SUBMIT ALL PREDICTIONS'}</button>
                     </footer>
                 )}
             </section>
@@ -181,3 +176,6 @@ const PredictionTabs = () => {
 };
 
 export default PredictionTabs;
+
+
+

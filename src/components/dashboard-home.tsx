@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import Link from 'next/link';
@@ -65,13 +65,13 @@ export default function DashboardHome({ profile, setActiveView, logout }: Dashbo
                         <span className="text-[9px] uppercase tracking-widest font-bold text-gray-500 mb-2 block">Driver Honors</span>
                         <div className="flex flex-col gap-2">
                             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
-                                <span className="text-[#fbaa19]">🏆</span> Campeão Poletime 2025
+                                <span className="text-[#fbaa19]">ðŸ†</span> CampeÃ£o Poletime 2025
                             </div>
                             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
-                                <span className="text-gray-400">🥇</span> Vencedor Etapa Japão
+                                <span className="text-gray-400">ðŸ¥‡</span> Vencedor Etapa JapÃ£o
                             </div>
                             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black dark:text-white">
-                                <span className="text-red-500">🏎️</span> 1º Lugar Silly Season Ferrari
+                                <span className="text-red-500">ðŸŽï¸</span> 1Âº Lugar Silly Season Ferrari
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@ export default function DashboardHome({ profile, setActiveView, logout }: Dashbo
                         <div className="relative pl-4 pb-4">
                             <div className="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-[#fbaa19]"></div>
                             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">2h ago</p>
-                            <p className="text-xs font-bold uppercase tracking-widest text-black dark:text-white">Make Prediction for Austrália GP</p>
+                            <p className="text-xs font-bold uppercase tracking-widest text-black dark:text-white">Make Prediction for AustrÃ¡lia GP</p>
                         </div>
                         
                         <div className="relative pl-4 pb-4">
@@ -140,21 +140,21 @@ export default function DashboardHome({ profile, setActiveView, logout }: Dashbo
                         <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 group-hover:text-[#fbaa19]">Poletime</span>
                         <div className="flex flex-col">
                             <span className="text-3xl font-black uppercase tracking-tighter">678 <span className="text-sm tracking-widest text-gray-400">PTS</span></span>
-                            <span className="text-xs font-bold uppercase text-green-500 mt-1">8º LUGAR</span>
+                            <span className="text-xs font-bold uppercase text-green-500 mt-1">8Âº LUGAR</span>
                         </div>
                     </div>
                     <div className="bg-white dark:bg-[#0a0a0a] border border-black/10 dark:border-white/10 p-5 shadow-md flex flex-col justify-between group hover:border-[#fbaa19] transition-colors cursor-pointer">
                         <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 group-hover:text-[#fbaa19]">Master</span>
                         <div className="flex flex-col">
                             <span className="text-3xl font-black uppercase tracking-tighter">69 <span className="text-sm tracking-widest text-gray-400">PTS</span></span>
-                            <span className="text-xs font-bold uppercase text-blue-500 mt-1">20º (J.Fangio)</span>
+                            <span className="text-xs font-bold uppercase text-blue-500 mt-1">20Âº (J.Fangio)</span>
                         </div>
                     </div>
                     <div className="bg-white dark:bg-[#0a0a0a] border border-black/10 dark:border-white/10 p-5 shadow-md flex flex-col justify-between group hover:border-[#fbaa19] transition-colors cursor-pointer">
                         <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 group-hover:text-[#fbaa19]">Milesimus</span>
                         <div className="flex flex-col">
                             <span className="text-3xl font-black uppercase tracking-tighter">1420 <span className="text-sm tracking-widest text-gray-400">PTS</span></span>
-                            <span className="text-xs font-bold uppercase text-[#fbaa19] mt-1">112º GLOBAL</span>
+                            <span className="text-xs font-bold uppercase text-[#fbaa19] mt-1">112Âº GLOBAL</span>
                         </div>
                     </div>
                 </div>
@@ -189,6 +189,7 @@ export default function DashboardHome({ profile, setActiveView, logout }: Dashbo
                     <button onClick={() => setActiveView("calendar")} className="bg-transparent text-black dark:text-white border border-black/20 dark:border-white/20 p-3 font-bold uppercase tracking-widest text-[9px] sm:text-[10px] hover:border-[#fbaa19] hover:text-[#fbaa19] transition-colors text-center">F1 Calendar</button>
                     <button onClick={() => setActiveView("settings")} className="bg-[#fbaa19] text-black border border-[#fbaa19] p-3 font-bold uppercase tracking-widest text-[9px] sm:text-[10px] hover:bg-black hover:text-[#fbaa19] transition-colors text-center">Settings</button>
                     <Link href="/race-control" className="bg-black dark:bg-white text-white dark:text-black border border-black dark:border-white p-3 font-bold uppercase tracking-widest text-[9px] sm:text-[10px] hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white transition-colors text-center">Race Control</Link>
+                    <Link href="/telemetry" className="bg-black dark:bg-[#1a1a1a] text-white border border-black dark:border-[#1a1a1a] p-3 font-bold uppercase tracking-widest text-[9px] sm:text-[10px] hover:bg-[#fbaa19] hover:text-black transition-colors text-center">Telemetry</Link>
                     <button onClick={() => logout()} className="bg-transparent text-gray-500 border border-transparent p-3 font-bold uppercase tracking-widest text-[9px] sm:text-[10px] hover:text-red-500 hover:border-red-500/30 transition-colors col-span-2 sm:col-span-1 text-center">Logout</button>
                 </div>
             </div>
@@ -206,10 +207,10 @@ export default function DashboardHome({ profile, setActiveView, logout }: Dashbo
                         
                         <div className="flex flex-col gap-4">
                             <div className="bg-black/10 p-4 border-l-4 border-black">
-                                <p className="text-xs font-bold leading-relaxed">As apostas para a primeira etapa Master já estão abertas. Revise sua garagem.</p>
+                                <p className="text-xs font-bold leading-relaxed">As apostas para a primeira etapa Master jÃ¡ estÃ£o abertas. Revise sua garagem.</p>
                             </div>
                             <div className="bg-black/10 p-4 border-l-4 border-black">
-                                <p className="text-xs font-bold leading-relaxed">Você foi convidado para uma liga privada: <span className="underline cursor-pointer">Senna Fans</span></p>
+                                <p className="text-xs font-bold leading-relaxed">VocÃª foi convidado para uma liga privada: <span className="underline cursor-pointer">Senna Fans</span></p>
                             </div>
                         </div>
                     </div>
@@ -225,3 +226,4 @@ export default function DashboardHome({ profile, setActiveView, logout }: Dashbo
         </div>
     );
 }
+
