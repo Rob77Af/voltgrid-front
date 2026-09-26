@@ -4,6 +4,8 @@ import { GlobalProvider } from "../../global-context";
 import Navigation from "../components/navigation";
 import NasdaqTicker from "../components/nasdaq-ticker";
 import Footer from "../components/footer";
+import { Analytics } from "@vercel/analytics/next";
+
 
 
 export const metadata: Metadata = {
@@ -54,6 +56,7 @@ export default function RootLayout({
                 {children}
               </div>
               <Footer />
+              <Analytics />
             </div>
           </ThemeWrapper>
         </GlobalProvider>
