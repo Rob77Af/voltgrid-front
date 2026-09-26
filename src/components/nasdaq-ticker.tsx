@@ -19,13 +19,13 @@ export default function NasdaqTicker() {
     const tickerText = `MKT: ${event.status} | RND ${event.round} | EVT ${event.name} | LOC ${event.circuit} | RACE ${event.date} ${event.time}`;
 
     return (
-        <div className="w-full bg-[#0a0a0a] border-y border-[#00ff00]/20 h-10 flex items-center justify-center relative overflow-hidden">
-            {/* Tablet max width wrapper */}
-            <div className="w-full max-w-screen-md flex items-center h-full relative px-2 md:px-0">
+        <div className="w-full bg-[#0a0a0a] h-8 flex items-center justify-center relative overflow-hidden">
+            {/* Reduced width wrapper */}
+            <div className="w-full max-w-xl flex items-center h-full relative px-2 md:px-0">
                 
                 {/* Left Fixed Label */}
-                <div className="z-20 bg-[#0a0a0a] pr-4 py-2 border-r border-[#00ff00]/20 flex items-center shrink-0">
-                    <span className="text-[#00ff00] font-black tracking-widest uppercase text-xs">RACE WEEK</span>
+                <div className="z-20 bg-[#0a0a0a] pr-3 py-1 flex items-center shrink-0">
+                    <span className="text-[#00ff00] font-black tracking-widest uppercase text-[9px] sm:text-[10px]">RACE WEEK</span>
                 </div>
 
                 {/* Marquee area */}
@@ -37,28 +37,28 @@ export default function NasdaqTicker() {
                     <style dangerouslySetInnerHTML={{__html: `
                         @keyframes marquee-disappear {
                             0% { transform: translateX(100%); opacity: 1; }
-                            40% { transform: translateX(-100%); opacity: 1; }
-                            41% { opacity: 0; }
+                            35% { transform: translateX(-100%); opacity: 1; }
+                            36% { opacity: 0; }
                             100% { transform: translateX(-100%); opacity: 0; }
                         }
                         .animate-marquee-pause {
                             display: inline-block;
                             white-space: nowrap;
-                            animation: marquee-disappear 15s linear infinite;
+                            animation: marquee-disappear 25s linear infinite;
                             will-change: transform;
                         }
                     `}} />
 
                     <div className="w-full relative h-full flex items-center">
-                        <div className="absolute w-full animate-marquee-pause text-[#00ff00] text-[10px] sm:text-xs font-mono font-bold tracking-[0.2em] uppercase whitespace-nowrap">
+                        <div className="absolute w-full animate-marquee-pause text-[#00ff00] text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.2em] uppercase whitespace-nowrap">
                             {tickerText}
                         </div>
                     </div>
                 </div>
 
                 {/* Right Fixed Label (Deadline) */}
-                <div className="z-20 bg-[#0a0a0a] pl-4 py-2 border-l border-[#00ff00]/20 flex items-center shrink-0">
-                    <span className="text-red-500 font-bold tracking-widest uppercase text-[10px] sm:text-xs flex items-center gap-2">
+                <div className="z-20 bg-[#0a0a0a] pl-3 py-1 flex items-center shrink-0">
+                    <span className="text-red-500 font-bold tracking-widest uppercase text-[9px] sm:text-[10px] flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
                         Q-DEADLINE: {qualiTimeStr}
                     </span>
