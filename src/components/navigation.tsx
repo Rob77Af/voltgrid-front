@@ -26,7 +26,7 @@ const Navigation = () => {
 
     return (
         <>
-            <nav className="sticky top-0 z-50 w-full bg-gradient-to-b from-black to-[#111] border-b border-white/5">
+            <nav className="sticky top-0 z-50 w-full bg-[#0a0a0a]">
                 {/* Background texture overlay */}
                 <div className="absolute inset-0 z-0 opacity-10 dark:opacity-[0.08] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://images.pexels.com/photos/6159693/pexels-photo-6159693.jpeg?auto=compress&cs=tinysrgb&h=650&w=940")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                 
