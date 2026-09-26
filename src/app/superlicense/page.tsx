@@ -8,7 +8,7 @@ import Onboarding from '@/components/onboarding';
 import SetupForm from '@/components/setup-form';
 
 export default function SuperlicenseRouter() {
-    const { user, loading: authLoading } = useSupabaseAuth();
+    const { user, isLoading: authLoading } = useSupabaseAuth();
     const router = useRouter();
     const [verifying, setVerifying] = useState(true);
     const [step, setStep] = useState<'login' | 'onboarding' | 'setup'>('login');
