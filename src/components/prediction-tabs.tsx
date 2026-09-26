@@ -10,6 +10,9 @@ import Misc from './misc';
 
 import { usePredictionStore } from '@/store/usePredictionStore';
 import { useSwipe } from '@/hooks/useSwipe';
+import { supabase } from '@/utils/supabase';
+import { useSupabaseAuth } from '@/hooks/useSupabaseAuth';
+
 
 const TABS_ORDER = ['all-forms', 'poletime', 'master', 'evo', 'head-to-head', 'misc'];
 
@@ -18,7 +21,51 @@ const PredictionTabs = () => {
     const [isMounted, setIsMounted] = useState(false);
 
     // Global validation for ALL forms
-    const { top10, evo, h2h, misc, setPoletime, setTop10, setEvo, setH2H, setMisc } = usePredictionStore();
+    const { top10, evo, h2h, misc, poletime, setPoletime, setTop10, setEvo, setH2H, setMisc } = usePredictionStore();
+
+        const { user } = useSupabaseAuth();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    const handleSubmitAll = async () => {
+        if (!user) {
+            alert('Você precisa estar logado (Superlicense) para enviar suas previsões.');
+            return;
+        }
+
+        setIsSubmitting(true);
+        
+        const formattedPoletime = `${poletime[0]}:${poletime[1]}${poletime[2]}.${poletime[3]}${poletime[4]}${poletime[5]}`;
+
+        const payload = {
+            user_id: user.id,
+            round: 'current', // Podemos tornar isso dinâmico depois
+            poletime: formattedPoletime,
+            top10,
+            evo,
+            h2h,
+            misc,
+            created_at: new Date().toISOString()
+        };
+
+        try {
+            // Tentando salvar na tabela "predictions"
+            const { error } = await supabase.from('predictions').insert(payload);
+            
+            if (error) {
+                console.error("Supabase error:", error);
+                alert("Erro ao salvar apostas: " + error.message);
+            } else {
+                console.log("Apostas salvas com sucesso no banco!");
+                setIsSuccess(true);
+                setTimeout(() => setIsSuccess(false), 5000);
+            }
+        } catch (e) {
+            console.error("Erro inesperado:", e);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     const handleClearAll = () => {
         setPoletime([0,0,0,0,0,0]);
