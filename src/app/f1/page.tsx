@@ -143,12 +143,7 @@ export default function F1Page() {
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
     const sessionTabs = [
-        { id: "fp1", label: "FP1" },
-        { id: "fp2", label: "FP2" },
-        { id: "fp3", label: "FP3" },
-        { id: "quali", label: "QUALI" },
-        { id: "sprint", label: "SPRINT" },
-        { id: "race", label: "RACE" }
+        { id: "race", label: "RACE" }, { id: "sprint", label: "SPRINT" }, { id: "quali", label: "QUALI" }, { id: "fp3", label: "FP3" }, { id: "fp2", label: "FP2" }, { id: "fp1", label: "FP1" }
     ];
 
     const handleSelectRound = (round: string) => {
@@ -225,5 +220,6 @@ export default function F1Page() {
         </main>
     );
 }
+
 
 
