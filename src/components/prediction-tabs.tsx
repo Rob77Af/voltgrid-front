@@ -10,6 +10,8 @@ import Misc from './misc';
 
 import { usePredictionStore } from '@/store/usePredictionStore';
 import { useSwipe } from '@/hooks/useSwipe';
+import { useRouter } from 'next/navigation';
+
 import { supabase } from '@/utils/supabase';
 import { useSupabaseAuth } from '@/hooks/useSupabaseAuth';
 
@@ -24,6 +26,7 @@ const PredictionTabs = () => {
     const { top10, evo, h2h, misc, poletime, setPoletime, setTop10, setEvo, setH2H, setMisc } = usePredictionStore();
 
         const { user } = useSupabaseAuth();
+    const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
@@ -58,7 +61,11 @@ const PredictionTabs = () => {
             } else {
                 console.log("Apostas salvas com sucesso no banco!");
                 setIsSuccess(true);
-                setTimeout(() => setIsSuccess(false), 5000);
+                // Redirecionar para a Telemetry após 1 segundo (tempo para ver a mensagem de sucesso)
+                setTimeout(() => {
+                    setIsSuccess(false);
+                    router.push('/telemetry');
+                }, 1000);
             }
         } catch (e) {
             console.error("Erro inesperado:", e);
