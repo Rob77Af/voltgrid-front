@@ -2,23 +2,13 @@
 import React, { useState } from 'react';
 import { F1_DRIVERS, getDriverDetails } from '@/api/f1-data';
 import { usePredictionStore } from '@/store/usePredictionStore';
+import { useSubmitPrediction } from '@/hooks/useSubmitPrediction';
 
 const Top10Finish = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: boolean }) => {
     const picks = usePredictionStore(state => state.top10);
     const setPicks = usePredictionStore(state => state.setTop10);
     const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const handleSubmit = () => {
-        setIsSubmitting(true);
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSuccess(true);
-            console.log("Mock DB - Master Top 10 Submetido:", picks);
-            setTimeout(() => setIsSuccess(false), 5000);
-        }, 1200);
-    };
+    const { submit: handleSubmit, isSubmitting, isSuccess } = useSubmitPrediction();
 
     const handleSelect = (index: number, driver: string) => {
         const newPicks = [...picks];
@@ -186,7 +176,7 @@ const Top10Finish = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHea
                         {!hideSubmit && (
 <button 
                             type="button" 
-                            onClick={handleSubmit}
+                            onClick={() => handleSubmit(false)}
                             disabled={picks.some(p => p === '') || isSubmitting || isSuccess}
                             className="w-full md:w-auto order-1 md:order-2 f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
                         >

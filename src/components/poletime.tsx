@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { usePredictionStore } from '@/store/usePredictionStore';
+import { useSubmitPrediction } from '@/hooks/useSubmitPrediction';
 
 const DigitButton = ({ value, onClick }: { value: number, onClick: () => void }) => (
     <button
@@ -15,18 +16,7 @@ const DigitButton = ({ value, onClick }: { value: number, onClick: () => void })
 const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: boolean }) => {
     const digits = usePredictionStore(state => state.poletime);
     const setDigits = usePredictionStore(state => state.setPoletime);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const handleSubmit = () => {
-        setIsSubmitting(true);
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSuccess(true);
-            console.log("Mock DB - Poletime Submetido:", digits.join(''));
-            setTimeout(() => setIsSuccess(false), 5000);
-        }, 1200);
-    };
+    const { submit: handleSubmit, isSubmitting, isSuccess } = useSubmitPrediction();
 
     // Max values for each position:
     // [0] Minutes: 0 to 3
@@ -109,7 +99,7 @@ const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader
                         {!hideSubmit && (
 <button 
                             type="button" 
-                            onClick={handleSubmit}
+                            onClick={() => handleSubmit(false)}
                             disabled={isSubmitting || isSuccess}
                             className="w-full md:w-auto order-1 md:order-2 f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
                         >

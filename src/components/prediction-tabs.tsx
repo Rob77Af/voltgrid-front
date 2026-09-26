@@ -11,6 +11,7 @@ import Misc from './misc';
 import { usePredictionStore } from '@/store/usePredictionStore';
 import { useSwipe } from '@/hooks/useSwipe';
 import { useRouter } from 'next/navigation';
+import { useSubmitPrediction } from '@/hooks/useSubmitPrediction';
 
 import { supabase } from '@/utils/supabase';
 import { useSupabaseAuth } from '@/hooks/useSupabaseAuth';
@@ -25,54 +26,7 @@ const PredictionTabs = () => {
     // Global validation for ALL forms
     const { top10, evo, h2h, misc, poletime, setPoletime, setTop10, setEvo, setH2H, setMisc } = usePredictionStore();
 
-        const { user } = useSupabaseAuth();
-    const router = useRouter();
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const handleSubmitAll = async () => {
-        if (!user) {
-            alert('Voce precisa estar logado (Superlicense) para enviar suas previsoes.');
-            return;
-        }
-
-        setIsSubmitting(true);
-        
-        const formattedPoletime = `${poletime[0]}:${poletime[1]}${poletime[2]}.${poletime[3]}${poletime[4]}${poletime[5]}`;
-
-        const payload = {
-            user_id: user.id,
-            round: 'current', // Podemos tornar isso dinÃ¢mico depois
-            poletime: formattedPoletime,
-            top10,
-            evo,
-            h2h,
-            misc,
-            created_at: new Date().toISOString()
-        };
-
-        try {
-            // Tentando salvar na tabela "predictions"
-            const { error } = await supabase.from('predictions').insert(payload);
-            
-            if (error) {
-                console.error("Supabase error:", error);
-                alert("Erro ao salvar apostas: " + error.message);
-            } else {
-                console.log("Apostas salvas com sucesso no banco!");
-                setIsSuccess(true);
-                // Redirecionar para a Telemetry após 1 segundo (tempo para ver a mensagem de sucesso)
-                setTimeout(() => {
-                    setIsSuccess(false);
-                    router.push('/telemetry');
-                }, 1000);
-            }
-        } catch (e) {
-            console.error("Erro inesperado:", e);
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+        const { submit: handleSubmitAll, isSubmitting, isSuccess } = useSubmitPrediction();
 
     const handleClearAll = () => {
         setPoletime([0,0,0,0,0,0]);
@@ -174,7 +128,7 @@ const PredictionTabs = () => {
                         <h3 className="text-black font-black uppercase text-xl md:text-2xl tracking-widest font-display">
                             {isAllValid ? 'ALL SELECTIONS COMPLETE' : 'INCOMPLETE SELECTIONS'}
                         </h3>
-                        <button onClick={handleSubmitAll} disabled={!isAllValid || isSubmitting || isSuccess} className="bg-black text-[#fbaa19] border-2 border-black font-black uppercase tracking-widest px-12 py-4 text-lg md:text-xl transition-all hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:cursor-not-allowed">{isSubmitting ? 'ENVIANDO...' : isSuccess ? '✔ SALVO' : 'SUBMIT ALL PREDICTIONS'}</button>
+                        <button onClick={() => handleSubmitAll(true)} disabled={!isAllValid || isSubmitting || isSuccess} className="bg-black text-[#fbaa19] border-2 border-black font-black uppercase tracking-widest px-12 py-4 text-lg md:text-xl transition-all hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:cursor-not-allowed">{isSubmitting ? 'ENVIANDO...' : isSuccess ? '✔ SALVO' : 'SUBMIT ALL PREDICTIONS'}</button>
                     </footer>
                 )}
             </section>
@@ -183,6 +137,9 @@ const PredictionTabs = () => {
 };
 
 export default PredictionTabs;
+
+
+
 
 
 

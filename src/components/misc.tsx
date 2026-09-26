@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { usePredictionStore } from '@/store/usePredictionStore';
+import { useSubmitPrediction } from '@/hooks/useSubmitPrediction';
 
 const QUESTIONS = [
     { id: 'q1', text: 'Safety car during the race?', options: ['Yes', 'No'] },
@@ -13,18 +14,7 @@ const QUESTIONS = [
 const Misc = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: boolean }) => {
     const answers = usePredictionStore(state => state.misc);
     const setAnswers = usePredictionStore(state => state.setMisc);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const handleSubmit = () => {
-        setIsSubmitting(true);
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSuccess(true);
-            console.log("Mock DB - Misc Submetido:", answers);
-            setTimeout(() => setIsSuccess(false), 5000);
-        }, 1200);
-    };
+    const { submit: handleSubmit, isSubmitting, isSuccess } = useSubmitPrediction();
 
     const handleSelect = (questionId: string, option: string) => {
         setAnswers(prev => ({
@@ -113,7 +103,7 @@ const Misc = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader?: b
                         {!hideSubmit && (
 <button 
                             type="button" 
-                            onClick={handleSubmit}
+                            onClick={() => handleSubmit(false)}
                             disabled={answeredCount !== totalQuestions || isSubmitting || isSuccess}
                             className="w-full md:w-auto order-1 md:order-2 f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#fbaa19] disabled:hover:text-black flex-1 md:flex-none"
                         >

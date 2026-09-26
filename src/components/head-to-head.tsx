@@ -2,22 +2,12 @@
 import React from 'react';
 import { F1_MATCHUPS } from '@/api/f1-data';
 import { usePredictionStore } from '@/store/usePredictionStore';
+import { useSubmitPrediction } from '@/hooks/useSubmitPrediction';
 import { useState } from 'react';
 const HeadToHead = (props: React.HTMLAttributes<HTMLDivElement>) => {
     const picks = usePredictionStore(state => state.h2h);
     const setPicks = usePredictionStore(state => state.setH2H);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const handleSubmit = () => {
-        setIsSubmitting(true);
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSuccess(true);
-            console.log("Mock DB - H2H Submetido:", picks);
-            setTimeout(() => setIsSuccess(false), 5000);
-        }, 1200);
-    };
+    const { submit: handleSubmit, isSubmitting, isSuccess } = useSubmitPrediction();
 
     const handlePick = (matchupId: string, driverNum: string) => {
         setPicks(prev => ({ ...prev, [matchupId]: driverNum }));
@@ -106,7 +96,7 @@ const HeadToHead = (props: React.HTMLAttributes<HTMLDivElement>) => {
                         {!props.hideSubmit && (
 <button 
                             type="button" 
-                            onClick={handleSubmit}
+                            onClick={() => handleSubmit(false)}
                             disabled={countPicks !== F1_MATCHUPS.length || isSubmitting || isSuccess}
                             className="w-full md:w-auto order-1 md:order-2 f1-submit-picks bg-[#fbaa19] text-black border-2 border-[#fbaa19] px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm transition-colors hover:bg-gray-200 dark:hover:bg-black hover:text-[#fbaa19] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
