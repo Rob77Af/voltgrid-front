@@ -103,7 +103,7 @@ const Poletime = ({ hideSubmit, hideHeader }: { hideSubmit?: boolean, hideHeader
                                 className="text-xs font-bold uppercase tracking-widest text-[#fbaa19] hover:bg-[#fbaa19] hover:text-black transition-colors border border-[#fbaa19] p-3 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                AI ASSIST
+                                AUTO
                             </button>
                         </div>
                         {!hideSubmit && (

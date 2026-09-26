@@ -34,7 +34,7 @@ export default function ThemeWrapper({ children }: { children: React.ReactNode }
 
     return (
         <div 
-            className="min-h-screen transition-all duration-300"
+            className="w-full transition-all duration-300"
             style={{ 
                 fontFamily: bodyVar,
                 // We can set a local custom property for headers to use

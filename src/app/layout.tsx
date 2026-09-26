@@ -47,10 +47,14 @@ export default function RootLayout({
       <body>
         <GlobalProvider initialLocales={undefined}>
           <ThemeWrapper>
-            <Navigation />
-            <NasdaqTicker />
-            {children}
-            <Footer />
+            <div className="flex flex-col min-h-screen w-full">
+              <Navigation />
+              <NasdaqTicker />
+              <div className="flex-grow flex flex-col w-full">
+                {children}
+              </div>
+              <Footer />
+            </div>
           </ThemeWrapper>
         </GlobalProvider>
       </body>
