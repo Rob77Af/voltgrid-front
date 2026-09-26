@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useState } from "react";
 import RaceEventHero from "@/components/next-race-hero";
 import F1CalendarModal from "@/components/f1-calendar-modal";
@@ -62,15 +62,20 @@ function RaceResultsView({ round, session }: { round: string, session: string })
     const jolpi = useJolpicaRaceResults("current", round, isOfficialSession ? (session as any) : "race");
     const openf1 = useOpenF1Session(session);
 
-    const isLoading = isOfficialSession ? jolpi.isLoading : openf1.isLoading;
-    const results = isOfficialSession ? jolpi.results : openf1.results;
-    const error = isOfficialSession ? null : openf1.error;
+    // Smart Hybrid Routing
+    const jolpiEmpty = !jolpi.isLoading && jolpi.results.length === 0;
+    const fallbackToOpenF1 = isOfficialSession && jolpiEmpty && openf1.results.length > 0;
+    const effectiveIsOfficial = isOfficialSession && !fallbackToOpenF1;
+
+    const isLoading = effectiveIsOfficial ? jolpi.isLoading : openf1.isLoading;
+    const results = effectiveIsOfficial ? jolpi.results : openf1.results;
+    const error = effectiveIsOfficial ? null : openf1.error;
     
     if (isLoading) return (
         <div className="p-12 text-center animate-pulse flex flex-col items-center justify-center border border-dashed border-gray-400/30 bg-black/5 dark:bg-white/5">
-            <div className={`w-8 h-8 rounded-full border-4 border-t-transparent animate-spin mb-4 ${isOfficialSession ? 'border-[#fbaa19]' : 'border-[#00ff00]'}`}></div>
-            <p className={`font-bold tracking-widest uppercase text-xs ${isOfficialSession ? 'text-[#fbaa19]' : 'text-[#00ff00]'}`}>
-                {isOfficialSession ? 'Buscando Classificação Oficial (FIA)...' : 'Sincronizando telemetria (OpenF1)...'}
+            <div className={`w-8 h-8 rounded-full border-4 border-t-transparent animate-spin mb-4 ${effectiveIsOfficial ? 'border-[#fbaa19]' : 'border-[#00ff00]'}`}></div>
+            <p className={`font-bold tracking-widest uppercase text-xs ${effectiveIsOfficial ? 'text-[#fbaa19]' : 'text-[#00ff00]'}`}>
+                {effectiveIsOfficial ? 'Buscando Classificacao Oficial (FIA)...' : 'Sincronizando telemetria (OpenF1)...'}
             </p>
         </div>
     );
@@ -86,16 +91,16 @@ function RaceResultsView({ round, session }: { round: string, session: string })
     if (!results || results.length === 0) {
         return (
             <div className="p-12 text-center text-gray-500 uppercase tracking-widest border border-dashed border-gray-400/30 bg-black/5 dark:bg-white/5">
-                Resultados não disponíveis para esta sessão ainda.
+                Resultados nÃ£o disponÃ­veis para esta sessÃ£o ainda.
             </div>
         );
     }
 
     return (
         <div className="flex flex-col w-full border border-black/20 dark:border-white/10 bg-white dark:bg-[#111]">
-            <div className={`border-b-2 font-black uppercase tracking-widest p-4 text-xs md:text-sm flex justify-between items-center ${isOfficialSession ? 'bg-[#fbaa19] text-black border-[#fbaa19]' : 'bg-[#00ff00]/10 text-[#00ff00] border-[#00ff00]/20'}`}>
-                <span>{isOfficialSession ? `Classificação Oficial (${session})` : 'OpenF1 Live Telemetry Engine'}</span>
-                {!isOfficialSession && <span className="animate-pulse">● LIVE</span>}
+            <div className={`border-b-2 font-black uppercase tracking-widest p-4 text-xs md:text-sm flex justify-between items-center ${effectiveIsOfficial ? 'bg-[#fbaa19] text-black border-[#fbaa19]' : 'bg-[#00ff00]/10 text-[#00ff00] border-[#00ff00]/20'}`}>
+                <span>{effectiveIsOfficial ? `Classificacao Oficial (${session})` : fallbackToOpenF1 ? `Telemetria em Tempo Real (${session} - Aguardando FIA)` : 'OpenF1 Live Telemetry Engine'}</span>
+                {!effectiveIsOfficial && <span className="animate-pulse">â— LIVE</span>}
             </div>
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
@@ -119,9 +124,9 @@ function RaceResultsView({ round, session }: { round: string, session: string })
                                 </td>
                                 <td className="p-3 text-[10px] md:text-xs text-gray-500 uppercase hidden sm:table-cell whitespace-nowrap">{r.Constructor?.name || 'Unknown'}</td>
                                 <td className="p-3 text-right text-[10px] uppercase text-gray-500">
-                                    {isOfficialSession ? (r.Time?.time || r.status) : <span className="bg-[#00ff00]/10 text-[#00ff00] px-2 py-1 rounded-sm border border-[#00ff00]/20">Validating</span>}
+                                    {effectiveIsOfficial ? (r.Time?.time || r.status) : <span className="bg-[#00ff00]/10 text-[#00ff00] px-2 py-1 rounded-sm border border-[#00ff00]/20">Validating</span>}
                                 </td>
-                                <td className="p-3 text-right font-black text-[#fbaa19] text-sm md:text-lg">{isOfficialSession ? r.points : (r.position <= 10 ? '?' : '-')}</td>
+                                <td className="p-3 text-right font-black text-[#fbaa19] text-sm md:text-lg">{effectiveIsOfficial ? r.points : (r.position <= 10 ? '?' : '-')}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -220,3 +225,5 @@ export default function F1Page() {
         </main>
     );
 }
+
+
