@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 const categories = [
-    { id: 'all-forms', label: 'FULL', icon: (
+    { id: 'all-forms', label: 'FULL BET', icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
             <rect x="4" y="4" rx="1" width="16" height="16"></rect>
             <path d="M4 10h16M4 16h16M10 4v16M16 4v16"></path>
