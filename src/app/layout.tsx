@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { GlobalProvider } from "../../global-context";
 import Navigation from "../components/navigation";
@@ -7,6 +7,13 @@ import Footer from "../components/footer";
 import { Analytics } from "@vercel/analytics/next";
 
 
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Create Next App",
