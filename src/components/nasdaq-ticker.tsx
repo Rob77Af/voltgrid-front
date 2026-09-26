@@ -4,9 +4,16 @@ import { fetchNextEvent, type F1Event } from '@/api/f1-data';
 
 export default function NasdaqTicker() {
     const [event, setEvent] = useState<F1Event | null>(null);
+    const [currentTime, setCurrentTime] = useState(new Date());
 
     useEffect(() => {
         fetchNextEvent().then(setEvent);
+        
+        // Update time every minute to check if race goes live while user is on page
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 60000);
+        return () => clearInterval(timer);
     }, []);
 
     if (!event) return null;
@@ -18,6 +25,31 @@ export default function NasdaqTicker() {
 
     const tickerText = `MKT: ${event.status} | RND ${event.round} | EVT ${event.name} | LOC ${event.circuit} | RACE ${event.date} ${event.time}`;
 
+    // Dynamic Label Logic
+    let leftLabelText = "RACE WEEK";
+    let isLive = false;
+
+    if (event.rawDate && event.rawTime) {
+        // Race start time object
+        const raceDate = new Date(`${event.rawDate}T${event.rawTime}`);
+        
+        // Check if today is race day (comparing local calendar dates)
+        if (currentTime.toDateString() === raceDate.toDateString()) {
+            leftLabelText = "RACE TODAY";
+            
+            // Check if it is currently Race Time (assuming a window of ~2.5 hours for the race)
+            const raceStartMs = raceDate.getTime();
+            const nowMs = currentTime.getTime();
+            const twoAndHalfHoursMs = 2.5 * 60 * 60 * 1000;
+            
+            // Allow up to 10 minutes before the race to show LIVE
+            if (nowMs >= (raceStartMs - 10 * 60000) && nowMs <= (raceStartMs + twoAndHalfHoursMs)) {
+                leftLabelText = "RACE LIVE";
+                isLive = true;
+            }
+        }
+    }
+
     return (
         <div className="w-full bg-[#0a0a0a] h-8 flex items-center justify-center relative overflow-hidden">
             {/* Reduced width wrapper */}
@@ -25,7 +57,9 @@ export default function NasdaqTicker() {
                 
                 {/* Left Fixed Label */}
                 <div className="z-20 bg-[#0a0a0a] pr-3 py-1 flex items-center shrink-0">
-                    <span className="text-[#00ff00] font-black tracking-widest uppercase text-[9px] sm:text-[10px]">RACE WEEK</span>
+                    <span className={`font-black tracking-widest uppercase text-[9px] sm:text-[10px] ${isLive ? 'text-red-500 animate-pulse' : 'text-[#00ff00]'}`}>
+                        {leftLabelText}
+                    </span>
                 </div>
 
                 {/* Marquee area */}

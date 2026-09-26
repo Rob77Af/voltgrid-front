@@ -52,6 +52,8 @@ export interface F1Event {
     circuit: string;
     date: string;
     time: string;
+    rawDate?: string;
+    rawTime?: string;
     qualiDate?: string;
     qualiTime?: string;
     status: 'OPEN' | 'CLOSED' | 'LIVE';
@@ -73,6 +75,8 @@ export const fetchNextEvent = async (): Promise<F1Event> => {
                 circuit: nextRace.Circuit.circuitName.toUpperCase(),
                 date: dateStr,
                 time: nextRace.time ? nextRace.time.replace(':00Z', ' UTC') : 'TBA',
+                rawDate: nextRace.date,
+                rawTime: nextRace.time,
                 qualiDate: nextRace.Qualifying ? nextRace.Qualifying.date : undefined,
                 qualiTime: nextRace.Qualifying ? nextRace.Qualifying.time : undefined,
                 status: 'OPEN'
